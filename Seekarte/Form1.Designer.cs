@@ -60,6 +60,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackgroundImage = global::Seekarte.Properties.Resources.amslernetz;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1740, 1156);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
