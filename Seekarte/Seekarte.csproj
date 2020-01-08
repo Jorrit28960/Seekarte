@@ -54,6 +54,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Functions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -84,6 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Pictures\amslernetz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\WhatsApp Image 2020-01-08 at 22.27.44.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
