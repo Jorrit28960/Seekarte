@@ -16,7 +16,7 @@ namespace Seekarte
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Hello World!", "test merge", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button2_Click(object sender, EventArgs e)
