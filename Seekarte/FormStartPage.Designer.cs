@@ -85,7 +85,6 @@ namespace Seekarte
             this.buttonAdmin.TabIndex = 0;
             this.buttonAdmin.Text = "admin";
             this.buttonAdmin.UseVisualStyleBackColor = true;
-            this.buttonAdmin.Click += new System.EventHandler(this.Button1_Click);
             // 
             // buttonPolen
             // 
