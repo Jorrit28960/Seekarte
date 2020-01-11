@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace Seekarte
@@ -21,27 +20,28 @@ namespace Seekarte
 
         private void button2_Click(object sender, EventArgs e)
         {
+            FunctionLayouts.ActivateCountry(sender as Button, e);
 
-            string pwdInput;
-            if (!polen.passwordSet)
-            {
-                var pwdOutput = Interaction.InputBox("Bitte legen Sie ihr Passwort fest", "Passwort", "");
-                polen.SetPassowrd(pwdOutput);
-                //MessageBox.Show("Bitte legen Sien ein Passwort fest", "Enter Password", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            }
-            //MessageBox.Show(test, "Enter Password", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //string pwdInput;
+            //if (!polen.passwordSet)
+            //{
+            //    var pwdOutput = Interaction.InputBox("Bitte legen Sie ihr Passwort fest", "Passwort", "");
+            //    polen.SetPassowrd(pwdOutput);
+            //    //MessageBox.Show("Bitte legen Sien ein Passwort fest", "Enter Password", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            //}
+            ////MessageBox.Show(test, "Enter Password", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            do
-            {
-                pwdInput = Interaction.InputBox("Bitte geben Sie ihr Passwort ein", "Passwort", "");
-            } while (pwdInput != polen.GetPassword());
+            //do
+            //{
+            //    pwdInput = Interaction.InputBox("Bitte geben Sie ihr Passwort ein", "Passwort", "");
+            //} while (pwdInput != polen.GetPassword());
 
-            if (pwdInput == polen.GetPassword())
-            {
-                this.Hide();
-                FormCountry formCoutry = new FormCountry();
-                formCoutry.Show();
-            }
+            //if (pwdInput == polen.GetPassword())
+            //{
+            //    this.Hide();
+            //    FormCountry formCoutry = new FormCountry();
+            //    formCoutry.Show();
+            //}
 
 
         }
@@ -50,7 +50,7 @@ namespace Seekarte
         {
             //shows map on application start
             //resize is not working properly in this case
-            Functions.ResizeImage();
+            FunctionLayouts.ResizeImage();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -72,7 +72,7 @@ namespace Seekarte
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            Functions.ResizeImage();
+            FunctionLayouts.ResizeImage();
         }
     }
 }

@@ -1,12 +1,17 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Windows.Forms;
 
 namespace Seekarte
 {
-    class Functions
+    class FunctionLayouts
     {
+        private static Country polen = new Country("Polen");
+        private static Country tartarenreich = new Country("Tartarenreich");
+
         /// <summary>
         /// Resize the image to the specified width and height.
         /// </summary>
@@ -53,13 +58,55 @@ namespace Seekarte
 
                 if (ratioWidth > ratioHeight)
                 {
-                    Program.formStartPage.Map.Image = Functions.ResizeImage(Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44, (int)Math.Round(Program.formStartPage.Map.Height / ratio), Program.formStartPage.Map.Height);
+                    Program.formStartPage.Map.Image = FunctionLayouts.ResizeImage(Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44, (int)Math.Round(Program.formStartPage.Map.Height / ratio), Program.formStartPage.Map.Height);
                 }
                 else
                 {
-                    Program.formStartPage.Map.Image = Functions.ResizeImage(Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44, Program.formStartPage.Map.Width, (int)Math.Round(Program.formStartPage.Map.Width * ratio));
+                    Program.formStartPage.Map.Image = FunctionLayouts.ResizeImage(Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44, Program.formStartPage.Map.Width, (int)Math.Round(Program.formStartPage.Map.Width * ratio));
                 }
             }
+        }
+
+        private static Country GetCountry(string buttonAcssibleName)
+        {
+            switch (buttonAcssibleName)
+            {
+                case "Polen":
+                    return polen;
+                case "Tartarenreich":
+                    return tartarenreich;
+            }
+
+            return new Country("test");
+        }
+
+        public static void ActivateCountry(Button sender, EventArgs e)
+        {
+            Country country = GetCountry(sender.Text);
+            //MessageBox.Show(sender.Text, "Enter Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            string pwdInput;
+            if (!country.passwordSet)
+            {
+                var pwdOutput = Interaction.InputBox("Bitte legen Sie ihr Passwort fest", "Passwort", "");
+                country.SetPassowrd(pwdOutput);
+                //MessageBox.Show("Bitte legen Sien ein Passwort fest", "Enter Password", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            }
+            //MessageBox.Show(test, "Enter Password", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            do
+            {
+                pwdInput = Interaction.InputBox("Bitte geben Sie ihr Passwort ein", "Passwort", "");
+            } while (pwdInput != country.GetPassword());
+
+            if (pwdInput == country.GetPassword())
+            {
+                //this.Hide();
+                Program.formStartPage.Hide();
+                FormCountry formCoutry = new FormCountry();
+                formCoutry.Show();
+            }
+
         }
     }
 }

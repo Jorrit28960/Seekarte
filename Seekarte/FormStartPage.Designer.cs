@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button_polen = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.Map = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -53,16 +53,17 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // button_polen
             // 
-            this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button2.Location = new System.Drawing.Point(3, 53);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(188, 44);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Polen";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button_polen.AccessibleName = "polen";
+            this.button_polen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button_polen.Location = new System.Drawing.Point(3, 53);
+            this.button_polen.Name = "button_polen";
+            this.button_polen.Size = new System.Drawing.Size(188, 44);
+            this.button_polen.TabIndex = 1;
+            this.button_polen.Text = "Polen";
+            this.button_polen.UseVisualStyleBackColor = true;
+            this.button_polen.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -121,7 +122,7 @@
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.button2, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.button_polen, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.Tartarenreich, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(1537, 3);
@@ -142,6 +143,7 @@
             // 
             // Tartarenreich
             // 
+            this.Tartarenreich.AccessibleName = "Tartarenreich";
             this.Tartarenreich.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Tartarenreich.Location = new System.Drawing.Point(3, 103);
             this.Tartarenreich.Name = "Tartarenreich";
@@ -172,7 +174,7 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button_polen;
         public System.Windows.Forms.PictureBox Map;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

@@ -60,7 +60,7 @@
     <Compile Include="FormCountry.Designer.cs">
       <DependentUpon>FormCountry.cs</DependentUpon>
     </Compile>
-    <Compile Include="Functions.cs" />
+    <Compile Include="FunctionLayouts.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="start.cs">
