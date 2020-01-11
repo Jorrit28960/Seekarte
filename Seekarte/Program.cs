@@ -12,10 +12,12 @@ namespace Seekarte
         [STAThread]
         static void Main()
         {
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             formStartPage = new FormStartPage();
             Application.Run(formStartPage);
+            //julian comment
         }
     }
 }

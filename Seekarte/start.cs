@@ -16,5 +16,10 @@ namespace Seekarte
         {
             InitializeComponent();
         }
+
+        private void start_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
