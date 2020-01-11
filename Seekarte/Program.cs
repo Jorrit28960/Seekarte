@@ -12,6 +12,7 @@ namespace Seekarte
         [STAThread]
         static void Main()
         {
+            //Jorrit's Comment
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             formStartPage = new FormStartPage();
