@@ -53,7 +53,8 @@ namespace Seekarte
                 int widthMap = Program.formStartPage.GetMapWidth();
                 int heightMap = Program.formStartPage.GetMapHeight();
                 double ratio = height / width;
-
+                
+                //Variable window
                 double ratioWidth = widthMap / width;
                 double ratioHeight = heightMap / height;
 
