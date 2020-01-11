@@ -57,14 +57,14 @@ namespace Seekarte
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button_polen = new System.Windows.Forms.Button();
+            this.buttonAdmin = new System.Windows.Forms.Button();
+            this.buttonPolen = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.Map = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.Tartarenreich = new System.Windows.Forms.Button();
+            this.buttonTartarenreich = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.labelRunde = new System.Windows.Forms.Label();
@@ -76,28 +76,28 @@ namespace Seekarte
             this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonAdmin
             // 
-            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(188, 44);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "admin";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAdmin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonAdmin.Location = new System.Drawing.Point(3, 3);
+            this.buttonAdmin.Name = "buttonAdmin";
+            this.buttonAdmin.Size = new System.Drawing.Size(188, 44);
+            this.buttonAdmin.TabIndex = 0;
+            this.buttonAdmin.Text = "admin";
+            this.buttonAdmin.UseVisualStyleBackColor = true;
+            this.buttonAdmin.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // button_polen
+            // buttonPolen
             // 
-            this.button_polen.AccessibleName = "polen";
-            this.button_polen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button_polen.Location = new System.Drawing.Point(3, 53);
-            this.button_polen.Name = "button_polen";
-            this.button_polen.Size = new System.Drawing.Size(188, 44);
-            this.button_polen.TabIndex = 1;
-            this.button_polen.Text = "Polen";
-            this.button_polen.UseVisualStyleBackColor = true;
-            this.button_polen.Click += new System.EventHandler(this.button2_Click);
+            this.buttonPolen.AccessibleName = "polen";
+            this.buttonPolen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonPolen.Location = new System.Drawing.Point(3, 53);
+            this.buttonPolen.Name = "buttonPolen";
+            this.buttonPolen.Size = new System.Drawing.Size(188, 44);
+            this.buttonPolen.TabIndex = 1;
+            this.buttonPolen.Text = "Polen";
+            this.buttonPolen.UseVisualStyleBackColor = true;
+            this.buttonPolen.Click += new System.EventHandler(this.buttonPolen_Click);
             // 
             // button3
             // 
@@ -108,7 +108,6 @@ namespace Seekarte
             this.button3.TabIndex = 4;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Map
             // 
@@ -119,7 +118,6 @@ namespace Seekarte
             this.Map.Size = new System.Drawing.Size(1528, 1094);
             this.Map.TabIndex = 2;
             this.Map.TabStop = false;
-            this.Map.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -135,7 +133,6 @@ namespace Seekarte
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1740, 1156);
             this.tableLayoutPanel1.TabIndex = 5;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // tableLayoutPanel2
             // 
@@ -156,9 +153,9 @@ namespace Seekarte
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.button_polen, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.Tartarenreich, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.buttonAdmin, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.buttonPolen, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.buttonTartarenreich, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.button2, 0, 8);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(1537, 3);
@@ -177,16 +174,16 @@ namespace Seekarte
             this.tableLayoutPanel3.Size = new System.Drawing.Size(194, 1094);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
-            // Tartarenreich
+            // buttonTartarenreich
             // 
-            this.Tartarenreich.AccessibleName = "Tartarenreich";
-            this.Tartarenreich.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Tartarenreich.Location = new System.Drawing.Point(3, 103);
-            this.Tartarenreich.Name = "Tartarenreich";
-            this.Tartarenreich.Size = new System.Drawing.Size(188, 44);
-            this.Tartarenreich.TabIndex = 2;
-            this.Tartarenreich.Text = "Tartarenreich";
-            this.Tartarenreich.UseVisualStyleBackColor = true;
+            this.buttonTartarenreich.AccessibleName = "Tartarenreich";
+            this.buttonTartarenreich.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonTartarenreich.Location = new System.Drawing.Point(3, 103);
+            this.buttonTartarenreich.Name = "buttonTartarenreich";
+            this.buttonTartarenreich.Size = new System.Drawing.Size(188, 44);
+            this.buttonTartarenreich.TabIndex = 2;
+            this.buttonTartarenreich.Text = "Tartarenreich";
+            this.buttonTartarenreich.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -216,7 +213,6 @@ namespace Seekarte
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(1734, 44);
             this.tableLayoutPanel4.TabIndex = 1;
-            this.tableLayoutPanel4.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel4_Paint);
             // 
             // labelRunde
             // 
@@ -262,14 +258,14 @@ namespace Seekarte
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button_polen;
+        private System.Windows.Forms.Button buttonAdmin;
+        private System.Windows.Forms.Button buttonPolen;
+        private System.Windows.Forms.Button buttonTartarenreich;
         private System.Windows.Forms.PictureBox Map;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button Tartarenreich;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label labelRunde;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;

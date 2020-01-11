@@ -54,7 +54,6 @@ namespace Seekarte
                 int heightMap = Program.formStartPage.GetMapHeight();
                 double ratio = height / width;
 
-                //double ratioWidth = Program.formStartPage.Map.Width / width;
                 double ratioWidth = widthMap / width;
                 double ratioHeight = heightMap / height;
 
@@ -69,9 +68,9 @@ namespace Seekarte
             }
         }
 
-        private static Country GetCountry(string buttonAcssibleName)
+        private static Country GetCountry(string buttonText)
         {
-            switch (buttonAcssibleName)
+            switch (buttonText)
             {
                 case "Polen":
                     return polen;
@@ -108,21 +107,12 @@ namespace Seekarte
         public static void ActivateCountry(Button sender, EventArgs e)
         {
             Country country = GetCountry(sender.Text);
-            //MessageBox.Show(sender.Text, "Enter Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
 
             if (Password(country))
             {
-                //this.Hide();
-                //Program.formStartPage.Hide();
-                //FormCountry formCoutry = new FormCountry();
-                //formCoutry.Show();
-
                 Program.formStartPage.SetCountryLabel(country.GetName());
                 Program.formStartPage.SetCountryLabel(true);
             }
-
         }
     }
 }
