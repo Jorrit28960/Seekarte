@@ -11,8 +11,7 @@ namespace Seekarte
         /// </summary>
         [STAThread]
         static void Main()
-        {
-            
+        {            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             formStartPage = new FormStartPage();
