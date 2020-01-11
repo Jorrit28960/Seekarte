@@ -50,19 +50,21 @@ namespace Seekarte
             {
                 double width = global::Seekarte.Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44.Width;
                 double height = global::Seekarte.Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44.Height;
+                int widthMap = Program.formStartPage.GetMapWidth();
+                int heightMap = Program.formStartPage.GetMapHeight();
                 double ratio = height / width;
 
                 //double ratioWidth = Program.formStartPage.Map.Width / width;
-                double ratioWidth = Program.formStartPage.GetMapWidth() / width;
-                double ratioHeight = Program.formStartPage.Map.Height / height;
+                double ratioWidth = widthMap / width;
+                double ratioHeight = heightMap / height;
 
                 if (ratioWidth > ratioHeight)
                 {
-                    Program.formStartPage.Map.Image = FunctionLayouts.ResizeImage(Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44, (int)Math.Round(Program.formStartPage.Map.Height / ratio), Program.formStartPage.Map.Height);
+                    Program.formStartPage.SetMapImage(FunctionLayouts.ResizeImage(Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44, (int)Math.Round(heightMap / ratio), heightMap));
                 }
                 else
                 {
-                    Program.formStartPage.Map.Image = FunctionLayouts.ResizeImage(Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44, Program.formStartPage.Map.Width, (int)Math.Round(Program.formStartPage.Map.Width * ratio));
+                    Program.formStartPage.SetMapImage(FunctionLayouts.ResizeImage(Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44, widthMap, (int)Math.Round(widthMap * ratio)));
                 }
             }
         }

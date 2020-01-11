@@ -1,4 +1,6 @@
-﻿namespace Seekarte
+﻿using System.Drawing;
+
+namespace Seekarte
 {
     partial class FormStartPage
     {
@@ -20,9 +22,19 @@
             base.Dispose(disposing);
         }
 
-        public double GetMapWidth()
+        public int GetMapWidth()
         {
             return Map.Width;
+        }
+
+        public int GetMapHeight()
+        {
+            return Map.Height;
+        }
+
+        public void SetMapImage(Image image)
+        {
+            Map.Image = image;
         }
 
         public void SetCountryLabel(string text)
@@ -252,7 +264,7 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button_polen;
-        public System.Windows.Forms.PictureBox Map;
+        private System.Windows.Forms.PictureBox Map;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
