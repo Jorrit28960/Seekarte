@@ -5,14 +5,14 @@ namespace Seekarte
     struct Ship
     {
         enum Schiff { Schnellsegler, Transportschiff };
-        string name;
-        Location location;
+        //string name;
+        //Location location;
     }
 
     struct Location
     {
-        private int locationX;
-        private int locationY;
+        //private int locationX;
+        //private int locationY;
     }
     class Country
     {
@@ -42,6 +42,11 @@ namespace Seekarte
             return _password;
         }
 
-        Ship test123;
+        public string GetName()
+        {
+            return _name;
+        }
+
+
     }
 }

@@ -5,7 +5,7 @@ namespace Seekarte
 {
     public partial class FormStartPage : Form
     {
-        Country polen = new Country("polen");
+        //Country polen = new Country("polen");
 
         public FormStartPage()
         {
@@ -73,6 +73,21 @@ namespace Seekarte
         private void Form1_Resize(object sender, EventArgs e)
         {
             FunctionLayouts.ResizeImage();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel4_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

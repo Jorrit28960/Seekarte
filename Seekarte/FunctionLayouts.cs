@@ -80,31 +80,45 @@ namespace Seekarte
             return new Country("test");
         }
 
-        public static void ActivateCountry(Button sender, EventArgs e)
+        private static bool Password(Country country)
         {
-            Country country = GetCountry(sender.Text);
-            //MessageBox.Show(sender.Text, "Enter Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             string pwdInput;
             if (!country.passwordSet)
             {
                 var pwdOutput = Interaction.InputBox("Bitte legen Sie ihr Passwort fest", "Passwort", "");
                 country.SetPassowrd(pwdOutput);
-                //MessageBox.Show("Bitte legen Sien ein Passwort fest", "Enter Password", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             }
-            //MessageBox.Show(test, "Enter Password", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            do
-            {
-                pwdInput = Interaction.InputBox("Bitte geben Sie ihr Passwort ein", "Passwort", "");
-            } while (pwdInput != country.GetPassword());
+            pwdInput = Interaction.InputBox("Bitte geben Sie ihr Passwort ein", "Passwort", "");
+            country.passwordSet = true;
 
             if (pwdInput == country.GetPassword())
             {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Falsches Passwort", "Falsches Passwort", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public static void ActivateCountry(Button sender, EventArgs e)
+        {
+            Country country = GetCountry(sender.Text);
+            //MessageBox.Show(sender.Text, "Enter Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+
+            if (Password(country))
+            {
                 //this.Hide();
-                Program.formStartPage.Hide();
-                FormCountry formCoutry = new FormCountry();
-                formCoutry.Show();
+                //Program.formStartPage.Hide();
+                //FormCountry formCoutry = new FormCountry();
+                //formCoutry.Show();
+
+                Program.formStartPage.SetCountryLabel(country.GetName());
+                Program.formStartPage.SetCountryLabel(true);
             }
 
         }
