@@ -80,5 +80,24 @@ namespace Seekarte
         {
 
         }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            double width = global::Seekarte.Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44.Width;
+            double height = global::Seekarte.Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44.Height;
+            double ratio = height / width;
+
+            double ratioWidth = pictureBox1.Width / width;
+            double ratioHeight = pictureBox1.Height / height;
+
+            if (ratioWidth > ratioHeight)
+            {
+                pictureBox1.Image = Functions.ResizeImage(Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44, (int)Math.Round(pictureBox1.Height / ratio), pictureBox1.Height);
+            }
+            else
+            {
+                pictureBox1.Image = Functions.ResizeImage(Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44, pictureBox1.Width, (int)Math.Round(pictureBox1.Width * ratio));
+            }
+        }
     }
 }
