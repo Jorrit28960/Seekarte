@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Seekarte.jpeg" />
+    <None Remove="WhatsApp Image 2020-01-08 at 22.27.44.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Seekarte.jpeg" />
+    <Resource Include="WhatsApp Image 2020-01-08 at 22.27.44.jpeg" />
+  </ItemGroup>
+
+</Project>
