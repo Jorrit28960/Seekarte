@@ -1,6 +1,4 @@
-/.vs
-/Seekarte/bin
-/Seekarte/obj
-#**/bin
-#**/obj
-#**/Debug
+**/bin
+**/obj
+**/Debug
+**/.vs
