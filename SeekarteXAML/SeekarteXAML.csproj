@@ -7,13 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Seekarte.jpeg" />
-    <None Remove="WhatsApp Image 2020-01-08 at 22.27.44.jpeg" />
+    <None Remove="Westeros.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Seekarte.jpeg" />
-    <Resource Include="WhatsApp Image 2020-01-08 at 22.27.44.jpeg" />
+    <Resource Include="Pictures\Westeros.png" />
   </ItemGroup>
 
 </Project>

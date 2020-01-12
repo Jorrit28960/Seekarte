@@ -57,7 +57,7 @@
                           Grid.Column="0" 
                           Grid.ColumnSpan="4" 
                           Grid.RowSpan="2">
-            <Image Source="Seekarte.jpeg" 
+            <Image Source="Westeros.png" 
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center">                
             </Image>
