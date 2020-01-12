@@ -13,7 +13,6 @@ namespace SeekarteXAML
     {
         public MainWindow()
         {
-            //test
             InitializeComponent();
         }
     }
