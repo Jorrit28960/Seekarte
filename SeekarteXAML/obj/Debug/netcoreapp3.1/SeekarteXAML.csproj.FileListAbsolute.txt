@@ -16,3 +16,21 @@ C:\Users\Julian\OneDrive - haw-hamburg.de\GIThub\Seekarte\SeekarteXAML\obj\Debug
 C:\Users\Julian\OneDrive - haw-hamburg.de\GIThub\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\SeekarteXAML.AssemblyInfo.cs
 C:\Users\Julian\OneDrive - haw-hamburg.de\GIThub\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\SeekarteXAML.dll
 C:\Users\Julian\OneDrive - haw-hamburg.de\GIThub\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\SeekarteXAML.pdb
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\bin\Debug\netcoreapp3.1\SeekarteXAML.exe
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\bin\Debug\netcoreapp3.1\SeekarteXAML.deps.json
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\bin\Debug\netcoreapp3.1\SeekarteXAML.runtimeconfig.json
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\bin\Debug\netcoreapp3.1\SeekarteXAML.runtimeconfig.dev.json
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\bin\Debug\netcoreapp3.1\SeekarteXAML.dll
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\bin\Debug\netcoreapp3.1\SeekarteXAML.pdb
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\SeekarteXAML.csprojAssemblyReference.cache
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\SeekarteXAML_MarkupCompile.cache
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\SeekarteXAML_MarkupCompile.lref
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\MainWindow.baml
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\SeekarteXAML.g.resources
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\SeekarteXAML.AssemblyInfoInputs.cache
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\SeekarteXAML.AssemblyInfo.cs
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\SeekarteXAML.dll
+C:\Users\Jorrit_Surface\source\repos\Seekarte\SeekarteXAML\obj\Debug\netcoreapp3.1\SeekarteXAML.pdb
