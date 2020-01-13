@@ -17,6 +17,7 @@ namespace Seekarte
             Application.SetCompatibleTextRenderingDefault(false);
             formStartPage = new FormStartPage();
             Application.Run(formStartPage);
+            //julian comment
         }
     }
 }

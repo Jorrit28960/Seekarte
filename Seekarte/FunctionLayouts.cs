@@ -11,6 +11,7 @@ namespace Seekarte
     {
         private static Country polen = new Country("Polen");
         private static Country tartarenreich = new Country("Tartarenreich");
+        private static Bitmap imageSea = Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44;
 
         /// <summary>
         /// Resize the image to the specified width and height.
@@ -21,6 +22,8 @@ namespace Seekarte
         /// <returns>The resized image.</returns>
         public static Bitmap ResizeImage(Image image, int width, int height)
         {
+            //Only if width and height are greater than 0
+            if (width <= 0 || height <= 0) return null;
             var destRect = new Rectangle(0, 0, width, height);
             var destImage = new Bitmap(width, height);
 
@@ -34,13 +37,14 @@ namespace Seekarte
                 graphics.SmoothingMode = SmoothingMode.HighQuality;
                 graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
+
                 using (var wrapMode = new ImageAttributes())
                 {
                     wrapMode.SetWrapMode(WrapMode.TileFlipXY);
                     graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
                 }
             }
-
+            destImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
             return destImage;
         }
 
@@ -48,23 +52,23 @@ namespace Seekarte
         {
             if (Program.formStartPage != null)
             {
-                double width = global::Seekarte.Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44.Width;
-                double height = global::Seekarte.Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44.Height;
+                double width = imageSea.Width;
+                double height = imageSea.Height;
                 int widthMap = Program.formStartPage.GetMapWidth();
                 int heightMap = Program.formStartPage.GetMapHeight();
-                double ratio = height / width;
+                //double ratio = height / width;
                 
-                //Variable window
                 double ratioWidth = widthMap / width;
                 double ratioHeight = heightMap / height;
 
+
                 if (ratioWidth > ratioHeight)
                 {
-                    Program.formStartPage.SetMapImage(FunctionLayouts.ResizeImage(Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44, (int)Math.Round(heightMap / ratio), heightMap));
+                    Program.formStartPage.SetMapImage(FunctionLayouts.ResizeImage(imageSea, (int)Math.Round(width * ratioHeight), (int)Math.Round(height*ratioHeight)));
                 }
                 else
                 {
-                    Program.formStartPage.SetMapImage(FunctionLayouts.ResizeImage(Properties.Resources.WhatsApp_Image_2020_01_08_at_22_27_44, widthMap, (int)Math.Round(widthMap * ratio)));
+                    Program.formStartPage.SetMapImage(FunctionLayouts.ResizeImage(imageSea, (int)Math.Round( width*ratioWidth), (int)Math.Round(height*ratioWidth)));
                 }
             }
         }

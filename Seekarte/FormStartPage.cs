@@ -7,7 +7,6 @@ namespace Seekarte
     {
         public FormStartPage()
         {
-
             InitializeComponent();
         }
 
@@ -30,6 +29,14 @@ namespace Seekarte
         private void Form1_Resize(object sender, EventArgs e)
         {
             FunctionLayouts.ResizeImage();
+        }
+
+        private void Map_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int CoordX = Control.MousePosition.X;            
+            int CoordY = Control.MousePosition.Y;
+            MessageBox.Show(String.Format("CoordX: {0} CoordY: {1}", CoordX, CoordY), "Nix", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
     }
 }

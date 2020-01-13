@@ -1,0 +1,78 @@
+﻿<Window x:Class="SeekarteXAML.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SeekarteXAML"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        Title="MainWindow" Height="1080" Width="1920">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="10"/>            
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+
+                <GradientStop Color="Yellow" Offset="0" />
+
+                <GradientStop Color="Brown" Offset="1.0" />
+
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="140"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".15*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" 
+                   x:Name="txtRoundCounter" 
+                   Text="Runde 1" 
+                   FontSize="17" 
+                   VerticalAlignment="Center"/>
+        
+        <Grid Grid.Row="1" Grid.Column="4" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="btn3" Grid.Row="0" Content="Button 3"/>
+            <Button x:Name="btnAdmin" Grid.Row="1" Content="Admin"/>
+            <Button x:Name="btnPolen" Grid.Row="2" Content="Polen"/>
+            <Button x:Name="btTatarenland" Grid.Row="3" Content="Tatarenreich"/>
+            <Button x:Name="btn2" Grid.Row="4" Content="Button2"/>
+        </Grid>
+        <local:ZoomBorder x:Name="border" 
+                          BorderThickness="0,1,1,0"
+                          BorderBrush="Black"
+                          ClipToBounds="True"                           
+                          Grid.Row="1" 
+                          Grid.Column="0" 
+                          Grid.ColumnSpan="4" 
+                          Grid.RowSpan="2">
+            <Image Source="Pictures/Westeros.png" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">                
+            </Image>
+        </local:ZoomBorder>
+
+
+    </Grid>
+
+</Window>
