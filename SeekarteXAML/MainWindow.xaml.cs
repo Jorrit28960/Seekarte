@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,9 +12,33 @@ namespace SeekarteXAML
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(string game)
         {
+            SetGameDictionary(game);
             InitializeComponent();
+        }
+
+        private void SetGameDictionary(string game)
+        {
+            ResourceDictionary dict = new ResourceDictionary();
+            switch (game)
+            {
+                case "Risiko":
+                    dict.Source = new Uri("..\\Resources\\Risiko.xaml", UriKind.Relative);
+                    break;
+                case "GameOfThrones":
+                    dict.Source = new Uri("..\\Resources\\GameOfThrones.xaml", UriKind.Relative);
+                    break;
+                default:
+                    dict.Source = new Uri("..\\Resources\\Risiko.xaml", UriKind.Relative);
+                    break;
+            }
+            this.Resources.MergedDictionaries.Add(dict);
+        }
+
+        private void btnPreussen_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

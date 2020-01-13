@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SeekarteXAML"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <system:String x:Key="Country1">Preussen</system:String>
+    <system:String x:Key="Country2">Tartarenreich</system:String>
+    <system:String x:Key="Country3">Spanien</system:String>
+    <system:String x:Key="Country4">Polen</system:String>
+    <system:String x:Key="Country5">Preussen</system:String>
+    <system:String x:Key="Country6">Preussen</system:String>
+    <system:String x:Key="Country7">Preussen</system:String>
+
+</ResourceDictionary>

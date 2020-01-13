@@ -52,11 +52,11 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Button x:Name="btn3" Grid.Row="0" Content="Button 3"/>
-            <Button x:Name="btnAdmin" Grid.Row="1" Content="Admin"/>
-            <Button x:Name="btnPolen" Grid.Row="2" Content="Polen"/>
-            <Button x:Name="btTatarenland" Grid.Row="3" Content="Tatarenreich"/>
-            <Button x:Name="btn2" Grid.Row="4" Content="Button2"/>
+            <Button x:Name="btnAdmin" Grid.Row="0" Content="Admin"/>
+            <Button x:Name="btnCountry1" Grid.Row="1" Content="{StaticResource Country1}" HorizontalAlignment="Left" Margin="10,10,0,10" Width="120" Click="btnPreussen_Click"/>
+            <Button x:Name="btnCountry2" Grid.Row="2" Content="{StaticResource Country2}"/>
+            <Button x:Name="btnCountry3" Grid.Row="3" Content="{StaticResource Country3}"/>
+            <Button x:Name="btnCountry4" Grid.Row="4" Content="{StaticResource Country4}"/>
         </Grid>
         <local:ZoomBorder x:Name="border" 
                           BorderThickness="0,1,1,0"
@@ -66,7 +66,7 @@
                           Grid.Column="0" 
                           Grid.ColumnSpan="4" 
                           Grid.RowSpan="2">
-            <Image Source="Pictures/Westeros.png" 
+            <Image Source="Resources/Pictures/Westeros.png" 
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center">                
             </Image>
