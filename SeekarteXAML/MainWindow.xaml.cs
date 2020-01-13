@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace SeekarteXAML
 {
@@ -39,6 +40,25 @@ namespace SeekarteXAML
         private void btnPreussen_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnCountry4_Click(object sender, RoutedEventArgs e)
+        {
+            Line line = new Line();
+            Thickness thickness = new Thickness(101, -11, 362, 250);
+            line.Margin = thickness;
+            line.Visibility = System.Windows.Visibility.Visible;
+            line.StrokeThickness = 4;
+            line.Stroke = System.Windows.Media.Brushes.Black;
+            line.X1 = 10;
+            line.X2 = 40;
+            line.Y1 = 70;
+            line.Y2 = 70;
+
+            Map.Children.Add(line);
+            //Window win = Window.GetWindow(this);
+
+            //win.
         }
     }
 

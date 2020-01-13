@@ -11,4 +11,7 @@
     <system:String x:Key="Country6">Preussen</system:String>
     <system:String x:Key="Country7">Preussen</system:String>
 
+    <!--<BitmapImage x:Key="Map" UriSource="../Resources/Pictures/Westeros.png" />-->
+    <!--<BitmapImage x:Key="Map" UriSource="../Resources/Pictures/amslernetz.png" />-->
+    <BitmapImage x:Key="Map" UriSource="../Resources/Pictures/Risiko.JPG" />
 </ResourceDictionary>
