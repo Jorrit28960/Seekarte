@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Pictures\Risiko.JPG" />
     <None Remove="Westeros.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Pictures\Risiko.JPG" />
     <Resource Include="Resources\Pictures\Westeros.png" />
   </ItemGroup>
 
