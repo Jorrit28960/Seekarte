@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -65,6 +66,7 @@ namespace SeekarteXAML
     //Class that implements the image zoom and pan
     public class ZoomBorder : Border
     {
+        static List<UIElement> list = new List<UIElement>();
         private UIElement child = null;
         private Point origin;
         private Point start;
@@ -87,7 +89,10 @@ namespace SeekarteXAML
             set
             {
                 if (value != null && value != this.Child)
+                {
                     this.Initialize(value);
+                    list.Add(value);
+                }
                 base.Child = value;
             }
         }
@@ -133,28 +138,32 @@ namespace SeekarteXAML
 
         private void Child_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (child != null)
+            foreach (var child in list)
             {
-                var st = GetScaleTransform(child);
-                var tt = GetTranslateTransform(child);
+                if (child != null)
+                {
+                    var st = GetScaleTransform(child);
+                    var tt = GetTranslateTransform(child);
 
-                double zoom = e.Delta > 0 ? .2 : -.2;
-                if (!(e.Delta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
-                    return;
+                    double zoom = e.Delta > 0 ? .2 : -.2;
+                    if (!(e.Delta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
+                        return;
 
-                Point relative = e.GetPosition(child);
-                double absoluteX = relative.X * st.ScaleX + tt.X;
-                double absoluteY = relative.Y * st.ScaleY + tt.Y;
+                    Point relative = e.GetPosition(child);
+                    double absoluteX = relative.X * st.ScaleX + tt.X;
+                    double absoluteY = relative.Y * st.ScaleY + tt.Y;
 
-                //don't zoom greater than window
-                st.ScaleX = (st.ScaleX + zoom >= 1) ? st.ScaleX + zoom : 1;
-                st.ScaleY = (st.ScaleY + zoom >= 1) ? st.ScaleY + zoom : 1;
+                    //don't zoom greater than window
+                    st.ScaleX = (st.ScaleX + zoom >= 1) ? st.ScaleX + zoom : 1;
+                    st.ScaleY = (st.ScaleY + zoom >= 1) ? st.ScaleY + zoom : 1;
 
-                //center image if maximum size
-                tt.X = (st.ScaleX + zoom >= 1) ? absoluteX - relative.X * st.ScaleX : 0;
-                tt.Y = (st.ScaleY + zoom >= 1) ? absoluteY - relative.Y * st.ScaleY : 0;
+                    //center image if maximum size
+                    tt.X = (st.ScaleX + zoom >= 1) ? absoluteX - relative.X * st.ScaleX : 0;
+                    tt.Y = (st.ScaleY + zoom >= 1) ? absoluteY - relative.Y * st.ScaleY : 0;
 
+                }
             }
+
         }
 
         private void Child_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
