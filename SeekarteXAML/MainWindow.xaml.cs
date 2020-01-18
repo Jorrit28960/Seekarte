@@ -243,17 +243,20 @@ namespace SeekarteXAML
             redLine2.Stroke = redBrush;
 
             // Add line to the Grid. 
-            zoomBorder.child = redLine;
-            zoomBorder.Initialize(redLine);
-            Choose.mainWindow.Map.Children.Add(redLine);
+            //zoomBorder.AddLogicalChild(redLine);
+            //zoomBorder.AddVisualChild(redLine);
+            zoomBorder.Child = redLine;
+            //zoomBorder.child = redLine;
+            //zoomBorder.Initialize(redLine);
+            Choose.mainWindow.Map.Children.Add(zoomBorder);
             //Choose.mainWindow.Map.Children.Add(redLine2);
             var a = Choose.mainWindow.Map.Children.Count;
             //var ab = Choose.mainWindow.Map.Children[3].ToString();
             //var abc = Choose.mainWindow.Map.s;
-            Grid.SetColumn(redLine, 0);
-            Grid.SetRow(redLine, 1);
-            Grid.SetColumnSpan(redLine, 4);
-            Grid.SetRowSpan(redLine, 4);
+            Grid.SetColumn(zoomBorder, 0);
+            Grid.SetRow(zoomBorder, 1);
+            Grid.SetColumnSpan(zoomBorder, 4);
+            Grid.SetRowSpan(zoomBorder, 4);
             MessageBox.Show(a.ToString());
         }
 
