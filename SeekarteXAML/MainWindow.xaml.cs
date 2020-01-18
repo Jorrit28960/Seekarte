@@ -67,6 +67,8 @@ namespace SeekarteXAML
     public class ZoomBorder : Border
     {
         static List<UIElement> list = new List<UIElement>();
+        static List<Point> points = new List<Point>();
+        static List<ZoomBorder> zoomBorders = new List<ZoomBorder>();
         private UIElement child = null;
         private Point origin;
         private Point start;
@@ -92,6 +94,7 @@ namespace SeekarteXAML
                 {
                     this.Initialize(value);
                     list.Add(value);
+                    zoomBorders.Add(this);
                 }
                 base.Child = value;
             }
@@ -170,6 +173,13 @@ namespace SeekarteXAML
         {
             if (child != null)
             {
+                points.Clear();
+                foreach (var child in list)
+                {
+                    var tmp = GetTranslateTransform(child);
+                    origin = new Point(tmp.X, tmp.Y);
+                    points.Add(origin);
+                }
                 var tt = GetTranslateTransform(child);
                 start = e.GetPosition(this);
                 origin = new Point(tt.X, tt.Y);
@@ -194,19 +204,38 @@ namespace SeekarteXAML
 
         private void Child_MouseMove(object sender, MouseEventArgs e)
         {
-            if (child != null)
+            //if (child != null)
+            //{
+            //    if (child.IsMouseCaptured)
+            //    {
+            //        var tt = GetTranslateTransform(child);
+            //        Vector v = start - e.GetPosition(this);
+            //        tt.X = origin.X - v.X;
+            //        tt.Y = origin.Y - v.Y;
+            //    }
+            //}
+
+            if (list.Count > 0 && points.Count > 0)
             {
-                if (child.IsMouseCaptured)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    var tt = GetTranslateTransform(child);
-                    Vector v = start - e.GetPosition(this);
-                    tt.X = origin.X - v.X;
-                    tt.Y = origin.Y - v.Y;
+                    var achild = list[i];
+                    var aorigin = points[i];
+
+                    if (achild != null)
+                    {
+                        if (child.IsMouseCaptured)
+                        {
+                            var tt = GetTranslateTransform(achild);
+                            Vector v = start - e.GetPosition(zoomBorders[i]);
+                            tt.X = aorigin.X - v.X;
+                            tt.Y = aorigin.Y - v.Y;
+                        }
+                    }
+
                 }
             }
         }
-
         #endregion
     }
-
 }
