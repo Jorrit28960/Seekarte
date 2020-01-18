@@ -7,6 +7,7 @@ namespace SeekarteXAML
     /// </summary>
     public partial class Choose : Window
     {
+        public static MainWindow mainWindow;
         public Choose()
         {
             InitializeComponent();
@@ -19,7 +20,7 @@ namespace SeekarteXAML
 
         private void OpenMain(string game)
         {
-            var mainWindow = new MainWindow(game);
+            mainWindow = new MainWindow(game);
             mainWindow.Show();
             this.Close();
         }

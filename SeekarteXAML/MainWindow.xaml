@@ -75,20 +75,40 @@
                    VerticalAlignment="Center">
             </Image>
         </local:ZoomBorder>
-        <local:ZoomBorder x:Name="border2" 
+        <!--<local:ZoomBorder x:Name="border2" 
                           BorderThickness="0,1,1,0"
                           BorderBrush="Black"
-                          ClipToBounds="True"                           
+                          ClipToBounds="True"
                           Grid.Row="1" 
                           Grid.Column="0" 
                           Grid.ColumnSpan="4" 
                           Grid.RowSpan="2">
 
-            <!--<Image Source="Resources/Pictures/Risiko.JPG"-->
+            --><!--<Image Source="Resources/Pictures/Risiko.JPG"--><!--
 
             <Line Name="line7" Stroke="Black" StrokeThickness="20" X1="10" X2="40" Y1="70" Y2="70" Margin="101,296,354,160" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Row="1" />
 
+        </local:ZoomBorder>-->
+
+        <local:ZoomBorder 
+                          Grid.Row="1" 
+                          Grid.Column="0" 
+                          Grid.ColumnSpan="4" 
+                          Grid.RowSpan="2">
+
+            <Line Name="line" Stroke="Black" StrokeThickness="20" X1="10" X2="200" Y1="70" Y2="170" Margin="101,296,354,160"/>
+
         </local:ZoomBorder>
+
+        <Border 
+                          Grid.Row="1" 
+                          Grid.Column="0" 
+                          Grid.ColumnSpan="4" 
+                          Grid.RowSpan="2">
+
+            <Line Name="line2" Stroke="Black" StrokeThickness="20" X1="100" X2="300" Y1="70" Y2="170" Margin="101,296,354,160"/>
+
+        </Border>
 
     </Grid>
 

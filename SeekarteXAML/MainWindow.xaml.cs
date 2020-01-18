@@ -199,7 +199,62 @@ namespace SeekarteXAML
 
         void Child_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.Reset();
+            //this.Reset();
+
+            var aBackground = this.Background;
+            CreateALine();
+
+
+        }
+
+        public void CreateALine()
+        {
+            ZoomBorder zoomBorder = new ZoomBorder();
+            //zoomBorder.BorderThickness = "0,1,1,0";
+
+            //Grid.Row = "1"
+            //Grid.Column = "0"
+            //Grid.ColumnSpan = "4"
+            //Grid.RowSpan = "2"
+
+            // Create a Line  
+            Line redLine = new Line();
+            redLine.X1 = 50;
+            redLine.Y1 = 50;
+            redLine.X2 = 200;
+            redLine.Y2 = 50;
+
+            Line redLine2 = new Line();
+            redLine2.X1 = 210;
+            redLine2.Y1 = 50;
+            redLine2.X2 = 400;
+            redLine2.Y2 = 200;
+
+
+            // Create a red Brush  
+            SolidColorBrush redBrush = new SolidColorBrush();
+            redBrush.Color = Colors.Red;
+
+            // Set Line's width and color  
+            redLine.StrokeThickness = 4;
+            redLine.Stroke = redBrush;
+
+            redLine2.StrokeThickness = 4;
+            redLine2.Stroke = redBrush;
+
+            // Add line to the Grid. 
+            zoomBorder.child = redLine;
+            zoomBorder.Initialize(redLine);
+            Choose.mainWindow.Map.Children.Add(redLine);
+            //Choose.mainWindow.Map.Children.Add(redLine2);
+            var a = Choose.mainWindow.Map.Children.Count;
+            //var ab = Choose.mainWindow.Map.Children[3].ToString();
+            //var abc = Choose.mainWindow.Map.s;
+            Grid.SetColumn(redLine, 0);
+            Grid.SetRow(redLine, 1);
+            Grid.SetColumnSpan(redLine, 4);
+            Grid.SetRowSpan(redLine, 4);
+            MessageBox.Show(a.ToString());
         }
 
         private void Child_MouseMove(object sender, MouseEventArgs e)
