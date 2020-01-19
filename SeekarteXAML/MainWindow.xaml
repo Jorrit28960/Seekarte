@@ -58,7 +58,6 @@
             <Button x:Name="btnCountry3" Grid.Row="3" Content="{StaticResource Country3}"/>
             <Button x:Name="btnCountry4" Grid.Row="4" Content="{StaticResource Country4}" Click="btnCountry4_Click"/>
             <Button x:Name="btnCountry5" Grid.Row="5" Content="{StaticResource Country5}"/>
-            <!--<Line Name="line7" Grid.Row="5" Stroke="Black" StrokeThickness="0" X1="1000" X2="40" Y1="70" Y2="70" Margin="101,-11,362,250" Visibility="Visible" />-->
         </Grid>
         <local:ZoomBorder x:Name="border" 
                           BorderThickness="0,1,1,0"
@@ -76,7 +75,7 @@
                    VerticalAlignment="Center">
             </Image>
         </local:ZoomBorder>
-        <!--<local:ZoomBorder 
+        <local:ZoomBorder 
                           ClipToBounds="True"                           
                           Grid.Row="1" 
                           Grid.Column="0" 
@@ -85,7 +84,7 @@
 
             <Line Name="line" Stroke="Black" StrokeThickness="20" X1="10" X2="200" Y1="70" Y2="170" Margin="101,296,354,160"/>
 
-        </local:ZoomBorder>-->
+        </local:ZoomBorder>
     </Grid>
 
 </Window>
