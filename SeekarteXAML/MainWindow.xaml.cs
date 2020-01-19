@@ -62,6 +62,10 @@ namespace SeekarteXAML
             //win.
         }
 
+        private void AdminBtnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Admin");
+        }
     }
 
     //Class that implements the image zoom and pan
