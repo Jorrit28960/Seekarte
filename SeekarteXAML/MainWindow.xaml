@@ -11,21 +11,21 @@
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="17"/>
             <Setter Property="Height" Value="30"/>
-            <Setter Property="Margin" Value="10"/>            
+            <Setter Property="Margin" Value="10"/>
             <Setter Property="Background" Value="White"/>
         </Style>
     </Window.Resources>
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+            <RadialGradientBrush >
 
-                <GradientStop Color="Yellow" Offset="0" />
-
+                <GradientStop Color="Yellow" Offset="0.3" />
                 <GradientStop Color="Brown" Offset="1.0" />
 
-            </LinearGradientBrush>
+            </RadialGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -43,8 +43,8 @@
                    Text="Runde 1" 
                    FontSize="17" 
                    VerticalAlignment="Center"/>
-        
-        <Grid Grid.Row="1" Grid.Column="4" Grid.RowSpan="2">
+
+        <Grid Grid.Row="1" Grid.Column="5" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
@@ -55,20 +55,38 @@
             <Button x:Name="btn3" Grid.Row="0" Content="Button 3"/>
             <Button x:Name="btnAdmin" Grid.Row="1" Content="Admin"/>
             <Button x:Name="btnPolen" Grid.Row="2" Content="Polen"/>
-            <Button x:Name="btTatarenland" Grid.Row="3" Content="Tatarenreich"/>
-            <Button x:Name="btn2" Grid.Row="4" Content="Button2"/>
+            <Button x:Name="btTatarenland" Grid.Row="3" Content="Tatarenreich" Click="btTatarenland_Click"/>
+            <Button x:Name="btnCenter" Grid.Row="4" Content="Center Map" Click="btnCenter_Click"/>
         </Grid>
+        <Rectangle
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="4" 
+            Grid.RowSpan="2" Margin="28,76,27,62">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="#3D281B"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Image Source="Rahmen.png"                
+               Grid.Row="1"
+               Grid.Column="1"
+               Grid.ColumnSpan="4" 
+               Grid.RowSpan="2"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center">
+        </Image>
         <local:ZoomBorder x:Name="border" 
-                          BorderThickness="0,1,1,0"
-                          BorderBrush="Black"
-                          ClipToBounds="True"                           
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          ClipToBounds="True"    
+                          Margin="47,47,47,47"
                           Grid.Row="1" 
-                          Grid.Column="0" 
+                          Grid.Column="1" 
                           Grid.ColumnSpan="4" 
                           Grid.RowSpan="2">
-            <Image Source="Seekarte.jpeg"  
+            <Image Source="Westeros_landscape_ohneRahmen.png"  
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center">                
+                   VerticalAlignment="Top">
             </Image>
         </local:ZoomBorder>
 

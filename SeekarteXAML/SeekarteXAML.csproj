@@ -7,12 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Seekarte.jpeg" />
+    <None Remove="Rahmen.png" />
+    <None Remove="Westeros.png" />
+    <None Remove="Westeros_landscape.png" />
+    <None Remove="Westeros_landscape_ohneRahmen.png" />
     <None Remove="WhatsApp Image 2020-01-08 at 22.27.44.jpeg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Seekarte.jpeg" />
+    <Resource Include="Rahmen.png" />
+    <Resource Include="Westeros.png" />
+    <Resource Include="Westeros_landscape.png" />
+    <Resource Include="Westeros_landscape_ohneRahmen.png" />
     <Resource Include="WhatsApp Image 2020-01-08 at 22.27.44.jpeg" />
   </ItemGroup>
 

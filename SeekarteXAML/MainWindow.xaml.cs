@@ -15,6 +15,16 @@ namespace SeekarteXAML
         {
             InitializeComponent();
         }
+
+        private void btnCenter_Click(object sender, RoutedEventArgs e)
+        {
+            border.Reset();
+        }
+
+        private void btTatarenland_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(border.PrintTransform());
+        }
     }
 
     //Class that implements the image zoom and pan
@@ -93,6 +103,9 @@ namespace SeekarteXAML
                 var st = GetScaleTransform(child);
                 var tt = GetTranslateTransform(child);
 
+                var scaleX = st.ScaleX - 1.0;
+                var scaleY = st.ScaleY - 1.0;
+
                 double zoom = e.Delta > 0 ? .2 : -.2;
                 if (!(e.Delta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
                     return;
@@ -106,8 +119,39 @@ namespace SeekarteXAML
                 st.ScaleY = (st.ScaleY + zoom >= 1) ? st.ScaleY + zoom : 1;
 
                 //center image if maximum size
-                tt.X = (st.ScaleX + zoom >= 1) ? absoluteX - relative.X * st.ScaleX : 0;
-                tt.Y = (st.ScaleY + zoom >= 1) ? absoluteY - relative.Y * st.ScaleY : 0;
+                //tt.X = (st.ScaleX + zoom >= 1) ? absoluteX - relative.X * st.ScaleX : 0;
+                //tt.Y = (st.ScaleY + zoom >= 1) ? absoluteY - relative.Y * st.ScaleY : 0;
+                //
+                if (st.ScaleX + zoom >= 1)
+                {
+                    if (absoluteX - relative.X * st.ScaleX <= 0 && absoluteX - relative.X * st.ScaleX < (-327 *  scaleX * 5))
+                    {
+                        tt.X = absoluteX - relative.X * st.ScaleX;
+                    }
+                    else
+                    {
+                        tt.X = tt.X;
+                    }
+                }
+                else
+                {
+                    tt.X = 0;
+                }
+                if (st.ScaleY + zoom >= 1)
+                {
+                    if (absoluteY - relative.Y * st.ScaleY <= 0)
+                    {
+                        tt.Y = absoluteY - relative.Y * st.ScaleY;
+                    }
+                    else
+                    {
+                        tt.Y = tt.Y;
+                    }
+                }
+                else
+                {
+                    tt.Y = 0;
+                }
 
             }
         }
@@ -135,7 +179,17 @@ namespace SeekarteXAML
 
         void Child_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.Reset();
+            //this.Reset();
+        }
+
+        public string PrintTransform()
+        {
+            if (child != null)
+            {
+                var tt = GetTranslateTransform(child);
+                return string.Format("ttX: {0} \nttY: {1}", tt.X, tt.Y);
+            }
+            return 0.ToString();
         }
 
         private void Child_MouseMove(object sender, MouseEventArgs e)
@@ -145,9 +199,13 @@ namespace SeekarteXAML
                 if (child.IsMouseCaptured)
                 {
                     var tt = GetTranslateTransform(child);
+                    var st = GetScaleTransform(child);
+                    var scaleX = st.ScaleX - 1.0;
+                    var scaleY = st.ScaleY - 1.0;
+
                     Vector v = start - e.GetPosition(this);
-                    tt.X = origin.X - v.X;
-                    tt.Y = origin.Y - v.Y;
+                    tt.X = (origin.X - v.X >= 0 || origin.X - v.X < (-327*scaleX*5)) ? tt.X : origin.X - v.X;
+                    tt.Y = (origin.Y - v.Y >= 0 || origin.Y - v.Y <= (-154*scaleY*5)) ? tt.Y : origin.Y - v.Y;
                 }
             }
         }
