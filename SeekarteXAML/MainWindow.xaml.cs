@@ -75,8 +75,9 @@ namespace SeekarteXAML
         private Point startLeftBtn;
         private Point startRightBtn;
         private Point endRightBtn;
-        private static double latestZoom;
-        private static ScaleTransform latestScale;
+        private static ScaleTransform latestScale = new ScaleTransform(1, 1);
+        private static TranslateTransform latestTransform = new TranslateTransform(0, 0);
+
 
         private TranslateTransform GetTranslateTransform(UIElement element)
         {
@@ -155,7 +156,6 @@ namespace SeekarteXAML
                     var tt = GetTranslateTransform(child);
 
                     double zoom = e.Delta > 0 ? .2 : -.2;
-                    latestZoom = zoom;
                     if (!(e.Delta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
                         return;
 
@@ -169,13 +169,14 @@ namespace SeekarteXAML
                     if (st != null)
                         latestScale = st;
 
+                    if (tt != null)
+                        latestTransform = tt;
+
                     //center image if maximum size
                     tt.X = (st.ScaleX + zoom >= 1) ? absoluteX - relative.X * st.ScaleX : 0;
                     tt.Y = (st.ScaleY + zoom >= 1) ? absoluteY - relative.Y * st.ScaleY : 0;
-
                 }
             }
-
         }
 
         private void Child_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -231,8 +232,7 @@ namespace SeekarteXAML
             Choose.mainWindow.Map.Children.Add(zoomBorder);
 
             var st = GetScaleTransform(zoomBorder.child);
-            //st.ScaleX = (st.ScaleX + latestZoom >= 1) ? st.ScaleX + latestZoom : 1;
-            //st.ScaleY = (st.ScaleY + latestZoom >= 1) ? st.ScaleY + latestZoom : 1;
+            var tt = GetTranslateTransform(zoomBorder.child);
 
             if (latestScale != null)
             {
@@ -240,17 +240,24 @@ namespace SeekarteXAML
                 st.ScaleY = latestScale.ScaleY;
             }
 
-            redLine.X1 = startRightBtn.X;
-            redLine.Y1 = startRightBtn.Y;
-            redLine.X2 = endRightBtn.X;
-            redLine.Y2 = endRightBtn.Y;
+            if (latestTransform != null)
+            {
+                tt.X = latestTransform.X;
+                tt.Y = latestTransform.Y;
+            }
+
+            redLine.X1 = ((startRightBtn.X - latestTransform.X) / latestScale.ScaleX);
+            redLine.Y1 = ((startRightBtn.Y - latestTransform.Y) / latestScale.ScaleY);
+
+            redLine.X2 = ((endRightBtn.X - latestTransform.X) / latestScale.ScaleX);
+            redLine.Y2 = ((endRightBtn.Y - latestTransform.Y) / latestScale.ScaleY);
 
             // Create a red Brush  
             SolidColorBrush redBrush = new SolidColorBrush();
             redBrush.Color = Colors.Red;
 
             // Set Line's width and color  
-            redLine.StrokeThickness = 4;
+            redLine.StrokeThickness = 1;
             redLine.Stroke = redBrush;
 
             // Add line to the Grid. 
@@ -259,10 +266,6 @@ namespace SeekarteXAML
             Grid.SetColumnSpan(zoomBorder, 4);
             Grid.SetRowSpan(zoomBorder, 2);
             zoomBorder.ClipToBounds = true;
-
-
-
-
         }
 
         private void Child_MouseMove(object sender, MouseEventArgs e)
@@ -295,7 +298,6 @@ namespace SeekarteXAML
                             tt.Y = aorigin.Y - v.Y;
                         }
                     }
-
                 }
             }
         }
