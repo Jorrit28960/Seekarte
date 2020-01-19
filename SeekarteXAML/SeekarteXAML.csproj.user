@@ -7,7 +7,21 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Choose.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Choose.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\GameOfThrones.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Risiko.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

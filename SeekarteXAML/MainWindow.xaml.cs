@@ -1,8 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace SeekarteXAML
 {
@@ -11,18 +14,70 @@ namespace SeekarteXAML
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(string game)
         {
+            SetGameDictionary(game);
             InitializeComponent();
         }
+
+        private void SetGameDictionary(string game)
+        {
+            ResourceDictionary dict = new ResourceDictionary();
+            switch (game)
+            {
+                case "Risiko":
+                    dict.Source = new Uri("..\\Resources\\Risiko.xaml", UriKind.Relative);
+                    break;
+                case "GameOfThrones":
+                    dict.Source = new Uri("..\\Resources\\GameOfThrones.xaml", UriKind.Relative);
+                    break;
+                default:
+                    dict.Source = new Uri("..\\Resources\\Risiko.xaml", UriKind.Relative);
+                    break;
+            }
+            this.Resources.MergedDictionaries.Add(dict);
+        }
+
+        private void btnPreussen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCountry4_Click(object sender, RoutedEventArgs e)
+        {
+            Line line = new Line();
+            Thickness thickness = new Thickness(101, -11, 362, 250);
+            line.Margin = thickness;
+            line.Visibility = System.Windows.Visibility.Visible;
+            line.StrokeThickness = 4;
+            line.Stroke = System.Windows.Media.Brushes.Black;
+            line.X1 = 10;
+            line.X2 = 40;
+            line.Y1 = 70;
+            line.Y2 = 70;
+
+            Map.Children.Add(line);
+            //Window win = Window.GetWindow(this);
+
+            //win.
+        }
+
     }
 
     //Class that implements the image zoom and pan
     public class ZoomBorder : Border
     {
+        static List<UIElement> list = new List<UIElement>();
+        static List<Point> points = new List<Point>();
+        static List<ZoomBorder> zoomBorders = new List<ZoomBorder>();
         private UIElement child = null;
         private Point origin;
-        private Point start;
+        private Point startLeftBtn;
+        private Point startRightBtn;
+        private Point endRightBtn;
+        private static ScaleTransform latestScale = new ScaleTransform(1, 1);
+        private static TranslateTransform latestTransform = new TranslateTransform(0, 0);
+
 
         private TranslateTransform GetTranslateTransform(UIElement element)
         {
@@ -42,7 +97,11 @@ namespace SeekarteXAML
             set
             {
                 if (value != null && value != this.Child)
+                {
                     this.Initialize(value);
+                    list.Add(value);
+                    zoomBorders.Add(this);
+                }
                 base.Child = value;
             }
         }
@@ -63,6 +122,7 @@ namespace SeekarteXAML
                 this.MouseLeftButtonDown += Child_MouseLeftButtonDown;
                 this.MouseLeftButtonUp += Child_MouseLeftButtonUp;
                 this.MouseMove += Child_MouseMove;
+                this.MouseRightButtonUp += Child_MouseRightButtonUp;
                 this.PreviewMouseRightButtonDown += new MouseButtonEventHandler(
                   Child_PreviewMouseRightButtonDown);
             }
@@ -88,27 +148,34 @@ namespace SeekarteXAML
 
         private void Child_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (child != null)
+            foreach (var child in list)
             {
-                var st = GetScaleTransform(child);
-                var tt = GetTranslateTransform(child);
+                if (child != null)
+                {
+                    var st = GetScaleTransform(child);
+                    var tt = GetTranslateTransform(child);
 
-                double zoom = e.Delta > 0 ? .2 : -.2;
-                if (!(e.Delta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
-                    return;
+                    double zoom = e.Delta > 0 ? .2 : -.2;
+                    if (!(e.Delta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
+                        return;
 
-                Point relative = e.GetPosition(child);
-                double absoluteX = relative.X * st.ScaleX + tt.X;
-                double absoluteY = relative.Y * st.ScaleY + tt.Y;
+                    Point relative = e.GetPosition(child);
+                    double absoluteX = relative.X * st.ScaleX + tt.X;
+                    double absoluteY = relative.Y * st.ScaleY + tt.Y;
 
-                //don't zoom greater than window
-                st.ScaleX = (st.ScaleX + zoom >= 1) ? st.ScaleX + zoom : 1;
-                st.ScaleY = (st.ScaleY + zoom >= 1) ? st.ScaleY + zoom : 1;
+                    //don't zoom greater than window
+                    st.ScaleX = (st.ScaleX + zoom >= 1) ? st.ScaleX + zoom : 1;
+                    st.ScaleY = (st.ScaleY + zoom >= 1) ? st.ScaleY + zoom : 1;
+                    if (st != null)
+                        latestScale = st;
 
-                //center image if maximum size
-                tt.X = (st.ScaleX + zoom >= 1) ? absoluteX - relative.X * st.ScaleX : 0;
-                tt.Y = (st.ScaleY + zoom >= 1) ? absoluteY - relative.Y * st.ScaleY : 0;
+                    if (tt != null)
+                        latestTransform = tt;
 
+                    //center image if maximum size
+                    tt.X = (st.ScaleX + zoom >= 1) ? absoluteX - relative.X * st.ScaleX : 0;
+                    tt.Y = (st.ScaleY + zoom >= 1) ? absoluteY - relative.Y * st.ScaleY : 0;
+                }
             }
         }
 
@@ -116,8 +183,15 @@ namespace SeekarteXAML
         {
             if (child != null)
             {
+                points.Clear();
+                foreach (var child in list)
+                {
+                    var tmp = GetTranslateTransform(child);
+                    origin = new Point(tmp.X, tmp.Y);
+                    points.Add(origin);
+                }
                 var tt = GetTranslateTransform(child);
-                start = e.GetPosition(this);
+                startLeftBtn = e.GetPosition(this);
                 origin = new Point(tt.X, tt.Y);
                 this.Cursor = Cursors.Hand;
                 child.CaptureMouse();
@@ -135,24 +209,98 @@ namespace SeekarteXAML
 
         void Child_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.Reset();
+            startRightBtn = e.GetPosition(this);
+        }
+        private void Child_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            endRightBtn = e.GetPosition(this);
+            CreateALine();
+
+            //need because MouseRightDown is not reacting always
+            startRightBtn = e.GetPosition(this);
+        }
+
+
+        public void CreateALine()
+        {
+            ZoomBorder zoomBorder = new ZoomBorder();
+
+            // Create a Line  
+            Line redLine = new Line();
+
+            zoomBorder.Child = redLine;
+            Choose.mainWindow.Map.Children.Add(zoomBorder);
+
+            var st = GetScaleTransform(zoomBorder.child);
+            var tt = GetTranslateTransform(zoomBorder.child);
+
+            if (latestScale != null)
+            {
+                st.ScaleX = latestScale.ScaleX;
+                st.ScaleY = latestScale.ScaleY;
+            }
+
+            if (latestTransform != null)
+            {
+                tt.X = latestTransform.X;
+                tt.Y = latestTransform.Y;
+            }
+
+            redLine.X1 = ((startRightBtn.X - latestTransform.X) / latestScale.ScaleX);
+            redLine.Y1 = ((startRightBtn.Y - latestTransform.Y) / latestScale.ScaleY);
+
+            redLine.X2 = ((endRightBtn.X - latestTransform.X) / latestScale.ScaleX);
+            redLine.Y2 = ((endRightBtn.Y - latestTransform.Y) / latestScale.ScaleY);
+
+            // Create a red Brush  
+            SolidColorBrush redBrush = new SolidColorBrush();
+            redBrush.Color = Colors.Red;
+
+            // Set Line's width and color  
+            redLine.StrokeThickness = 1;
+            redLine.Stroke = redBrush;
+
+            // Add line to the Grid. 
+            Grid.SetColumn(zoomBorder, 0);
+            Grid.SetRow(zoomBorder, 1);
+            Grid.SetColumnSpan(zoomBorder, 4);
+            Grid.SetRowSpan(zoomBorder, 2);
+            zoomBorder.ClipToBounds = true;
         }
 
         private void Child_MouseMove(object sender, MouseEventArgs e)
         {
-            if (child != null)
+            //if (child != null)
+            //{
+            //    if (child.IsMouseCaptured)
+            //    {
+            //        var tt = GetTranslateTransform(child);
+            //        Vector v = start - e.GetPosition(this);
+            //        tt.X = origin.X - v.X;
+            //        tt.Y = origin.Y - v.Y;
+            //    }
+            //}
+
+            if (list.Count > 0 && points.Count > 0)
             {
-                if (child.IsMouseCaptured)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    var tt = GetTranslateTransform(child);
-                    Vector v = start - e.GetPosition(this);
-                    tt.X = origin.X - v.X;
-                    tt.Y = origin.Y - v.Y;
+                    var achild = list[i];
+
+                    if (achild != null)
+                    {
+                        if (child.IsMouseCaptured)
+                        {
+                            var aorigin = points[i];
+                            var tt = GetTranslateTransform(achild);
+                            Vector v = startLeftBtn - e.GetPosition(zoomBorders[i]);
+                            tt.X = aorigin.X - v.X;
+                            tt.Y = aorigin.Y - v.Y;
+                        }
+                    }
                 }
             }
         }
-
         #endregion
     }
-
 }
