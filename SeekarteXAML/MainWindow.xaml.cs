@@ -61,6 +61,7 @@ namespace SeekarteXAML
 
             //win.
         }
+
     }
 
     //Class that implements the image zoom and pan
@@ -71,7 +72,11 @@ namespace SeekarteXAML
         static List<ZoomBorder> zoomBorders = new List<ZoomBorder>();
         private UIElement child = null;
         private Point origin;
-        private Point start;
+        private Point startLeftBtn;
+        private Point startRightBtn;
+        private Point endRightBtn;
+        private static double latestZoom;
+        private static ScaleTransform latestScale;
 
         private TranslateTransform GetTranslateTransform(UIElement element)
         {
@@ -116,6 +121,7 @@ namespace SeekarteXAML
                 this.MouseLeftButtonDown += Child_MouseLeftButtonDown;
                 this.MouseLeftButtonUp += Child_MouseLeftButtonUp;
                 this.MouseMove += Child_MouseMove;
+                this.MouseRightButtonUp += Child_MouseRightButtonUp;
                 this.PreviewMouseRightButtonDown += new MouseButtonEventHandler(
                   Child_PreviewMouseRightButtonDown);
             }
@@ -149,6 +155,7 @@ namespace SeekarteXAML
                     var tt = GetTranslateTransform(child);
 
                     double zoom = e.Delta > 0 ? .2 : -.2;
+                    latestZoom = zoom;
                     if (!(e.Delta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
                         return;
 
@@ -159,6 +166,8 @@ namespace SeekarteXAML
                     //don't zoom greater than window
                     st.ScaleX = (st.ScaleX + zoom >= 1) ? st.ScaleX + zoom : 1;
                     st.ScaleY = (st.ScaleY + zoom >= 1) ? st.ScaleY + zoom : 1;
+                    if (st != null)
+                        latestScale = st;
 
                     //center image if maximum size
                     tt.X = (st.ScaleX + zoom >= 1) ? absoluteX - relative.X * st.ScaleX : 0;
@@ -181,7 +190,7 @@ namespace SeekarteXAML
                     points.Add(origin);
                 }
                 var tt = GetTranslateTransform(child);
-                start = e.GetPosition(this);
+                startLeftBtn = e.GetPosition(this);
                 origin = new Point(tt.X, tt.Y);
                 this.Cursor = Cursors.Hand;
                 child.CaptureMouse();
@@ -199,37 +208,42 @@ namespace SeekarteXAML
 
         void Child_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //this.Reset();
-
-            var aBackground = this.Background;
+            startRightBtn = e.GetPosition(this);
+        }
+        private void Child_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            endRightBtn = e.GetPosition(this);
             CreateALine();
 
-
+            //need because MouseRightDown is not reacting always
+            startRightBtn = e.GetPosition(this);
         }
+
 
         public void CreateALine()
         {
             ZoomBorder zoomBorder = new ZoomBorder();
-            //zoomBorder.BorderThickness = "0,1,1,0";
-
-            //Grid.Row = "1"
-            //Grid.Column = "0"
-            //Grid.ColumnSpan = "4"
-            //Grid.RowSpan = "2"
 
             // Create a Line  
             Line redLine = new Line();
-            redLine.X1 = 50;
-            redLine.Y1 = 50;
-            redLine.X2 = 200;
-            redLine.Y2 = 50;
 
-            Line redLine2 = new Line();
-            redLine2.X1 = 210;
-            redLine2.Y1 = 50;
-            redLine2.X2 = 400;
-            redLine2.Y2 = 200;
+            zoomBorder.Child = redLine;
+            Choose.mainWindow.Map.Children.Add(zoomBorder);
 
+            var st = GetScaleTransform(zoomBorder.child);
+            //st.ScaleX = (st.ScaleX + latestZoom >= 1) ? st.ScaleX + latestZoom : 1;
+            //st.ScaleY = (st.ScaleY + latestZoom >= 1) ? st.ScaleY + latestZoom : 1;
+
+            if (latestScale != null)
+            {
+                st.ScaleX = latestScale.ScaleX;
+                st.ScaleY = latestScale.ScaleY;
+            }
+
+            redLine.X1 = startRightBtn.X;
+            redLine.Y1 = startRightBtn.Y;
+            redLine.X2 = endRightBtn.X;
+            redLine.Y2 = endRightBtn.Y;
 
             // Create a red Brush  
             SolidColorBrush redBrush = new SolidColorBrush();
@@ -239,25 +253,16 @@ namespace SeekarteXAML
             redLine.StrokeThickness = 4;
             redLine.Stroke = redBrush;
 
-            redLine2.StrokeThickness = 4;
-            redLine2.Stroke = redBrush;
-
             // Add line to the Grid. 
-            //zoomBorder.AddLogicalChild(redLine);
-            //zoomBorder.AddVisualChild(redLine);
-            zoomBorder.Child = redLine;
-            //zoomBorder.child = redLine;
-            //zoomBorder.Initialize(redLine);
-            Choose.mainWindow.Map.Children.Add(zoomBorder);
-            //Choose.mainWindow.Map.Children.Add(redLine2);
-            var a = Choose.mainWindow.Map.Children.Count;
-            //var ab = Choose.mainWindow.Map.Children[3].ToString();
-            //var abc = Choose.mainWindow.Map.s;
             Grid.SetColumn(zoomBorder, 0);
             Grid.SetRow(zoomBorder, 1);
             Grid.SetColumnSpan(zoomBorder, 4);
-            Grid.SetRowSpan(zoomBorder, 4);
-            MessageBox.Show(a.ToString());
+            Grid.SetRowSpan(zoomBorder, 2);
+            zoomBorder.ClipToBounds = true;
+
+
+
+
         }
 
         private void Child_MouseMove(object sender, MouseEventArgs e)
@@ -278,14 +283,14 @@ namespace SeekarteXAML
                 for (int i = 0; i < list.Count; i++)
                 {
                     var achild = list[i];
-                    var aorigin = points[i];
 
                     if (achild != null)
                     {
                         if (child.IsMouseCaptured)
                         {
+                            var aorigin = points[i];
                             var tt = GetTranslateTransform(achild);
-                            Vector v = start - e.GetPosition(zoomBorders[i]);
+                            Vector v = startLeftBtn - e.GetPosition(zoomBorders[i]);
                             tt.X = aorigin.X - v.X;
                             tt.Y = aorigin.Y - v.Y;
                         }
