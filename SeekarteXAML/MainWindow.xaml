@@ -52,11 +52,12 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Button x:Name="btnAdmin" Grid.Row="0" Content="Admin"/>
+            <Button x:Name="btnAdmin" Grid.Row="0" Content="Admin" Height="Auto" Margin="10,10,10,10" Click="AdminBtnClick"/>
             <Button x:Name="btnCountry1" Grid.Row="1" Content="{StaticResource Country1}" HorizontalAlignment="Left" Margin="10,10,0,10" Width="120" Click="btnPreussen_Click"/>
             <Button x:Name="btnCountry2" Grid.Row="2" Content="{StaticResource Country2}"/>
             <Button x:Name="btnCountry3" Grid.Row="3" Content="{StaticResource Country3}"/>
             <Button x:Name="btnCountry4" Grid.Row="4" Content="{StaticResource Country4}" Click="btnCountry4_Click"/>
+            <Button x:Name="btnCountry5" Grid.Row="5" Content="{StaticResource Country5}"/>
             <!--<Line Name="line7" Grid.Row="5" Stroke="Black" StrokeThickness="0" X1="1000" X2="40" Y1="70" Y2="70" Margin="101,-11,362,250" Visibility="Visible" />-->
         </Grid>
         <local:ZoomBorder x:Name="border" 

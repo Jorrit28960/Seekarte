@@ -40,7 +40,17 @@ namespace SeekarteXAML
 
         private void btnPreussen_Click(object sender, RoutedEventArgs e)
         {
+            var dialog = new Dialogue();
+            if (dialog.ShowDialog() == true)
+            {
+                MessageBox.Show("You said: " + dialog.ResponseText);
+            }
 
+            var dialog2 = new Dialogue("Hallo, geben SIe bitte Ihr Passwort ein");
+            if (dialog2.ShowDialog() == true)
+            {
+                MessageBox.Show("You said: " + dialog2.ResponseText);
+            }
         }
 
         private void btnCountry4_Click(object sender, RoutedEventArgs e)
@@ -62,6 +72,10 @@ namespace SeekarteXAML
             //win.
         }
 
+        private void AdminBtnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Admin");
+        }
     }
 
     //Class that implements the image zoom and pan
