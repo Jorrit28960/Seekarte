@@ -15,6 +15,9 @@
     <Compile Update="Choose.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Dialogue.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Choose.xaml">
@@ -27,6 +30,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\Risiko.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogue.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
