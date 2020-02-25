@@ -140,6 +140,36 @@ namespace SeekarteXAML
                 this.Cursor = Cursors.Hand;
                 child.CaptureMouse();
             }
+
+            //var a = listZoomBorders[0].DesiredSize;
+            //var b = listZoomBorders[1].DesiredSize;
+            //listZoomBorders[1].Measure(a);
+            //MessageBox.Show(a.ToString());
+            //MessageBox.Show(b.ToString());
+
+            //Bitmap on = new Bitmap();
+
+
+            //var line = new Line();
+            //line.X1 = 10;
+            //line.X2 = 100;
+            //line.Y1 = 10;
+            //line.Y2 = 100;
+
+
+            //SolidColorBrush redBrush = new SolidColorBrush();
+            //redBrush.Color = Colors.Red;
+
+            //// Set Line's width and color  
+            //line.StrokeThickness = 1;
+            //line.Stroke = redBrush;
+
+            //Choose.mainWindow.Cnv.Children.Add(line);
+            ////Canvas.SetLeft(line, e.GetPosition(Choose.mainWindow.Cnv).X);
+            ////Canvas.SetTop(line, e.GetPosition(Choose.mainWindow.Cnv).Y);
+
+
+
         }
 
         private void Child_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

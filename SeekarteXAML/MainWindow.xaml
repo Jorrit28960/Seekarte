@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:SeekarteXAML"
         mc:Ignorable="d"
         WindowState="Maximized"
+        ResizeMode="NoResize"
         Title="MainWindow" Height="1080" Width="1920">
     <Window.Resources>
         <Style TargetType="Button">
@@ -44,8 +45,12 @@
                    FontSize="17" 
                    VerticalAlignment="Center"/>
 
-        <Grid Grid.Row="1" Grid.Column="4" Grid.RowSpan="2">
+        <Grid Name="BtnGrid" Grid.Row="1" Grid.Column="4" Grid.RowSpan="2">
             <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
@@ -57,7 +62,9 @@
             <Button x:Name="btnCountry2" Grid.Row="2" Content="{StaticResource Country2}"/>
             <Button x:Name="btnCountry3" Grid.Row="3" Content="{StaticResource Country3}"/>
             <Button x:Name="btnCountry4" Grid.Row="4" Content="{StaticResource Country4}" Click="btnCountry4_Click"/>
-            <Button x:Name="btnCountry5" Grid.Row="5" Content="{StaticResource Country5}"/>
+            <Button x:Name="btnCountry5" Grid.Row="5" Content="{StaticResource Country4}"/>
+            <Button x:Name="btnCountry6" Grid.Row="6" Content="{StaticResource Country4}"/>
+            <Button x:Name="btnCountry7" Grid.Row="7" Content="{StaticResource Country4}"/>
         </Grid>
         <local:ZoomBorder x:Name="border" 
                           BorderThickness="0,1,1,0"
@@ -70,21 +77,48 @@
 
 
             <!--<Image Source="Resources/Pictures/Risiko.JPG"-->
-            <Image Source="{StaticResource Map}"
+            <Grid>
+                <Image Source="{StaticResource Map}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center">
-            </Image>
+                </Image>
+                <!--<Image Source="Resources/Pictures/linie.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+                </Image>
+                <Line Name="line" Stroke="Black" StrokeThickness="20" X1="10" X2="800" Y1="70" Y2="700"/>
+                <Canvas x:Name="Cnv" MaxWidth="459" MaxHeight="345" MinWidth="459" MinHeight="345"/>-->
+
+
+            </Grid>
         </local:ZoomBorder>
-        <local:ZoomBorder 
+        <!--<local:ZoomBorder 
+                            Width="4592"
+                          Height="3448"
                           ClipToBounds="True"                           
                           Grid.Row="1" 
                           Grid.Column="0" 
                           Grid.ColumnSpan="4" 
                           Grid.RowSpan="2">
 
-            <Line Name="line" Stroke="Black" StrokeThickness="20" X1="10" X2="200" Y1="70" Y2="170" Margin="101,296,354,160"/>
+            --><!--4592 x 3448--><!--
+            <Line Name="line" Stroke="Black" StrokeThickness="20" X1="10" X2="200" Y1="70" Y2="170"/>
 
-        </local:ZoomBorder>
+        </local:ZoomBorder>-->
+        <!--<Border x:Name="border2"              
+                          Grid.Row="1" 
+                          Grid.Column="0" 
+                          Grid.ColumnSpan="4" 
+                          Grid.RowSpan="2">
+
+
+            --><!--<Image Source="Resources/Pictures/Risiko.JPG"--><!--
+            <Image Source="Resources/Pictures/Reihnfolge.PNG"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+            </Image>-->
+        <!--</Border>-->
+
     </Grid>
 
 </Window>

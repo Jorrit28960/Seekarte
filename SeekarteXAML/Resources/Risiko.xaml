@@ -10,6 +10,15 @@
     <system:String x:Key="Country5">Preussen</system:String>
     <system:String x:Key="Country6">Preussen</system:String>
     <system:String x:Key="Country7">Preussen</system:String>
+    <system:String x:Key="Country8">Preussen</system:String>
+    <system:String x:Key="Country9">Preussen</system:String>
+    <system:String x:Key="Country10">Preussen</system:String>
+    <system:String x:Key="Country11">Preussen</system:String>
+    <system:String x:Key="Country12">Preussen</system:String>
+    <system:String x:Key="Country13">Preussen</system:String>
+    <system:String x:Key="Country14">Preussen</system:String>
+    <system:String x:Key="Country15">Preussen</system:String>
+    <system:String x:Key="Country16">Preussen</system:String>
 
     <BitmapImage x:Key="Map" UriSource="../Resources/Pictures/Risiko.jpg" />
 </ResourceDictionary>

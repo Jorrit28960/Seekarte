@@ -9,10 +9,13 @@ namespace SeekarteXAML
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ResourceDictionary gameDict;
+
         public MainWindow(string game)
         {
             SetGameDictionary(game);
             InitializeComponent();
+            SetBtn(5);
         }
 
         private void SetGameDictionary(string game)
@@ -31,6 +34,8 @@ namespace SeekarteXAML
                     break;
             }
             this.Resources.MergedDictionaries.Add(dict);
+
+            gameDict = dict;
         }
 
         private void btnPreussen_Click(object sender, RoutedEventArgs e)
@@ -70,6 +75,30 @@ namespace SeekarteXAML
         private void AdminBtnClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Admin");
+        }
+
+        private void SetBtn(int number)
+        {
+            //int start = 1;
+            //Array[] array = new Array[gameDict.Values.Count];
+            //gameDict.Values.CopyTo(array, 0);
+
+            //for (int i = start; i < number + start; i++)
+            //{
+            //    var tmpBtn = new Button();
+            //    tmpBtn.Content = "testdgfhgjhkjlkö";
+
+
+            //    //tmpBtn.Content = Resources.;
+            //    Grid.SetRow(tmpBtn, 7 + i);
+            //    this.BtnGrid.Children.Add(tmpBtn);
+            //    this.BtnGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(50) });
+            //}
+
+            //foreach (var item in array)
+            //{
+            //    MessageBox.Show(item.ToString());
+            //}
         }
     }
 }
