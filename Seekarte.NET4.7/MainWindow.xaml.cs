@@ -14,6 +14,8 @@ namespace Seekarte.NET4._7
     {
         private ResourceDictionary gameDict;
         private List<Country> countries;
+        private List<Button> buttonCountries;
+
 
         public MainWindow(string game)
         {
@@ -118,23 +120,42 @@ namespace Seekarte.NET4._7
 
         private void countryButtonClick(object sender, RoutedEventArgs e)
         {
-            Button tmp = (Button)sender;
+            Button tmpString = (Button)sender;
 
-            MessageBox.Show(tmp.Content.ToString());
+            //MessageBox.Show(tmp.Content.ToString());
 
-            var dialog = new Dialogue("Bitte geben Sie Ihr Passwort ein");
-            if (dialog.ShowDialog() == true)
+            Country tmpCountry = countries.Find(x => x.contryName == tmpString.Content.ToString());
+
+
+            if (tmpCountry.password == null)
             {
-                MessageBox.Show("You said: " + dialog.ResponseText);
+
+                var dialogueNewPassword = new Dialogue("Bitte legen Sie ein Passwort fest");
+                dialogueNewPassword.ShowDialog();
+                tmpCountry.password = dialogueNewPassword.ResponseText;
+                //if (dialogueNewPassword.ShowDialog() == true)
+                //{
+                //    MessageBox.Show("Your password is: " + dialogueNewPassword.ResponseText);
+                //}
             }
 
-            var dialog2 = new Dialogue("Hallo, geben SIe bitte Ihr Passwort ein");
-            if (dialog2.ShowDialog() == true)
+
+            var dialoguePassword = new Dialogue("Geben Sie bitte Ihr Passwort ein");
+            if (dialoguePassword.ShowDialog() == true && !dialoguePassword.ResponseText.Equals(tmpCountry.password))
             {
-                MessageBox.Show("You said: " + dialog2.ResponseText);
+                MessageBox.Show("Das war das falsche Passwort!");
+            }
+            else
+            {
+                MessageBox.Show("looloolololo");
             }
 
 
+        }
+
+        private Predicate<T> Predicate<T>(T country)
+        {
+            throw new NotImplementedException();
         }
 
         private List<Country> InitCountries(string game)
