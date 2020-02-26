@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Resources
 
 namespace Test
 {
@@ -14,6 +13,7 @@ namespace Test
 
             var a = Resources.Keys.Count;
             MessageBox.Show(a.ToString());
+            //var a = Resources.test;
         }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Shapes;
+
 
 namespace Seekarte.NET4._7
 {
@@ -10,12 +13,20 @@ namespace Seekarte.NET4._7
     public partial class MainWindow : Window
     {
         private ResourceDictionary gameDict;
+        private List<Country> countries;
 
         public MainWindow(string game)
         {
+            //Console.WriteLine(Resources.Test);
+
             SetGameDictionary(game);
             InitializeComponent();
-            SetBtn(5);
+            countries = InitCountries(game);
+            SetBtn(countries);
+
+
+
+            Console.WriteLine("Test");
         }
 
         private void SetGameDictionary(string game)
@@ -77,28 +88,80 @@ namespace Seekarte.NET4._7
             MessageBox.Show("Admin");
         }
 
-        private void SetBtn(int number)
+        private void SetBtn(List<Country> countries)
         {
             //int start = 1;
             //Array[] array = new Array[gameDict.Values.Count];
             //gameDict.Values.CopyTo(array, 0);
 
-            //for (int i = start; i < number + start; i++)
-            //{
-            //    var tmpBtn = new Button();
-            //    tmpBtn.Content = "testdgfhgjhkjlkö";
+            for (int i = 0; i < countries.Count; i++)
+            {
+                var tmpBtn = new Button();
+                tmpBtn.Content = countries[i].contryName;
+
+                tmpBtn.Click += countryButtonClick;
 
 
-            //    //tmpBtn.Content = Resources.;
-            //    Grid.SetRow(tmpBtn, 7 + i);
-            //    this.BtnGrid.Children.Add(tmpBtn);
-            //    this.BtnGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(50) });
-            //}
+                //tmpBtn.Content = Resources.;
+                Grid.SetRow(tmpBtn, 1 + i);
+                this.BtnGrid.Children.Add(tmpBtn);
+                this.BtnGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(50) });
+            }
 
             //foreach (var item in array)
             //{
             //    MessageBox.Show(item.ToString());
             //}
+
+
+        }
+
+        private void countryButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button tmp = (Button)sender;
+
+            MessageBox.Show(tmp.Content.ToString());
+
+            var dialog = new Dialogue("Bitte geben Sie Ihr Passwort ein");
+            if (dialog.ShowDialog() == true)
+            {
+                MessageBox.Show("You said: " + dialog.ResponseText);
+            }
+
+            var dialog2 = new Dialogue("Hallo, geben SIe bitte Ihr Passwort ein");
+            if (dialog2.ShowDialog() == true)
+            {
+                MessageBox.Show("You said: " + dialog2.ResponseText);
+            }
+
+
+        }
+
+        private List<Country> InitCountries(string game)
+        {
+            List<Country> countries = new List<Country>();
+
+            if (game.Equals("Risiko"))
+            {
+                string[] tmp = new string[] { "Admin", "Preussen", "Tartarenreich", "Spanien", "Polen" };
+
+                foreach (var item in tmp)
+                {
+                    countries.Add(new Country(item));
+                }
+            }
+
+            if (game.Equals("GameOfThrones"))
+            {
+                string[] tmp = new string[] { "Admin", "Stark", "Lennister", "Tyrell", "Targaryen", "Nachtkönig" };
+
+                foreach (var item in tmp)
+                {
+                    countries.Add(new Country(item));
+                }
+            }
+
+            return countries;
         }
     }
 }

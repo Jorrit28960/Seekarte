@@ -71,6 +71,15 @@ namespace Seekarte.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ooh ahhhh.
+        /// </summary>
+        internal static string Test {
+            get {
+                return ResourceManager.GetString("Test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap WhatsApp_Image_2020_01_08_at_22_27_44 {
