@@ -4,6 +4,7 @@
     {
         public string contryName { get; set; }
         public string password { get; set; }
+        public int geschwader { get; set; }
 
         public Country(string contryName)
         {

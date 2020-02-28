@@ -10,12 +10,15 @@ namespace Seekarte.NET4._7
         public Dialogue()
         {
             InitializeComponent();
+            //TexResponseTextBoxt.Focus();
         }
 
         public Dialogue(string displayText)
         {
             InitializeComponent();
             this.Text.Text = displayText;
+
+            ResponseTextBox.Focus();
         }
 
         public string ResponseText
@@ -29,9 +32,13 @@ namespace Seekarte.NET4._7
             DialogResult = true;
         }
 
-        private void ResponseTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void ResponseTextBox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                DialogResult = true;
+                //this.Close();
+            }
         }
     }
 }

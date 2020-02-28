@@ -7,31 +7,37 @@ using System.Windows.Shapes;
 
 namespace Seekarte.NET4._7
 {
+
+
+    //const string abmelden = Properties.Resources.Abmelden;
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        string[] risikoStrings = new string[] { "Admin", "Preussen", "Tartarenreich", "Spanien", "Polen" };
+        string[] gameOfThronesStrings = new string[] { "Admin", "Stark", "Lennister", "Tyrell", "Targaryen", "Nachtkönig" };
+
         private ResourceDictionary gameDict;
         private List<Country> countries;
-        private List<Button> buttonCountries;
+        private List<Button> buttonCountries = new List<Button>();
+        private bool normalModus = true;
+        private string game;
+
+        public bool IsCountrySelected { get; set; }
+        public Country SelctedCountry { get; set; }
 
 
         public MainWindow(string game)
         {
-            //Console.WriteLine(Resources.Test);
-
-            SetGameDictionary(game);
+            this.game = game;
+            SetGameDictionary();
             InitializeComponent();
-            countries = InitCountries(game);
+            countries = InitCountries();
             SetBtn(countries);
-
-
-
-            Console.WriteLine("Test");
         }
 
-        private void SetGameDictionary(string game)
+        private void SetGameDictionary()
         {
             ResourceDictionary dict = new ResourceDictionary();
             switch (game)
@@ -51,7 +57,7 @@ namespace Seekarte.NET4._7
             gameDict = dict;
         }
 
-        private void btnPreussen_Click(object sender, RoutedEventArgs e)
+        private void BtnPreussen_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new Dialogue();
             if (dialog.ShowDialog() == true)
@@ -66,7 +72,7 @@ namespace Seekarte.NET4._7
             }
         }
 
-        private void btnCountry4_Click(object sender, RoutedEventArgs e)
+        private void BtnCountry4_Click(object sender, RoutedEventArgs e)
         {
             Line line = new Line();
             Thickness thickness = new Thickness(101, -11, 362, 250);
@@ -99,88 +105,150 @@ namespace Seekarte.NET4._7
             for (int i = 0; i < countries.Count; i++)
             {
                 var tmpBtn = new Button();
+                buttonCountries.Add(tmpBtn);
                 tmpBtn.Content = countries[i].contryName;
 
-                tmpBtn.Click += countryButtonClick;
+                tmpBtn.Click += CountryButtonClick;
 
 
                 //tmpBtn.Content = Resources.;
-                Grid.SetRow(tmpBtn, 1 + i);
+                Grid.SetRow(tmpBtn, i);
                 this.BtnGrid.Children.Add(tmpBtn);
                 this.BtnGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(50) });
             }
-
-            //foreach (var item in array)
-            //{
-            //    MessageBox.Show(item.ToString());
-            //}
-
-
         }
 
-        private void countryButtonClick(object sender, RoutedEventArgs e)
+        private void CountryButtonClick(object sender, RoutedEventArgs e)
         {
-            Button tmpString = (Button)sender;
-
-            //MessageBox.Show(tmp.Content.ToString());
-
-            Country tmpCountry = countries.Find(x => x.contryName == tmpString.Content.ToString());
-
-
-            if (tmpCountry.password == null)
+            Button tmpButton = (Button)sender;
+            if (normalModus)
             {
+                Country tmpCountry = countries.Find(x => x.contryName == tmpButton.Content.ToString());
+                SelctedCountry = tmpCountry;
 
-                var dialogueNewPassword = new Dialogue("Bitte legen Sie ein Passwort fest");
-                dialogueNewPassword.ShowDialog();
-                tmpCountry.password = dialogueNewPassword.ResponseText;
-                //if (dialogueNewPassword.ShowDialog() == true)
-                //{
-                //    MessageBox.Show("Your password is: " + dialogueNewPassword.ResponseText);
-                //}
-            }
+                foreach (var item in buttonCountries)
+                {
+                    item.IsEnabled = false;
+                }
 
 
-            var dialoguePassword = new Dialogue("Geben Sie bitte Ihr Passwort ein");
-            if (dialoguePassword.ShowDialog() == true && !dialoguePassword.ResponseText.Equals(tmpCountry.password))
-            {
-                MessageBox.Show("Das war das falsche Passwort!");
+                SetPassword(tmpCountry);
+
+                if (RequestPassword(tmpCountry))
+                {
+                    foreach (var item in buttonCountries)
+                    {
+                        item.Visibility = Visibility.Hidden;
+                    }
+
+                    buttonCountries[0].Visibility = Visibility.Visible;
+                    buttonCountries[0].Content = Properties.Resources.Abmelden;
+                    buttonCountries[1].Visibility = Visibility.Visible;
+                    buttonCountries[1].Content = Properties.Resources.Flotte;
+
+
+
+                    normalModus = false;
+                }
+                foreach (var item in buttonCountries)
+                {
+                    item.IsEnabled = true;
+                }
+
+
+
             }
             else
             {
-                MessageBox.Show("looloolololo");
+                //switch (tmpString.Content.ToString())
+                //{
+                //    case Properties.Resources.Abmelden:
+                //        Abmelden();
+                //        break;
+                //    default:
+                //        break;
+                //}
+
+
+
+                if (tmpButton.Content.ToString() == Properties.Resources.Abmelden)
+                {
+                    Abmelden();
+                    normalModus = true;
+                    IsCountrySelected = false;
+                }
+
+                if (tmpButton.Content.ToString() == Properties.Resources.Flotte)
+                    Flotte();
+
+                if (tmpButton.Content.ToString().Contains(Properties.Resources.Geschwader))
+                    Geschwader();
+
+
+
             }
 
 
         }
 
-        private Predicate<T> Predicate<T>(T country)
+        private void Geschwader()
         {
             throw new NotImplementedException();
         }
 
-        private List<Country> InitCountries(string game)
+        private bool RequestPassword(Country tmpCountry)
+        {
+            var dialoguePassword = new Dialogue(Properties.Resources.PasswordRequest);
+            dialoguePassword.Owner = this;
+            dialoguePassword.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            if (dialoguePassword.ShowDialog() == true && dialoguePassword.ResponseText.Equals(tmpCountry.password))
+            {
+                IsCountrySelected = true;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(Properties.Resources.PasswordWrong);
+                return false;
+            }
+        }
+        private void SetPassword(Country tmpCountry)
+        {
+            if (tmpCountry.password == null)
+            {
+                var dialogueNewPassword = new Dialogue(Properties.Resources.PasswordSet);
+                dialogueNewPassword.Owner = this;
+                dialogueNewPassword.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                dialogueNewPassword.ShowDialog();
+                tmpCountry.password = dialogueNewPassword.ResponseText;
+            }
+        }
+
+        private void Abmelden()
+        {
+            for (int i = 0; i < buttonCountries.Count; i++)
+            {
+                buttonCountries[i].Content = countries[i].contryName;
+                buttonCountries[i].Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Flotte()
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<Country> InitCountries()
         {
             List<Country> countries = new List<Country>();
 
             if (game.Equals("Risiko"))
-            {
-                string[] tmp = new string[] { "Admin", "Preussen", "Tartarenreich", "Spanien", "Polen" };
-
-                foreach (var item in tmp)
-                {
+                foreach (var item in risikoStrings)
                     countries.Add(new Country(item));
-                }
-            }
 
             if (game.Equals("GameOfThrones"))
-            {
-                string[] tmp = new string[] { "Admin", "Stark", "Lennister", "Tyrell", "Targaryen", "Nachtkönig" };
-
-                foreach (var item in tmp)
-                {
+                foreach (var item in gameOfThronesStrings)
                     countries.Add(new Country(item));
-                }
-            }
 
             return countries;
         }

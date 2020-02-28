@@ -22,7 +22,7 @@ namespace Seekarte.NET4._7.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Seekarte.NET4._7.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Seekarte.NET4._7.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Seekarte.NET4._7.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,11 +61,56 @@ namespace Seekarte.NET4._7.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ohhhhh ahhhhh.
+        ///   Looks up a localized string similar to Abmelden.
         /// </summary>
-        public static string Test {
+        internal static string Abmelden {
             get {
-                return ResourceManager.GetString("Test", resourceCulture);
+                return ResourceManager.GetString("Abmelden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flotte.
+        /// </summary>
+        internal static string Flotte {
+            get {
+                return ResourceManager.GetString("Flotte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Geschwader.
+        /// </summary>
+        internal static string Geschwader {
+            get {
+                return ResourceManager.GetString("Geschwader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitte geben Sie Ihr Passwort ein!.
+        /// </summary>
+        internal static string PasswordRequest {
+            get {
+                return ResourceManager.GetString("PasswordRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitte legen Sie Ihr Passwort fest!.
+        /// </summary>
+        internal static string PasswordSet {
+            get {
+                return ResourceManager.GetString("PasswordSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Das eingegebene Passwort war falsch!.
+        /// </summary>
+        internal static string PasswordWrong {
+            get {
+                return ResourceManager.GetString("PasswordWrong", resourceCulture);
             }
         }
     }
