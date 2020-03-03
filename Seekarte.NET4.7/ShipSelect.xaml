@@ -1,0 +1,56 @@
+﻿<Window x:Class="Seekarte.NET4._7.ShipSelect"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Seekarte.NET4._7"
+        mc:Ignorable="d"
+        Title="ShipSelect" Height="450" Width="800">
+    <Grid Name="Grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left" Height="154" Margin="0,5,0,0" Grid.Row="2" Grid.RowSpan="3" VerticalAlignment="Top" Width="626">
+            <Grid Name="scrollViewer">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Typ" Grid.Row="0" Grid.Column="0"/>
+                <Button Content="hinzufügen" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"  Width="110" Click="AddShip_Click"/>
+                <Label Content="Linienschiff 1. Klasse" Grid.Row="1" Grid.Column="0"/>
+
+
+            </Grid>
+
+        </ScrollViewer>
+        <Button Content="Schiff löschen" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"  Width="110"/>
+
+
+    </Grid>
+</Window>

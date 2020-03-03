@@ -70,6 +70,24 @@ namespace Seekarte.NET4._7.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Admin.
+        /// </summary>
+        internal static string Admin {
+            get {
+                return ResourceManager.GetString("Admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Land.
+        /// </summary>
+        internal static string Country {
+            get {
+                return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flotte.
         /// </summary>
         internal static string Flotte {
@@ -111,6 +129,15 @@ namespace Seekarte.NET4._7.Properties {
         internal static string PasswordWrong {
             get {
                 return ResourceManager.GetString("PasswordWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwort ändern.
+        /// </summary>
+        internal static string PasswortÄndern {
+            get {
+                return ResourceManager.GetString("PasswortÄndern", resourceCulture);
             }
         }
     }

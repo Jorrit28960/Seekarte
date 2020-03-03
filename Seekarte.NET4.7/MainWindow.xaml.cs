@@ -23,9 +23,10 @@ namespace Seekarte.NET4._7
         private List<Button> buttonCountries = new List<Button>();
         private bool normalModus = true;
         private string game;
+        public static int round { get; set; } = 1;
 
-        public bool IsCountrySelected { get; set; }
-        public Country SelctedCountry { get; set; }
+        public static bool IsCountrySelected { get; set; }
+        public static Country SelctedCountry { get; set; }
 
 
         public MainWindow(string game)
@@ -93,7 +94,7 @@ namespace Seekarte.NET4._7
 
         private void AdminBtnClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Admin");
+            //MessageBox.Show("Admin");
         }
 
         private void SetBtn(List<Country> countries)
@@ -106,7 +107,7 @@ namespace Seekarte.NET4._7
             {
                 var tmpBtn = new Button();
                 buttonCountries.Add(tmpBtn);
-                tmpBtn.Content = countries[i].contryName;
+                tmpBtn.Content = countries[i].countryName;
 
                 tmpBtn.Click += CountryButtonClick;
 
@@ -123,7 +124,7 @@ namespace Seekarte.NET4._7
             Button tmpButton = (Button)sender;
             if (normalModus)
             {
-                Country tmpCountry = countries.Find(x => x.contryName == tmpButton.Content.ToString());
+                Country tmpCountry = countries.Find(x => x.countryName == tmpButton.Content.ToString());
                 SelctedCountry = tmpCountry;
 
                 foreach (var item in buttonCountries)
@@ -131,24 +132,20 @@ namespace Seekarte.NET4._7
                     item.IsEnabled = false;
                 }
 
-
-                SetPassword(tmpCountry);
+                if (tmpCountry.password == null)
+                    SetPassword(tmpCountry);
 
                 if (RequestPassword(tmpCountry))
                 {
-                    foreach (var item in buttonCountries)
+                    if (SelctedCountry.countryName == Properties.Resources.Admin)
                     {
-                        item.Visibility = Visibility.Hidden;
+                        Admin();
                     }
+                    else
+                    {
+                        Country();
 
-                    buttonCountries[0].Visibility = Visibility.Visible;
-                    buttonCountries[0].Content = Properties.Resources.Abmelden;
-                    buttonCountries[1].Visibility = Visibility.Visible;
-                    buttonCountries[1].Content = Properties.Resources.Flotte;
-
-
-
-                    normalModus = false;
+                    }
                 }
                 foreach (var item in buttonCountries)
                 {
@@ -184,10 +181,88 @@ namespace Seekarte.NET4._7
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.Geschwader))
                     Geschwader();
 
+                if (tmpButton.Content.ToString().Contains(Properties.Resources.PasswortÄndern))
+                {
+                    foreach (var item in buttonCountries)
+                    {
+                        item.IsEnabled = false;
+                    }
+
+                    SetPassword(SelctedCountry);
+
+                    foreach (var item in buttonCountries)
+                    {
+                        item.IsEnabled = true;
+                    }
+                }
+
+                if (tmpButton.Content.ToString().Contains(Properties.Resources.Country))
+                {
+                    AdminWindow();
+                }
+
+
+
+
 
 
             }
 
+
+        }
+
+        private void AdminWindow()
+        {
+            var adminWindow = new Admin(countries);
+            adminWindow.Owner = this;
+            adminWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            adminWindow.ShowDialog();
+        }
+
+        private void Country()
+        {
+            foreach (var item in buttonCountries)
+            {
+                item.Visibility = Visibility.Hidden;
+            }
+
+            buttonCountries[0].Visibility = Visibility.Visible;
+            buttonCountries[0].Content = Properties.Resources.Abmelden;
+            buttonCountries[1].Visibility = Visibility.Visible;
+            buttonCountries[1].Content = Properties.Resources.Flotte;
+            buttonCountries[2].Visibility = Visibility.Visible;
+            buttonCountries[2].Content = Properties.Resources.PasswortÄndern;
+
+
+            foreach (var item in SelctedCountry.zoomBorders)
+            {
+                item.Visibility = Visibility.Visible;
+            }
+
+            normalModus = false;
+        }
+
+        private void Admin()
+        {
+            foreach (var item in buttonCountries)
+            {
+                item.Visibility = Visibility.Hidden;
+            }
+
+            buttonCountries[0].Visibility = Visibility.Visible;
+            buttonCountries[0].Content = Properties.Resources.Abmelden;
+            buttonCountries[1].Visibility = Visibility.Visible;
+            buttonCountries[1].Content = Properties.Resources.Country;
+            buttonCountries[2].Visibility = Visibility.Visible;
+            buttonCountries[2].Content = Properties.Resources.PasswortÄndern;
+
+
+            foreach (var item in SelctedCountry.zoomBorders)
+            {
+                item.Visibility = Visibility.Visible;
+            }
+
+            normalModus = false;
 
         }
 
@@ -214,22 +289,24 @@ namespace Seekarte.NET4._7
         }
         private void SetPassword(Country tmpCountry)
         {
-            if (tmpCountry.password == null)
-            {
-                var dialogueNewPassword = new Dialogue(Properties.Resources.PasswordSet);
-                dialogueNewPassword.Owner = this;
-                dialogueNewPassword.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                dialogueNewPassword.ShowDialog();
-                tmpCountry.password = dialogueNewPassword.ResponseText;
-            }
+            var dialogueNewPassword = new Dialogue(Properties.Resources.PasswordSet);
+            dialogueNewPassword.Owner = this;
+            dialogueNewPassword.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            dialogueNewPassword.ShowDialog();
+            tmpCountry.password = dialogueNewPassword.ResponseText;
         }
 
         private void Abmelden()
         {
             for (int i = 0; i < buttonCountries.Count; i++)
             {
-                buttonCountries[i].Content = countries[i].contryName;
+                buttonCountries[i].Content = countries[i].countryName;
                 buttonCountries[i].Visibility = Visibility.Visible;
+            }
+
+            foreach (var item in SelctedCountry.zoomBorders)
+            {
+                item.Visibility = Visibility.Hidden;
             }
         }
 
@@ -252,5 +329,47 @@ namespace Seekarte.NET4._7
 
             return countries;
         }
+    }
+
+    public class Fleet
+    {
+        public List<Linienschiff_1> linienschiff_1 { get; set; } = new List<Linienschiff_1>();
+    }
+
+    public abstract class Ship
+    {
+        public int HitPoints { get; set; }
+        public string Name { get; set; }
+        public int Troops { get; set; }
+        public abstract int MaxHitPoints { get; }
+        public abstract string Typ { get; }
+    }
+
+    public class Linienschiff_1 : Ship
+    {
+        public override int MaxHitPoints { get { return 40; } }
+        public override string Typ { get { return "Linienschiff 1. Klasse"; } }
+
+        public Linienschiff_1()
+        {
+            HitPoints = MaxHitPoints;
+            Troops = 0;
+            Name = "Linienschiff 1. Klasse";
+        }
+
+    }
+
+    public class Linienschiff_2 : Ship
+    {
+        public override int MaxHitPoints { get { return 30; } }
+        public override string Typ { get { return "Linienschiff 2. Klasse"; } }
+
+        public Linienschiff_2()
+        {
+            HitPoints = MaxHitPoints;
+            Troops = 0;
+            Name = "Linienschiff 2. Klasse";
+        }
+
     }
 }

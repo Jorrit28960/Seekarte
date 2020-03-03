@@ -188,14 +188,25 @@ namespace Seekarte.NET4._7
         private void Child_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             endRightBtn = e.GetPosition(this);
-            CreateALine();
+
+
+            if (MainWindow.IsCountrySelected)
+            {
+                MainWindow.SelctedCountry.zoomBorders.Add(CreateALine());
+            }
+
+            //if (IsCountrySelected)
+            {
+
+            }
+
 
             //need because MouseRightDown is not reacting always
             startRightBtn = e.GetPosition(this);
         }
 
 
-        public void CreateALine()
+        public ZoomBorder CreateALine()
         {
             ZoomBorder zoomBorder = new ZoomBorder();
 
@@ -240,6 +251,10 @@ namespace Seekarte.NET4._7
             Grid.SetColumnSpan(zoomBorder, 4);
             Grid.SetRowSpan(zoomBorder, 2);
             zoomBorder.ClipToBounds = true;
+
+            redLine.MouseRightButtonDown += Child_PreviewMouseRightButtonDown;
+
+            return zoomBorder;
         }
 
         private void Child_MouseMove(object sender, MouseEventArgs e)

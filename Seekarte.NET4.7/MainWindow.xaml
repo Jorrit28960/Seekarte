@@ -6,8 +6,8 @@
                 xmlns:local="clr-namespace:Seekarte.NET4._7"
         mc:Ignorable="d"
         WindowState="Maximized"
-        ResizeMode="NoResize"
         Title="MainWindow" Height="1080" Width="1920">
+        <!--ResizeMode="NoResize"-->
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="17"/>
@@ -31,7 +31,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height=".15*"/>
@@ -39,8 +39,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" 
-                   x:Name="txtRoundCounter" 
+        <TextBlock 
+                   Grid.Column="0" Grid.Row="0" 
+                   Name="txtRoundCounter" 
                    Text="Runde 1" 
                    FontSize="17" 
                    VerticalAlignment="Center"/>

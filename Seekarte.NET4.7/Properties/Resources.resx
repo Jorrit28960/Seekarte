@@ -120,6 +120,12 @@
   <data name="Abmelden" xml:space="preserve">
     <value>Abmelden</value>
   </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Land</value>
+  </data>
   <data name="Flotte" xml:space="preserve">
     <value>Flotte</value>
   </data>
@@ -134,5 +140,8 @@
   </data>
   <data name="PasswordWrong" xml:space="preserve">
     <value>Das eingegebene Passwort war falsch!</value>
+  </data>
+  <data name="PasswortÄndern" xml:space="preserve">
+    <value>Passwort ändern</value>
   </data>
 </root>
