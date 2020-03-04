@@ -192,21 +192,25 @@ namespace Seekarte.NET4._7
 
             if (MainWindow.IsCountrySelected)
             {
-                MainWindow.SelctedCountry.zoomBorders.Add(CreateALine());
+                //MainWindow.SelctedCountry.zoomBorders.Add(CreateALine());
+                //MainWindow.SelctedCountry.Route.Add( 1, CreateALine());
+
+                List<ZoomBorder> borders;
+                bool isListInDic = MainWindow.SelctedCountry.Route.TryGetValue(MainWindow.Round, out borders);
+
+                if (!isListInDic)
+                {
+                    MainWindow.SelctedCountry.Route.Add(MainWindow.Round, borders = new List<ZoomBorder>());
+                }
+
+                borders.Add(CreateALine(MainWindow.SelctedCountry.color));
             }
-
-            //if (IsCountrySelected)
-            {
-
-            }
-
-
             //need because MouseRightDown is not reacting always
             startRightBtn = e.GetPosition(this);
         }
 
 
-        public ZoomBorder CreateALine()
+        public ZoomBorder CreateALine(Color color)
         {
             ZoomBorder zoomBorder = new ZoomBorder();
 
@@ -239,7 +243,7 @@ namespace Seekarte.NET4._7
 
             // Create a red Brush  
             SolidColorBrush redBrush = new SolidColorBrush();
-            redBrush.Color = Colors.Red;
+            redBrush.Color = color;
 
             // Set Line's width and color  
             redLine.StrokeThickness = 1;

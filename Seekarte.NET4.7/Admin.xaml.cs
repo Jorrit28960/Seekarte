@@ -20,25 +20,16 @@ namespace Seekarte.NET4._7
             this.countries = countries;
 
             ShowCountries();
-
-            //inside listbox change auswahl
         }
 
         private void ShowShipsInit()
         {
             var scrollViewer = new ScrollViewer();
 
-            //listbox.ItemsSource = countriesStrings;
-
-            //scrollViewer.
-
-
 
             if (isCountrySelected)
             {
-                //string tmpName = SelectedCountry.Fleet.linienschiff_1
-
-                foreach (var item in SelectedCountry.Fleet.linienschiff_1)
+                foreach (var item in SelectedCountry.Ships)
                 {
                     Label labelName = new Label();
                     labelName.Content = item.Name;
@@ -57,23 +48,12 @@ namespace Seekarte.NET4._7
                     Grid.SetColumn(labelHitPoints, 2);
                     Grid.SetRow(labelHitPoints, 1);
                     this.scrollViewer.Children.Add(labelHitPoints);
-
-
-
                 }
-
-
             }
-
-            //this.Grid.Children.Add(listbox);
-
             Grid.SetColumn(scrollViewer, 0);
             Grid.SetRow(scrollViewer, 0);
             Grid.SetColumnSpan(scrollViewer, 1);
             Grid.SetRowSpan(scrollViewer, 2);
-
-
-
         }
 
         private void ShowCountries()
@@ -102,18 +82,12 @@ namespace Seekarte.NET4._7
         {
             var list = (ListBox)sender;
 
-
             isCountrySelected = true;
             SelectedCountry = countries.Find(x => x.countryName == list.SelectedItem.ToString());
 
             ShowShipsInit();
 
             isCountrySelected.GetType();
-
-            //SelectedCountry = 
-            //update scrollList
-
-            //MessageBox.Show(list.SelectedItem.ToString());
         }
 
         private void AddShip_Click(object sender, RoutedEventArgs e)
@@ -121,14 +95,14 @@ namespace Seekarte.NET4._7
             if (isCountrySelected)
             {
                 //new Window with stuff for new ship
-                MessageBox.Show("new ship");
+                //MessageBox.Show("new ship");
                 var addShip = new ShipSelect();
 
                 if (addShip.ShowDialog() == true)
                 {
-                    MessageBox.Show(addShip.selectedShip.GetType().ToString());
+                    //MessageBox.Show(addShip.selectedShip.GetType().ToString());
 
-                    SelectedCountry.Fleet.linienschiff_1.Add((Linienschiff_1)addShip.selectedShip);
+                    SelectedCountry.Ships.Add((Linienschiff_1)addShip.selectedShip);
                 }
             }
             else
@@ -144,16 +118,16 @@ namespace Seekarte.NET4._7
 
         private void RoundAdd_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.round++;
-            this.LabelRoundAdmin.Content = MainWindow.round;
-            Choose.mainWindow.txtRoundCounter.Text = "Runde " + MainWindow.round;
+            MainWindow.Round++;
+            this.LabelRoundAdmin.Content = MainWindow.Round;
+            Choose.mainWindow.txtRoundCounter.Text = "Runde " + MainWindow.Round;
         }
 
         private void RoundDelete_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.round--;
-            this.LabelRoundAdmin.Content = MainWindow.round;
-            Choose.mainWindow.txtRoundCounter.Text = "Runde " + MainWindow.round;
+            MainWindow.Round--;
+            this.LabelRoundAdmin.Content = MainWindow.Round;
+            Choose.mainWindow.txtRoundCounter.Text = "Runde " + MainWindow.Round;
         }
     }
 }
