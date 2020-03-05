@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,7 +22,6 @@ namespace Seekarte.NET4._7
         private Point endRightBtn;
         private static ScaleTransform latestScale = new ScaleTransform(1, 1);
         private static TranslateTransform latestTransform = new TranslateTransform(0, 0);
-
 
         private TranslateTransform GetTranslateTransform(UIElement element)
         {
@@ -110,17 +110,22 @@ namespace Seekarte.NET4._7
                     //don't zoom greater than window
                     st.ScaleX = (st.ScaleX + zoom >= 1) ? st.ScaleX + zoom : 1;
                     st.ScaleY = (st.ScaleY + zoom >= 1) ? st.ScaleY + zoom : 1;
-                    if (st != null)
-                        latestScale = st;
 
-                    if (tt != null)
-                        latestTransform = tt;
-
+                    saveLatest(st, tt);
                     //center image if maximum size
                     tt.X = (st.ScaleX + zoom >= 1) ? absoluteX - relative.X * st.ScaleX : 0;
                     tt.Y = (st.ScaleY + zoom >= 1) ? absoluteY - relative.Y * st.ScaleY : 0;
                 }
             }
+        }
+
+        private void saveLatest(ScaleTransform st, TranslateTransform tt)
+        {
+            if (st != null)
+                latestScale = st;
+
+            if (tt != null)
+                latestTransform = tt;
         }
 
         private void Child_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -140,36 +145,6 @@ namespace Seekarte.NET4._7
                 this.Cursor = Cursors.Hand;
                 child.CaptureMouse();
             }
-
-            //var a = listZoomBorders[0].DesiredSize;
-            //var b = listZoomBorders[1].DesiredSize;
-            //listZoomBorders[1].Measure(a);
-            //MessageBox.Show(a.ToString());
-            //MessageBox.Show(b.ToString());
-
-            //Bitmap on = new Bitmap();
-
-
-            //var line = new Line();
-            //line.X1 = 10;
-            //line.X2 = 100;
-            //line.Y1 = 10;
-            //line.Y2 = 100;
-
-
-            //SolidColorBrush redBrush = new SolidColorBrush();
-            //redBrush.Color = Colors.Red;
-
-            //// Set Line's width and color  
-            //line.StrokeThickness = 1;
-            //line.Stroke = redBrush;
-
-            //Choose.mainWindow.Cnv.Children.Add(line);
-            ////Canvas.SetLeft(line, e.GetPosition(Choose.mainWindow.Cnv).X);
-            ////Canvas.SetTop(line, e.GetPosition(Choose.mainWindow.Cnv).Y);
-
-
-
         }
 
         private void Child_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -178,6 +153,17 @@ namespace Seekarte.NET4._7
             {
                 child.ReleaseMouseCapture();
                 this.Cursor = Cursors.Arrow;
+
+                foreach (var item in listZoomBorders)
+                {
+                    if (item != null)
+                    {
+                        var st = GetScaleTransform(item);
+                        var tt = GetTranslateTransform(item);
+
+                        saveLatest(st, tt);
+                    }
+                }
             }
         }
 
@@ -189,12 +175,8 @@ namespace Seekarte.NET4._7
         {
             endRightBtn = e.GetPosition(this);
 
-
             if (MainWindow.IsCountrySelected)
             {
-                //MainWindow.SelctedCountry.zoomBorders.Add(CreateALine());
-                //MainWindow.SelctedCountry.Route.Add( 1, CreateALine());
-
                 List<ZoomBorder> borders;
                 bool isListInDic = MainWindow.SelctedCountry.Route.TryGetValue(MainWindow.Round, out borders);
 
@@ -203,21 +185,54 @@ namespace Seekarte.NET4._7
                     MainWindow.SelctedCountry.Route.Add(MainWindow.Round, borders = new List<ZoomBorder>());
                 }
 
-                borders.Add(CreateALine(MainWindow.SelctedCountry.color));
+                foreach (var item in CreateALine(MainWindow.SelctedCountry.color))
+                {
+                    borders.Add(item);
+                }
             }
             //need because MouseRightDown is not reacting always
             startRightBtn = e.GetPosition(this);
         }
+        public List<ZoomBorder> CreateALine(Color color)
+        {
+            List<ZoomBorder> list = new List<ZoomBorder>();
 
+            list.Add(CreateALine(color, startRightBtn, endRightBtn));
 
-        public ZoomBorder CreateALine(Color color)
+            int lineLength = 10;
+
+            Point left = Pfeil(lineLength, 170, startRightBtn, endRightBtn);
+            Point right = Pfeil(lineLength, 190, startRightBtn, endRightBtn);
+
+            list.Add(CreateALine(color, endRightBtn, left));
+            list.Add(CreateALine(color, endRightBtn, right));
+
+            return list;
+        }
+
+        private Point Pfeil(int lineLength, int degree, Point point1, Point point2)
+        {
+            double X1 = (point1.X);
+            double Y1 = (point1.Y);
+            double X2 = (point2.X);
+            double Y2 = (point2.Y);
+
+            double r = Math.Sqrt(Math.Pow(X2 - X1, 2) + Math.Pow(Y2 - Y1, 2)) / latestScale.ScaleX;
+            double newY2 = Y2 + lineLength * (((Y2 - Y1) / r) * Math.Cos((degree / (double)360) * 2 * Math.PI) + ((X2 - X1) / r) * Math.Sin((degree / (double)360) * 2 * Math.PI));
+            double newX2 = X2 + lineLength * (((X2 - X1) / r) * Math.Cos((degree / (double)360) * 2 * Math.PI) - ((Y2 - Y1) / r) * Math.Sin((degree / (double)360) * 2 * Math.PI));
+
+            return new Point(newX2, newY2);
+
+        }
+
+        public ZoomBorder CreateALine(Color color, Point start, Point end)
         {
             ZoomBorder zoomBorder = new ZoomBorder();
 
             // Create a Line  
-            Line redLine = new Line();
+            Line line = new Line();
 
-            zoomBorder.Child = redLine;
+            zoomBorder.Child = line;
             Choose.mainWindow.Map.Children.Add(zoomBorder);
 
             var st = GetScaleTransform(zoomBorder.child);
@@ -235,19 +250,19 @@ namespace Seekarte.NET4._7
                 tt.Y = latestTransform.Y;
             }
 
-            redLine.X1 = ((startRightBtn.X - latestTransform.X) / latestScale.ScaleX);
-            redLine.Y1 = ((startRightBtn.Y - latestTransform.Y) / latestScale.ScaleY);
+            line.X1 = ((start.X - latestTransform.X) / latestScale.ScaleX);
+            line.Y1 = ((start.Y - latestTransform.Y) / latestScale.ScaleY);
 
-            redLine.X2 = ((endRightBtn.X - latestTransform.X) / latestScale.ScaleX);
-            redLine.Y2 = ((endRightBtn.Y - latestTransform.Y) / latestScale.ScaleY);
+            line.X2 = ((end.X - latestTransform.X) / latestScale.ScaleX);
+            line.Y2 = ((end.Y - latestTransform.Y) / latestScale.ScaleY);
 
             // Create a red Brush  
-            SolidColorBrush redBrush = new SolidColorBrush();
-            redBrush.Color = color;
+            SolidColorBrush solidColorBrush = new SolidColorBrush();
+            solidColorBrush.Color = color;
 
             // Set Line's width and color  
-            redLine.StrokeThickness = 1;
-            redLine.Stroke = redBrush;
+            line.StrokeThickness = 1;
+            line.Stroke = solidColorBrush;
 
             // Add line to the Grid. 
             Grid.SetColumn(zoomBorder, 0);
@@ -256,7 +271,7 @@ namespace Seekarte.NET4._7
             Grid.SetRowSpan(zoomBorder, 2);
             zoomBorder.ClipToBounds = true;
 
-            redLine.MouseRightButtonDown += Child_PreviewMouseRightButtonDown;
+            line.MouseRightButtonDown += Child_PreviewMouseRightButtonDown;
 
             return zoomBorder;
         }

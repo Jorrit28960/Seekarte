@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 
 namespace Seekarte.NET4._7
@@ -191,6 +190,10 @@ namespace Seekarte.NET4._7
             {
                 foreach (var item2 in SelctedCountry.Route[item.Key])
                 {
+                    //item2.solidColorBrush.Opacity = 1 / (double) (2 * (Round - item.Key));
+                    //item2.Line.Stroke.Opacity = 1 / (double)(2 * (Round - item.Key));
+
+                    item2.Opacity = 1 / (double)(4 * (Round - item.Key));
                     item2.Visibility = Visibility.Visible;
                 }
             }
@@ -218,7 +221,9 @@ namespace Seekarte.NET4._7
                 {
                     foreach (var item in country.Route[route.Key])
                     {
+                        item.Opacity = 1 / (double)(4 * (Round - route.Key));
                         item.Visibility = Visibility.Visible;
+
                     }
                 }
             }
@@ -308,13 +313,13 @@ namespace Seekarte.NET4._7
         public string Name { get; set; }
         public int Troops { get; set; }
         public abstract int MaxHitPoints { get; }
-        public abstract string Typ { get; }
+        public abstract Shiptype Typ { get; }
     }
 
     public class Linienschiff_1 : Ship
     {
         public override int MaxHitPoints { get { return 40; } }
-        public override string Typ { get { return "Linienschiff 1. Klasse"; } }
+        public override Shiptype Typ { get { return Shiptype.Linienschiff_1; } }
 
         public Linienschiff_1()
         {
@@ -328,7 +333,7 @@ namespace Seekarte.NET4._7
     public class Linienschiff_2 : Ship
     {
         public override int MaxHitPoints { get { return 30; } }
-        public override string Typ { get { return "Linienschiff 2. Klasse"; } }
+        public override Shiptype Typ { get { return Shiptype.Linienschiff_2; } }
 
         public Linienschiff_2()
         {
@@ -340,5 +345,10 @@ namespace Seekarte.NET4._7
 
     public enum Shiptype
     {
+        Linienschiff_1,
+        Linienschiff_2,
+        Linienschiff_3,
+        Linienschiff_4,
+        Fregatte
     }
 }

@@ -20,6 +20,7 @@ namespace Seekarte.NET4._7
             this.countries = countries;
 
             ShowCountries();
+            this.LabelRoundAdmin.Content = MainWindow.Round;
         }
 
         private void ShowShipsInit()
