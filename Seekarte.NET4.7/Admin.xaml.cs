@@ -9,8 +9,8 @@ namespace Seekarte.NET4._7
     /// </summary>
     public partial class Admin : Window
     {
-        public bool isCountrySelected { get; set; }
-        public Country SelectedCountry { get; set; }
+        public static bool isCountrySelected { get; set; }
+        public static Country SelectedCountry { get; set; }
 
         private List<Country> countries;
         public Admin(List<Country> countries)
@@ -21,40 +21,95 @@ namespace Seekarte.NET4._7
 
             ShowCountries();
             this.LabelRoundAdmin.Content = MainWindow.Round;
+
+            ShowShipsInit();
         }
 
         private void ShowShipsInit()
         {
-            var scrollViewer = new ScrollViewer();
+            //this.BtnGrid.Children.Add(tmpBtn);
+
+            var scrollViewer = this.scrollViewer;
+
+            scrollViewer.Children.Clear();
+
+            ShowShipsInitFirstLine();
+
+
+            //Grid.SetColumn(scrollViewer, 0);
+            //Grid.SetRow(scrollViewer, 0);
+            //Grid.SetColumnSpan(scrollViewer, 1);
+            //Grid.SetRowSpan(scrollViewer, 2);
+
 
 
             if (isCountrySelected)
             {
-                foreach (var item in SelectedCountry.Ships)
+                for (int i = 0; i < SelectedCountry.Ships.Count; i++)
                 {
                     Label labelName = new Label();
-                    labelName.Content = item.Name;
+                    labelName.Content = SelectedCountry.Ships[i].Name;
                     Grid.SetColumn(labelName, 0);
-                    Grid.SetRow(labelName, 1);
+                    Grid.SetRow(labelName, 1 + i);
                     this.scrollViewer.Children.Add(labelName);
 
                     Label labelType = new Label();
-                    labelType.Content = item.Typ;
+                    labelType.Content = SelectedCountry.Ships[i].ShipType;
                     Grid.SetColumn(labelType, 1);
-                    Grid.SetRow(labelType, 1);
+                    Grid.SetRow(labelType, 1 + i);
                     this.scrollViewer.Children.Add(labelType);
 
                     Label labelHitPoints = new Label();
-                    labelHitPoints.Content = item.HitPoints;
+                    labelHitPoints.Content = SelectedCountry.Ships[i].HitPoints;
                     Grid.SetColumn(labelHitPoints, 2);
-                    Grid.SetRow(labelHitPoints, 1);
+                    Grid.SetRow(labelHitPoints, 1 + i);
                     this.scrollViewer.Children.Add(labelHitPoints);
+
+                    this.scrollViewer.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(50) });
                 }
             }
-            Grid.SetColumn(scrollViewer, 0);
-            Grid.SetRow(scrollViewer, 0);
-            Grid.SetColumnSpan(scrollViewer, 1);
-            Grid.SetRowSpan(scrollViewer, 2);
+        }
+
+        private void ShowShipsInitFirstLine()
+        {
+            Label name = new Label();
+            name.Content = "Schiffsname";
+            Grid.SetColumn(name, 0);
+            Grid.SetRow(name, 0);
+            this.scrollViewer.Children.Add(name);
+
+            Label type = new Label();
+            type.Content = "Typ";
+            Grid.SetColumn(type, 1);
+            Grid.SetRow(type, 0);
+            this.scrollViewer.Children.Add(type);
+
+            Label hitpoints = new Label();
+            hitpoints.Content = "Trefferpunkte";
+            Grid.SetColumn(hitpoints, 2);
+            Grid.SetRow(hitpoints, 0);
+            this.scrollViewer.Children.Add(hitpoints);
+
+            Label maxHitpoints = new Label();
+            maxHitpoints.Content = "Maximale Trefferpunkte";
+            Grid.SetColumn(maxHitpoints, 3);
+            Grid.SetRow(maxHitpoints, 0);
+            this.scrollViewer.Children.Add(maxHitpoints);
+
+            Label troops = new Label();
+            troops.Content = "Truppen";
+            Grid.SetColumn(troops, 4);
+            Grid.SetRow(troops, 0);
+            this.scrollViewer.Children.Add(troops);
+
+            Label geschwader = new Label();
+            geschwader.Content = "Geschwader";
+            Grid.SetColumn(geschwader, 5);
+            Grid.SetRow(geschwader, 0);
+            this.scrollViewer.Children.Add(geschwader);
+
+            this.scrollViewer.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(50) });
+
         }
 
         private void ShowCountries()
@@ -101,10 +156,9 @@ namespace Seekarte.NET4._7
 
                 if (addShip.ShowDialog() == true)
                 {
-                    //MessageBox.Show(addShip.selectedShip.GetType().ToString());
-
-                    SelectedCountry.Ships.Add((Linienschiff_1)addShip.selectedShip);
+                    //SelectedCountry.Ships.Add((Linienschiff_1)addShip.selectedShip);
                 }
+                ShowShipsInit();
             }
             else
             {

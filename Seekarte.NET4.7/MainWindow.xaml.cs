@@ -17,7 +17,7 @@ namespace Seekarte.NET4._7
     {
         private Dictionary<string, Color> risikoDic = new Dictionary<string, Color>
         {
-            {"Admin", Colors.Red },
+            {"Admin", Colors.Transparent },
             {"Preussen", Colors.Red },
             {"Tartarenreich", Colors.Blue },
             {"Spanien", Colors.Blue },
@@ -26,7 +26,7 @@ namespace Seekarte.NET4._7
 
         private Dictionary<string, Color> GOTDic = new Dictionary<string, Color>
         {
-            {"Admin", Colors.Red },
+            {"Admin", Colors.Transparent },
             {"Stark", Colors.Red },
             {"Lennister", Colors.Blue },
             {"Tyrell", Colors.Brown },
@@ -135,7 +135,9 @@ namespace Seekarte.NET4._7
                 }
 
                 if (tmpButton.Content.ToString() == Properties.Resources.Flotte)
+                {
                     Flotte();
+                }
 
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.Geschwader))
                     Geschwader();
@@ -309,46 +311,52 @@ namespace Seekarte.NET4._7
 
     public abstract class Ship
     {
+        //static abstract string type;
+        //public abstract string ShipType { get; }
+        public abstract string ShipType { get; }
         public int HitPoints { get; set; }
         public string Name { get; set; }
         public int Troops { get; set; }
         public abstract int MaxHitPoints { get; }
-        public abstract Shiptype Typ { get; }
     }
 
     public class Linienschiff_1 : Ship
     {
+        public override string ShipType { get { return "Linienschiff 1. Klasse"; } }
         public override int MaxHitPoints { get { return 40; } }
-        public override Shiptype Typ { get { return Shiptype.Linienschiff_1; } }
 
         public Linienschiff_1()
         {
             HitPoints = MaxHitPoints;
             Troops = 0;
-            Name = "Linienschiff 1. Klasse";
+            Name = ShipType;
         }
 
     }
 
     public class Linienschiff_2 : Ship
     {
+        public override string ShipType { get { return "Linienschiff 2. Klasse"; } }
         public override int MaxHitPoints { get { return 30; } }
-        public override Shiptype Typ { get { return Shiptype.Linienschiff_2; } }
 
         public Linienschiff_2()
         {
             HitPoints = MaxHitPoints;
             Troops = 0;
-            Name = "Linienschiff 2. Klasse";
+            Name = ShipType;
         }
     }
 
-    public enum Shiptype
+    public class Linienschiff_3 : Ship
     {
-        Linienschiff_1,
-        Linienschiff_2,
-        Linienschiff_3,
-        Linienschiff_4,
-        Fregatte
+        public override string ShipType { get { return "Linienschiff 2. Klasse"; } }
+        public override int MaxHitPoints { get { return 20; } }
+
+        public Linienschiff_3()
+        {
+            HitPoints = MaxHitPoints;
+            Troops = 0;
+            Name = ShipType;
+        }
     }
 }

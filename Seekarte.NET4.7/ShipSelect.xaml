@@ -6,6 +6,15 @@
         xmlns:local="clr-namespace:Seekarte.NET4._7"
         mc:Ignorable="d"
         Title="ShipSelect" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <!--<Setter Property="FontSize" Value="8"/>-->
+            <!--<Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Background" Value="White"/>-->
+            <Setter Property="Margin" Value="10,10,10,10"/>
+        </Style>
+    </Window.Resources>
     <Grid Name="Grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -32,18 +41,18 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <!--<RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>-->
                 </Grid.RowDefinitions>
-                <Label Content="Typ" Grid.Row="0" Grid.Column="0"/>
-                <Button Content="hinzufügen" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"  Width="110" Click="AddShip_Click"/>
-                <Label Content="Linienschiff 1. Klasse" Grid.Row="1" Grid.Column="0"/>
+                <!--<Label Content="Typ" Grid.Row="0" Grid.Column="0"/>-->
+                <!--<Button Content="hinzufügen" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"  Width="110" Click="AddShip_Click"/>-->
+                <!--<Label Content="Linienschiff 1. Klasse" Grid.Row="1" Grid.Column="0"/>-->
 
 
             </Grid>

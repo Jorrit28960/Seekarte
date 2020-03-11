@@ -37,13 +37,13 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <!--<RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>-->
                 </Grid.RowDefinitions>
                 <Label Content="Schiffsname" Grid.Row="0" Grid.Column="0"/>
                 <Label Content="Typ" Grid.Row="0" Grid.Column="1"/>
