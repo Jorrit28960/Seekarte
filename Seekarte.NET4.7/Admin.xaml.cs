@@ -28,6 +28,7 @@ namespace Seekarte.NET4._7
         private void ShowShipsInit()
         {
             //this.BtnGrid.Children.Add(tmpBtn);
+            //asdas
 
             var scrollViewer = this.scrollViewer;
 
