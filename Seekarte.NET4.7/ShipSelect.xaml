@@ -34,7 +34,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left" Height="154" Margin="0,5,0,0" Grid.Row="2" Grid.RowSpan="3" VerticalAlignment="Top" Width="626">
+        <ScrollViewer Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left" Height="422" Grid.RowSpan="8" VerticalAlignment="Top" Width="626">
             <Grid Name="scrollViewer">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -58,7 +58,7 @@
             </Grid>
 
         </ScrollViewer>
-        <Button Content="Schiff löschen" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"  Width="110"/>
+        <!--<Button Content="Schiff löschen" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"  Width="110"/>-->
 
 
     </Grid>

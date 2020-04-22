@@ -83,6 +83,11 @@
     <Compile Include="Dialogue.xaml.cs">
       <DependentUpon>Dialogue.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IShip.cs" />
+    <Compile Include="Ships\Linienschiff_1.cs" />
+    <Compile Include="Ships\Linienschiff_2.cs" />
+    <Compile Include="Ships\Linienschiff_3.cs" />
+    <Compile Include="Ships\Ship.cs" />
     <Compile Include="ShipSelect.xaml.cs">
       <DependentUpon>ShipSelect.xaml</DependentUpon>
     </Compile>

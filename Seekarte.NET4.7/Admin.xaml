@@ -6,6 +6,27 @@
         xmlns:local="clr-namespace:Seekarte.NET4._7"
         mc:Ignorable="d"
         Title="Admin" Height="450" Width="1000">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <!--<Setter Property="FontSize" Value="8"/>-->
+            <!--<Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Background" Value="White"/>-->
+            <!--<Setter Property="Margin" Value="10,10,10,10"/>-->
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Button">
+            <!--<Setter Property="FontSize" Value="8"/>-->
+            <Setter Property="Height" Value="20"/>
+            <!--<Setter Property="Margin" Value="10"/>-->
+            <!--<Setter Property="Background" Value="White"/>-->
+            <!--<Setter Property="Margin" Value="10,10,10,10"/>-->
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
     <Grid Name="Grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -33,36 +54,29 @@
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="140"/>
                     <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="110"/>
                     <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="90"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <!--<RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>-->
                 </Grid.RowDefinitions>
-                <Label Content="Schiffsname" Grid.Row="0" Grid.Column="0"/>
+                <!--<Label Content="Schiffsname" Grid.Row="0" Grid.Column="0"/>
                 <Label Content="Typ" Grid.Row="0" Grid.Column="1"/>
                 <Label Content="Trefferpunkte" Grid.Row="0" Grid.Column="2"/>
                 <Label Content="Maximale Trefferpunkte" Grid.Row="0" Grid.Column="3"/>
                 <Label Content="Truppen" Grid.Row="0" Grid.Column="4"/>
-                <Label Content="Geschwader" Grid.Row="0" Grid.Column="5"/>
-
+                <Label Content="Maximale Truppen" Grid.Row="0" Grid.Column="5"/>
+                <Label Content="Geschwader" Grid.Row="0" Grid.Column="6"/>-->
+                <!--<Button Content="Bearbeiten" Grid.Column="7" Grid.Row="0"/>-->
 
 
             </Grid>
 
         </ScrollViewer>
         <Button Content="Schiff hinzufügen" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"  Width="110" Click="AddShip_Click"/>
-        <Button Content="Schiff löschen" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"  Width="110" Click="DeleteShip_Click"/>
+        <!--<Button Content="Schiff löschen" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"  Width="110" Click="DeleteShip_Click"/>-->
         <Button Content="Runde erhöhen" Grid.Column="2" Grid.Row="0" Width="110" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RoundAdd_Click"/>
         <Button Content="Runde erniedrigen" Grid.Column="3" Grid.Row="0" Width="110" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RoundDelete_Click"/>
         <Label Name="LabelRoundAdmin" Content="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-
     </Grid>
 </Window>
