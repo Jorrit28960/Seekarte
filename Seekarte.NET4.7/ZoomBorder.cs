@@ -12,9 +12,9 @@ namespace Seekarte.NET4._7
     //Class that implements the image zoom and pan
     public class ZoomBorder : Border
     {
-        private static List<UIElement> listZoomBorders = new List<UIElement>();
-        private static List<Point> pointsZoomBorders = new List<Point>();
-        private static List<ZoomBorder> zoomBorders = new List<ZoomBorder>();
+        private static readonly List<UIElement> listZoomBorders = new List<UIElement>();
+        private static readonly List<Point> pointsZoomBorders = new List<Point>();
+        private static readonly List<ZoomBorder> zoomBorders = new List<ZoomBorder>();
         private UIElement child = null;
         private Point origin;
         private Point startLeftBtn;
@@ -111,7 +111,7 @@ namespace Seekarte.NET4._7
                     st.ScaleX = (st.ScaleX + zoom >= 1) ? st.ScaleX + zoom : 1;
                     st.ScaleY = (st.ScaleY + zoom >= 1) ? st.ScaleY + zoom : 1;
 
-                    saveLatest(st, tt);
+                    SaveLatest(st, tt);
                     //center image if maximum size
                     tt.X = (st.ScaleX + zoom >= 1) ? absoluteX - relative.X * st.ScaleX : 0;
                     tt.Y = (st.ScaleY + zoom >= 1) ? absoluteY - relative.Y * st.ScaleY : 0;
@@ -119,7 +119,7 @@ namespace Seekarte.NET4._7
             }
         }
 
-        private void saveLatest(ScaleTransform st, TranslateTransform tt)
+        private void SaveLatest(ScaleTransform st, TranslateTransform tt)
         {
             if (st != null)
                 latestScale = st;
@@ -161,7 +161,7 @@ namespace Seekarte.NET4._7
                         var st = GetScaleTransform(item);
                         var tt = GetTranslateTransform(item);
 
-                        saveLatest(st, tt);
+                        SaveLatest(st, tt);
                     }
                 }
             }
@@ -177,8 +177,7 @@ namespace Seekarte.NET4._7
 
             if (MainWindow.IsCountrySelected)
             {
-                List<ZoomBorder> borders;
-                bool isListInDic = MainWindow.SelctedCountry.Route.TryGetValue(MainWindow.Round, out borders);
+                bool isListInDic = MainWindow.SelctedCountry.Route.TryGetValue(MainWindow.Round, out List<ZoomBorder> borders);
 
                 if (!isListInDic)
                 {
@@ -195,9 +194,10 @@ namespace Seekarte.NET4._7
         }
         public List<ZoomBorder> CreateALine(Color color)
         {
-            List<ZoomBorder> list = new List<ZoomBorder>();
-
-            list.Add(CreateALine(color, startRightBtn, endRightBtn));
+            List<ZoomBorder> list = new List<ZoomBorder>
+            {
+                CreateALine(color, startRightBtn, endRightBtn)
+            };
 
             int lineLength = 10;
 
@@ -257,8 +257,10 @@ namespace Seekarte.NET4._7
             line.Y2 = ((end.Y - latestTransform.Y) / latestScale.ScaleY);
 
             // Create a red Brush  
-            SolidColorBrush solidColorBrush = new SolidColorBrush();
-            solidColorBrush.Color = color;
+            SolidColorBrush solidColorBrush = new SolidColorBrush
+            {
+                Color = color
+            };
 
             // Set Line's width and color  
             line.StrokeThickness = 1;
