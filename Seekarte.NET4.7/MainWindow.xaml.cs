@@ -15,7 +15,7 @@ namespace Seekarte.NET4._7
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Dictionary<string, Color> risikoDic = new Dictionary<string, Color>
+        private readonly Dictionary<string, Color> risikoDic = new Dictionary<string, Color>
         {
             {"Admin", Colors.Transparent },
             {"Preussen", Colors.Red },
@@ -24,7 +24,7 @@ namespace Seekarte.NET4._7
             {"Polen", Colors.Brown }
         };
 
-        private Dictionary<string, Color> GOTDic = new Dictionary<string, Color>
+        private readonly Dictionary<string, Color> GOTDic = new Dictionary<string, Color>
         {
             {"Admin", Colors.Transparent },
             {"Stark", Colors.Red },
@@ -35,10 +35,10 @@ namespace Seekarte.NET4._7
         };
 
         private ResourceDictionary gameDict;
-        private List<Country> countries;
-        private List<Button> buttonCountries = new List<Button>();
+        private readonly List<Country> countries;
+        private readonly List<Button> buttonCountries = new List<Button>();
         private bool normalModus = true;
-        private string game;
+        private readonly string game;
         public static int Round { get; set; } = 1;
         public static bool IsCountrySelected { get; set; }
         public static Country SelctedCountry { get; set; }
@@ -168,9 +168,11 @@ namespace Seekarte.NET4._7
 
         private void AdminWindow()
         {
-            var adminWindow = new Admin(countries);
-            adminWindow.Owner = this;
-            adminWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            var adminWindow = new Admin(countries)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
             adminWindow.ShowDialog();
         }
 
@@ -240,9 +242,11 @@ namespace Seekarte.NET4._7
 
         private bool RequestPassword(Country tmpCountry)
         {
-            var dialoguePassword = new Dialogue(Properties.Resources.PasswordRequest);
-            dialoguePassword.Owner = this;
-            dialoguePassword.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            var dialoguePassword = new Dialogue(Properties.Resources.PasswordRequest)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
             if (dialoguePassword.ShowDialog() == true && dialoguePassword.ResponseText.Equals(tmpCountry.password))
             {
                 IsCountrySelected = true;
@@ -256,9 +260,11 @@ namespace Seekarte.NET4._7
         }
         private void SetPassword(Country tmpCountry)
         {
-            var dialogueNewPassword = new Dialogue(Properties.Resources.PasswordSet);
-            dialogueNewPassword.Owner = this;
-            dialogueNewPassword.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            var dialogueNewPassword = new Dialogue(Properties.Resources.PasswordSet)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
             dialogueNewPassword.ShowDialog();
             tmpCountry.password = dialogueNewPassword.ResponseText;
         }
@@ -285,7 +291,14 @@ namespace Seekarte.NET4._7
 
         private void Flotte()
         {
-            throw new NotImplementedException();
+            var test = new Dialogue("Hi")
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            test.ShowDialog();
+
+            //throw new NotImplementedException();
         }
 
         private List<Country> InitCountries()

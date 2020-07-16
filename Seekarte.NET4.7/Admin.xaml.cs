@@ -212,14 +212,14 @@ namespace Seekarte.NET4._7
         {
             MainWindow.Round++;
             this.LabelRoundAdmin.Content = MainWindow.Round;
-            Choose.mainWindow.txtRoundCounter.Text = "Runde " + MainWindow.Round;
+            ChooseGameMode.mainWindow.txtRoundCounter.Text = "Runde " + MainWindow.Round;
         }
 
         private void RoundDelete_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Round--;
             this.LabelRoundAdmin.Content = MainWindow.Round;
-            Choose.mainWindow.txtRoundCounter.Text = "Runde " + MainWindow.Round;
+            ChooseGameMode.mainWindow.txtRoundCounter.Text = "Runde " + MainWindow.Round;
         }
     }
 }

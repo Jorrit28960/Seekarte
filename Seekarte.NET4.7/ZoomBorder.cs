@@ -233,7 +233,7 @@ namespace Seekarte.NET4._7
             Line line = new Line();
 
             zoomBorder.Child = line;
-            Choose.mainWindow.Map.Children.Add(zoomBorder);
+            ChooseGameMode.mainWindow.Map.Children.Add(zoomBorder);
 
             var st = GetScaleTransform(zoomBorder.child);
             var tt = GetTranslateTransform(zoomBorder.child);

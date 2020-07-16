@@ -5,10 +5,10 @@ namespace Seekarte.NET4._7
     /// <summary>
     /// Interaction logic for Choose.xaml
     /// </summary>
-    public partial class Choose : Window
+    public partial class ChooseGameMode : Window
     {
         public static MainWindow mainWindow;
-        public Choose()
+        public ChooseGameMode()
         {
             InitializeComponent();
         }
