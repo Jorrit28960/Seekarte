@@ -135,9 +135,7 @@ namespace Seekarte.NET4._7
                 }
 
                 if (tmpButton.Content.ToString() == Properties.Resources.Flotte)
-                {
                     Flotte();
-                }
 
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.Geschwader))
                     Geschwader();
@@ -158,9 +156,13 @@ namespace Seekarte.NET4._7
                 }
 
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.Country))
-                {
                     AdminWindow();
-                }
+
+                if (tmpButton.Content.ToString().Contains(Properties.Resources.PasswordResetBtn))
+                    PasswordResetWindwow();
+
+                if (tmpButton.Content.ToString().Contains(Properties.Resources.PasswordSetBtn))
+                    PasswordSetWindwow();
             }
 
 
@@ -174,6 +176,25 @@ namespace Seekarte.NET4._7
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
             adminWindow.ShowDialog();
+        }
+
+        private void PasswordResetWindwow()
+        {
+            var window = new PasswordReset(countries)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            window.ShowDialog();
+        }
+        private void PasswordSetWindwow()
+        {
+            var window = new PasswordSet(countries, this)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            window.ShowDialog();
         }
 
         private void Country()
@@ -218,6 +239,11 @@ namespace Seekarte.NET4._7
             buttonCountries[1].Content = Properties.Resources.Country;
             buttonCountries[2].Visibility = Visibility.Visible;
             buttonCountries[2].Content = Properties.Resources.PasswortÄndern;
+            buttonCountries[3].Visibility = Visibility.Visible;
+            buttonCountries[3].Content = Properties.Resources.PasswordResetBtn;
+            buttonCountries[4].Visibility = Visibility.Visible;
+            buttonCountries[4].Content = Properties.Resources.PasswordSetBtn;
+
 
             foreach (var country in countries)
             {
@@ -258,7 +284,7 @@ namespace Seekarte.NET4._7
                 return false;
             }
         }
-        private void SetPassword(Country tmpCountry)
+        public void SetPassword(Country tmpCountry)
         {
             var dialogueNewPassword = new Dialogue(Properties.Resources.PasswordSet)
             {

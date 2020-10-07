@@ -135,8 +135,14 @@
   <data name="PasswordRequest" xml:space="preserve">
     <value>Bitte geben Sie Ihr Passwort ein!</value>
   </data>
+  <data name="PasswordResetBtn" xml:space="preserve">
+    <value>Spieler PW Reset</value>
+  </data>
   <data name="PasswordSet" xml:space="preserve">
     <value>Bitte legen Sie Ihr Passwort fest!</value>
+  </data>
+  <data name="PasswordSetBtn" xml:space="preserve">
+    <value>Spieler PW Set</value>
   </data>
   <data name="PasswordWrong" xml:space="preserve">
     <value>Das eingegebene Passwort war falsch!</value>

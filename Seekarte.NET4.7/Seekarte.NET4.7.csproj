@@ -80,10 +80,19 @@
       <DependentUpon>ChooseGameMode.xaml</DependentUpon>
     </Compile>
     <Compile Include="Country.cs" />
+    <Compile Include="CountryShips.xaml.cs">
+      <DependentUpon>CountryShips.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogue.xaml.cs">
       <DependentUpon>Dialogue.xaml</DependentUpon>
     </Compile>
     <Compile Include="IShip.cs" />
+    <Compile Include="PasswordReset.xaml.cs">
+      <DependentUpon>PasswordReset.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordSet.xaml.cs">
+      <DependentUpon>PasswordSet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ships\Linienschiff_1.cs" />
     <Compile Include="Ships\Linienschiff_2.cs" />
     <Compile Include="Ships\Linienschiff_3.cs" />
@@ -99,6 +108,10 @@
     <Page Include="ChooseGameMode.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CountryShips.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogue.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -116,6 +129,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PasswordReset.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PasswordSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\GameOfThrones.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

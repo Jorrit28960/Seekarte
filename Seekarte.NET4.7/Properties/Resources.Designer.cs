@@ -115,11 +115,29 @@ namespace Seekarte.NET4._7.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Spieler PW Reset.
+        /// </summary>
+        internal static string PasswordResetBtn {
+            get {
+                return ResourceManager.GetString("PasswordResetBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitte legen Sie Ihr Passwort fest!.
         /// </summary>
         internal static string PasswordSet {
             get {
                 return ResourceManager.GetString("PasswordSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spieler PW Set.
+        /// </summary>
+        internal static string PasswordSetBtn {
+            get {
+                return ResourceManager.GetString("PasswordSetBtn", resourceCulture);
             }
         }
         

@@ -27,7 +27,7 @@ namespace Seekarte.NET4._7
             ShowShipsInit();
         }
 
-        private void ShowShipsInit()
+        public void ShowShipsInit()
         {
             var scrollViewer = this.scrollViewer;
 
