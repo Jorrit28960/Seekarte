@@ -18,8 +18,8 @@ namespace Seekarte.NET4._7
         private UIElement child = null;
         private Point origin;
         private Point startLeftBtn;
-        private Point startRightBtn;
-        private Point endRightBtn;
+        public Point startRightBtn;
+        public Point endRightBtn;
         private static ScaleTransform latestScale = new ScaleTransform(1, 1);
         private static TranslateTransform latestTransform = new TranslateTransform(0, 0);
 
@@ -194,6 +194,21 @@ namespace Seekarte.NET4._7
         }
         public List<ZoomBorder> CreateALine(Color color)
         {
+            //to save data
+
+            if (MainWindow.IsCountrySelected)
+            {
+                bool isListInDic = MainWindow.SelctedCountry.RoutePoints.TryGetValue(MainWindow.Round, out List<TwoPoints> routePoints);
+
+                if (!isListInDic)
+                {
+                    MainWindow.SelctedCountry.RoutePoints.Add(MainWindow.Round, routePoints = new List<TwoPoints>());
+                }
+
+                routePoints.Add(new TwoPoints(startRightBtn, endRightBtn));
+            }
+
+            //actual code
             List<ZoomBorder> list = new List<ZoomBorder>
             {
                 CreateALine(color, startRightBtn, endRightBtn)

@@ -150,4 +150,10 @@
   <data name="PasswortÄndern" xml:space="preserve">
     <value>Passwort ändern</value>
   </data>
+  <data name="ReadData" xml:space="preserve">
+    <value>Spielstand wiederherstellen</value>
+  </data>
+  <data name="SaveData" xml:space="preserve">
+    <value>Spielstand speichern</value>
+  </data>
 </root>

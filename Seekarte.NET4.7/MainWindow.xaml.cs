@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-
 
 namespace Seekarte.NET4._7
 {
@@ -21,7 +22,9 @@ namespace Seekarte.NET4._7
             {"Preussen", Colors.Red },
             {"Tartarenreich", Colors.Blue },
             {"Spanien", Colors.Blue },
-            {"Polen", Colors.Brown }
+            {"Polen1", Colors.Brown },
+            {"Polen2", Colors.Brown },
+            {"Polen3", Colors.Brown }
         };
 
         private readonly Dictionary<string, Color> GOTDic = new Dictionary<string, Color>
@@ -35,7 +38,7 @@ namespace Seekarte.NET4._7
         };
 
         private ResourceDictionary gameDict;
-        private readonly List<Country> countries;
+        public List<Country> countries;
         private readonly List<Button> buttonCountries = new List<Button>();
         private bool normalModus = true;
         private readonly string game;
@@ -163,10 +166,33 @@ namespace Seekarte.NET4._7
 
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.PasswordSetBtn))
                     PasswordSetWindwow();
+
+                if (tmpButton.Content.ToString().Contains(Properties.Resources.SaveData))
+                {
+                    DeleteZoomBorders();
+                    DeleteLines(countries);
+
+                    var dateString = DateTime.Now.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "");
+
+                    SaveData<List<Country>>("C:\\Users\\Jorrit_Surface\\source\\repos\\Seekarte\\Seekarte.NET4.7\\bin\\Debug\\test" + dateString + ".json", countries);
+                    SaveLines(countries);
+                }
+
+                if (tmpButton.Content.ToString().Contains(Properties.Resources.ReadData))
+                {
+                    DeleteZoomBorders();
+
+                    countries = null;
+
+                    countries = ReadData<List<Country>>("C:\\Users\\Jorrit_Surface\\source\\repos\\Seekarte\\Seekarte.NET4.7\\bin\\Debug\\test.json");
+                    SaveLines(countries);
+                }
             }
 
 
         }
+
+        //Admin Buttons
 
         private void AdminWindow()
         {
@@ -195,6 +221,116 @@ namespace Seekarte.NET4._7
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
             window.ShowDialog();
+        }
+
+        /// <summary>
+        /// Writes the given object instance to a Json file.
+        /// <para>Object type must have a parameterless constructor.</para>
+        /// <para>Only Public properties and variables will be written to the file. These can be any type though, even other classes.</para>
+        /// <para>If there are public properties/variables that you do not want written to the file, decorate them with the [JsonIgnore] attribute.</para>
+        /// </summary>
+        /// <typeparam name="T">The type of object being written to the file.</typeparam>
+        /// <param name="filePath">The file path to write the object instance to.</param>
+        /// <param name="objectToWrite">The object instance to write to the file.</param>
+        /// <param name="append">If false the file will be overwritten if it already exists. If true the contents will be appended to the file.</param>
+        public static void SaveData<T>(string filePath, T objectToWrite, bool append = false) where T : new()
+        {
+            TextWriter writer = null;
+            try
+            {
+                var contentsToWriteToFile = JsonConvert.SerializeObject(objectToWrite);
+                writer = new StreamWriter(filePath, append);
+                writer.Write(contentsToWriteToFile);
+            }
+            finally
+            {
+                if (writer != null)
+                    writer.Close();
+                MessageBox.Show("Done");
+            }
+        }
+
+        /// <summary>
+        /// Reads an object instance from an Json file.
+        /// <para>Object type must have a parameterless constructor.</para>
+        /// </summary>
+        /// <typeparam name="T">The type of object to read from the file.</typeparam>
+        /// <param name="filePath">The file path to read the object instance from.</param>
+        /// <returns>Returns a new instance of the object read from the Json file.</returns>
+        public static T ReadData<T>(string filePath) where T : new()
+        {
+            TextReader reader = null;
+            try
+            {
+                reader = new StreamReader(filePath);
+                var fileContents = reader.ReadToEnd();
+                return JsonConvert.DeserializeObject<T>(fileContents);
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+                MessageBox.Show("Done");
+            }
+        }
+
+        private void DeleteZoomBorders()
+        {
+            var children = ChooseGameMode.mainWindow.Map.Children;
+
+            children.RemoveRange(3, children.Count - 3);
+        }
+
+        private void AddZoomBorders()
+        {
+
+            foreach (var country in countries)
+            {
+                if (country.Route == null)
+                    break;
+
+                foreach (var dicZoomBorder in country.Route)
+                {
+                    foreach (var zoomBorder in dicZoomBorder.Value)
+                    {
+                        ChooseGameMode.mainWindow.Map.Children.Add(zoomBorder);
+                    }
+                }
+
+            }
+        }
+
+        private void DeleteLines(List<Country> list)
+        {
+            foreach (var country in list)
+                country.Route = null;
+
+        }
+
+        private void SaveLines(List<Country> list)
+        {
+            List<ZoomBorder> zoomBorders;
+            foreach (var country in list)
+            {
+                country.Route = new Dictionary<int, List<ZoomBorder>>();
+
+                foreach (var dicRoutePoints in country.RoutePoints)
+                {
+                    country.Route.Add(dicRoutePoints.Key, zoomBorders = new List<ZoomBorder>());
+
+                    foreach (var routePoints in dicRoutePoints.Value)
+                    {
+                        ZoomBorder tmp = new ZoomBorder();
+                        tmp.startRightBtn = routePoints.startPoint;
+                        tmp.endRightBtn = routePoints.endPoint;
+
+                        foreach (var item in tmp.CreateALine(country.color))
+                        {
+                            zoomBorders.Add(item);
+                        }
+                    }
+                }
+            }
         }
 
         private void Country()
@@ -243,6 +379,10 @@ namespace Seekarte.NET4._7
             buttonCountries[3].Content = Properties.Resources.PasswordResetBtn;
             buttonCountries[4].Visibility = Visibility.Visible;
             buttonCountries[4].Content = Properties.Resources.PasswordSetBtn;
+            buttonCountries[5].Visibility = Visibility.Visible;
+            buttonCountries[5].Content = Properties.Resources.SaveData;
+            buttonCountries[6].Visibility = Visibility.Visible;
+            buttonCountries[6].Content = Properties.Resources.ReadData;
 
 
             foreach (var country in countries)
@@ -253,7 +393,6 @@ namespace Seekarte.NET4._7
                     {
                         item.Opacity = 1 / (double)(4 * (Round - route.Key));
                         item.Visibility = Visibility.Visible;
-
                     }
                 }
             }

@@ -158,5 +158,23 @@ namespace Seekarte.NET4._7.Properties {
                 return ResourceManager.GetString("PasswortÄndern", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spielstand wiederherstellen.
+        /// </summary>
+        internal static string ReadData {
+            get {
+                return ResourceManager.GetString("ReadData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spielstand speichern.
+        /// </summary>
+        internal static string SaveData {
+            get {
+                return ResourceManager.GetString("SaveData", resourceCulture);
+            }
+        }
     }
 }
