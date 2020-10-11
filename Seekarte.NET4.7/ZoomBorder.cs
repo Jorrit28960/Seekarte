@@ -242,6 +242,10 @@ namespace Seekarte.NET4._7
 
         public ZoomBorder CreateALine(Color color, Point start, Point end)
         {
+            //check for correct input (if NaN program crashes)
+            if (Double.IsNaN(end.X))
+                return new ZoomBorder();
+
             ZoomBorder zoomBorder = new ZoomBorder();
 
             // Create a Line  

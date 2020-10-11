@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -318,7 +319,8 @@ namespace Seekarte.NET4._7
                 {
                     country.Route.Add(dicRoutePoints.Key, zoomBorders = new List<ZoomBorder>());
 
-                    foreach (var routePoints in dicRoutePoints.Value)
+                    //used ToList() because it seemed having sometimes issues while execute the loop because the value changed during execution
+                    foreach (var routePoints in dicRoutePoints.Value.ToList())
                     {
                         ZoomBorder tmp = new ZoomBorder();
                         tmp.startRightBtn = routePoints.startPoint;
