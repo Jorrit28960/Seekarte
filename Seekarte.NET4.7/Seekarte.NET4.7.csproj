@@ -93,6 +93,12 @@
     <Compile Include="PasswordSet.xaml.cs">
       <DependentUpon>PasswordSet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlayerEvent.xaml.cs">
+      <DependentUpon>PlayerEvent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerEventWho.xaml.cs">
+      <DependentUpon>PlayerEventWho.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ships\Linienschiff_1.cs" />
     <Compile Include="Ships\Linienschiff_2.cs" />
     <Compile Include="Ships\Linienschiff_3.cs" />
@@ -135,6 +141,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PasswordSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PlayerEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PlayerEventWho.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

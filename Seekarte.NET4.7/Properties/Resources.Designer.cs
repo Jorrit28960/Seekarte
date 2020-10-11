@@ -88,6 +88,15 @@ namespace Seekarte.NET4._7.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Spieler Event.
+        /// </summary>
+        internal static string Event {
+            get {
+                return ResourceManager.GetString("Event", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flotte.
         /// </summary>
         internal static string Flotte {

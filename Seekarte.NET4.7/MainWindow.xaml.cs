@@ -25,7 +25,9 @@ namespace Seekarte.NET4._7
             {"Spanien", Colors.Blue },
             {"Polen1", Colors.Brown },
             {"Polen2", Colors.Brown },
-            {"Polen3", Colors.Brown }
+            {"Polen3", Colors.Brown },
+            {"Polen4", Colors.Brown },
+            {"Polen5", Colors.Brown }
         };
 
         private readonly Dictionary<string, Color> GOTDic = new Dictionary<string, Color>
@@ -46,6 +48,8 @@ namespace Seekarte.NET4._7
         public static int Round { get; set; } = 1;
         public static bool IsCountrySelected { get; set; }
         public static Country SelctedCountry { get; set; }
+        public static int PlayerEventNumber { get; set; }
+        public static List<Country> PlayerEventCountries { get; set; } = new List<Country>();
 
         public MainWindow(string game)
         {
@@ -173,7 +177,7 @@ namespace Seekarte.NET4._7
                     DeleteZoomBorders();
                     DeleteLines(countries);
 
-                    var dateString = DateTime.Now.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "");
+                    var dateString = DateTime.Now.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_");
 
                     SaveData<List<Country>>("C:\\Users\\Jorrit_Surface\\source\\repos\\Seekarte\\Seekarte.NET4.7\\bin\\Debug\\test" + dateString + ".json", countries);
                     SaveLines(countries);
@@ -188,6 +192,9 @@ namespace Seekarte.NET4._7
                     countries = ReadData<List<Country>>("C:\\Users\\Jorrit_Surface\\source\\repos\\Seekarte\\Seekarte.NET4.7\\bin\\Debug\\test.json");
                     SaveLines(countries);
                 }
+
+                if (tmpButton.Content.ToString().Contains(Properties.Resources.Event))
+                    CreatePlayerEvent();
             }
 
 
@@ -222,6 +229,31 @@ namespace Seekarte.NET4._7
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
             window.ShowDialog();
+        }
+
+        private void CreatePlayerEvent()
+        {
+            PlayerEventNumber = -1;
+            var window = new PlayerEventOverview()
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+
+            if (window.ShowDialog() == true)
+            {
+                PlayerEventNumber = window.PlayerEventReturn;
+            }
+
+            List<string> players = new List<string>();
+            players.Add("Preussen");
+            players.Add("Spanien");
+
+            foreach (var country in players)
+            {
+                Country tmpCountry = countries.Find(x => x.countryName == country);
+                PlayerEventCountries.Add(tmpCountry);
+            }
         }
 
         /// <summary>
@@ -322,14 +354,24 @@ namespace Seekarte.NET4._7
                     //used ToList() because it seemed having sometimes issues while execute the loop because the value changed during execution
                     foreach (var routePoints in dicRoutePoints.Value.ToList())
                     {
-                        ZoomBorder tmp = new ZoomBorder();
-                        tmp.startRightBtn = routePoints.startPoint;
-                        tmp.endRightBtn = routePoints.endPoint;
-
-                        foreach (var item in tmp.CreateALine(country.color))
+                        if (routePoints.type.Equals("Line"))
                         {
-                            zoomBorders.Add(item);
+
+                            ZoomBorder tmp = new ZoomBorder();
+                            tmp.startRightBtn = routePoints.startPoint;
+                            tmp.endRightBtn = routePoints.endPoint;
+
+                            foreach (var item in tmp.CreateALine(country.color))
+                            {
+                                zoomBorders.Add(item);
+                            }
                         }
+
+                        if (routePoints.type.Equals("EnemyFleet"))
+                        {
+                            MessageBox.Show("Should be implemented da da da EnemyFleet SaveLines");
+                        }
+
                     }
                 }
             }
@@ -385,6 +427,8 @@ namespace Seekarte.NET4._7
             buttonCountries[5].Content = Properties.Resources.SaveData;
             buttonCountries[6].Visibility = Visibility.Visible;
             buttonCountries[6].Content = Properties.Resources.ReadData;
+            buttonCountries[7].Visibility = Visibility.Visible;
+            buttonCountries[7].Content = Properties.Resources.Event;
 
 
             foreach (var country in countries)

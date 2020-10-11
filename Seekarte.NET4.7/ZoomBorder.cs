@@ -22,6 +22,7 @@ namespace Seekarte.NET4._7
         public Point endRightBtn;
         private static ScaleTransform latestScale = new ScaleTransform(1, 1);
         private static TranslateTransform latestTransform = new TranslateTransform(0, 0);
+        public string playerEvent { get; set; }
 
         private TranslateTransform GetTranslateTransform(UIElement element)
         {
@@ -175,7 +176,7 @@ namespace Seekarte.NET4._7
         {
             endRightBtn = e.GetPosition(this);
 
-            if (MainWindow.IsCountrySelected)
+            if (MainWindow.IsCountrySelected && MainWindow.SelctedCountry.countryName != "Admin")
             {
                 bool isListInDic = MainWindow.SelctedCountry.Route.TryGetValue(MainWindow.Round, out List<ZoomBorder> borders);
 
@@ -189,9 +190,153 @@ namespace Seekarte.NET4._7
                     borders.Add(item);
                 }
             }
+
+            if (MainWindow.IsCountrySelected && MainWindow.SelctedCountry.countryName == "Admin")
+            {
+                switch (MainWindow.PlayerEventNumber)
+                {
+                    case 2:
+                        foreach (var country in MainWindow.PlayerEventCountries)
+                        {
+                            EnemyFleet(country);
+                        }
+                        break;
+                    default:
+                        MessageBox.Show("Reset");
+                        break;
+                }
+
+                MainWindow.PlayerEventCountries.Clear();
+                MainWindow.PlayerEventNumber = -1;
+            }
             //need because MouseRightDown is not reacting always
             startRightBtn = e.GetPosition(this);
         }
+
+        private void EnemyFleet(Country country)
+        {
+            Point end1 = new Point();
+            Point end2 = new Point();
+            Point start1 = new Point();
+            Point start2 = new Point();
+
+            double versatz = 3 * latestScale.ScaleX;
+
+            start1.X = startRightBtn.X - versatz;
+            start1.Y = startRightBtn.Y - versatz;
+
+            end1.X = startRightBtn.X + versatz;
+            end1.Y = startRightBtn.Y + versatz;
+
+            start2.X = startRightBtn.X - versatz;
+            start2.Y = startRightBtn.Y + versatz;
+
+            end2.X = startRightBtn.X + versatz;
+            end2.Y = startRightBtn.Y - versatz;
+
+            //text to show
+            String txt = "Die folgende Schife begegenen sich:\n";
+
+            foreach (var item in MainWindow.PlayerEventCountries)
+            {
+                txt += item.countryName + ":" + "\nTransportschiff";
+                txt += "\n";
+            }
+
+            //to save data
+            bool isListInDic = country.RoutePoints.TryGetValue(MainWindow.Round, out List<TwoPoints> routePoints);
+
+            if (!isListInDic)
+            {
+                country.RoutePoints.Add(MainWindow.Round, routePoints = new List<TwoPoints>());
+            }
+
+            routePoints.Add(new TwoPoints(startRightBtn, startRightBtn, "EnemyFleet"));
+
+            //actual code
+            List<ZoomBorder> list = new List<ZoomBorder>
+            {
+                EnemyFleet(country.color, start1, end1, txt),
+                EnemyFleet(country.color, start2, end2, txt)
+            };
+
+            isListInDic = country.Route.TryGetValue(MainWindow.Round, out List<ZoomBorder> enemyfleet);
+
+            if (!isListInDic)
+            {
+                country.Route.Add(MainWindow.Round, enemyfleet = new List<ZoomBorder>());
+            }
+
+            foreach (var item in list)
+            {
+                enemyfleet.Add(item);
+            }
+        }
+
+        private ZoomBorder EnemyFleet(Color color, Point start, Point end, string txt)
+        {
+            ZoomBorder zoomBorder = new ZoomBorder();
+
+            //mouse over
+            zoomBorder.MouseDown += ZoomBorder_MouseDown; ;
+            zoomBorder.playerEvent = txt;
+
+
+            // Create a Line  
+            Line line = new Line();
+
+            zoomBorder.Child = line;
+            ChooseGameMode.mainWindow.Map.Children.Add(zoomBorder);
+
+            var st = GetScaleTransform(zoomBorder.child);
+            var tt = GetTranslateTransform(zoomBorder.child);
+
+            if (latestScale != null)
+            {
+                st.ScaleX = latestScale.ScaleX;
+                st.ScaleY = latestScale.ScaleY;
+            }
+
+            if (latestTransform != null)
+            {
+                tt.X = latestTransform.X;
+                tt.Y = latestTransform.Y;
+            }
+
+            line.X1 = ((start.X - latestTransform.X) / latestScale.ScaleX);
+            line.Y1 = ((start.Y - latestTransform.Y) / latestScale.ScaleY);
+
+            line.X2 = ((end.X - latestTransform.X) / latestScale.ScaleX);
+            line.Y2 = ((end.Y - latestTransform.Y) / latestScale.ScaleY);
+
+            // Create a red Brush  
+            SolidColorBrush solidColorBrush = new SolidColorBrush
+            {
+                Color = color
+            };
+
+            // Set Line's width and color  
+            line.StrokeThickness = 2;
+            line.Stroke = solidColorBrush;
+
+            // Add line to the Grid. 
+            Grid.SetColumn(zoomBorder, 0);
+            Grid.SetRow(zoomBorder, 1);
+            Grid.SetColumnSpan(zoomBorder, 4);
+            Grid.SetRowSpan(zoomBorder, 2);
+            zoomBorder.ClipToBounds = true;
+
+            line.MouseRightButtonDown += Child_PreviewMouseRightButtonDown;
+
+            return zoomBorder;
+        }
+
+        private void ZoomBorder_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ZoomBorder tmp = (ZoomBorder)sender;
+            MessageBox.Show(tmp.playerEvent);
+        }
+
         public List<ZoomBorder> CreateALine(Color color)
         {
             //to save data
@@ -205,7 +350,7 @@ namespace Seekarte.NET4._7
                     MainWindow.SelctedCountry.RoutePoints.Add(MainWindow.Round, routePoints = new List<TwoPoints>());
                 }
 
-                routePoints.Add(new TwoPoints(startRightBtn, endRightBtn));
+                routePoints.Add(new TwoPoints(startRightBtn, endRightBtn, "Line"));
             }
 
             //actual code

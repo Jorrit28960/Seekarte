@@ -126,6 +126,9 @@
   <data name="Country" xml:space="preserve">
     <value>Land</value>
   </data>
+  <data name="Event" xml:space="preserve">
+    <value>Spieler Event</value>
+  </data>
   <data name="Flotte" xml:space="preserve">
     <value>Flotte</value>
   </data>
