@@ -246,6 +246,10 @@ namespace Seekarte.NET4._7
             if (Double.IsNaN(end.X))
                 return new ZoomBorder();
 
+            //check for correct input (if mouse right boutton up is executed over line the end Point is false defined)
+            if (!ChooseGameMode.mainWindow.Map.Children[2].IsMouseOver)
+                return new ZoomBorder();
+
             ZoomBorder zoomBorder = new ZoomBorder();
 
             // Create a Line  
