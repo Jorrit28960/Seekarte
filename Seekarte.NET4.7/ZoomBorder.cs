@@ -22,7 +22,7 @@ namespace Seekarte.NET4._7
         public Point endRightBtn;
         private static ScaleTransform latestScale = new ScaleTransform(1, 1);
         private static TranslateTransform latestTransform = new TranslateTransform(0, 0);
-        public string playerEvent { get; set; }
+        public string playerEvent { get; set; } = null;
 
         private TranslateTransform GetTranslateTransform(UIElement element)
         {
@@ -213,7 +213,7 @@ namespace Seekarte.NET4._7
             startRightBtn = e.GetPosition(this);
         }
 
-        private void EnemyFleet(Country country)
+        public void EnemyFleet(Country country)
         {
             Point end1 = new Point();
             Point end2 = new Point();
@@ -235,14 +235,23 @@ namespace Seekarte.NET4._7
             end2.Y = startRightBtn.Y - versatz;
 
             //text to show
-            String txt = "Die folgende Schife begegenen sich:\n";
-
-            foreach (var item in MainWindow.PlayerEventCountries)
+            //== null when it was saved it is not equal null
+            string txt;
+            if (playerEvent == null)
             {
-                txt += item.countryName + ":" + "\nTransportschiff";
-                txt += "\n";
-            }
 
+                txt = "Die folgende Schife begegenen sich:\n";
+
+                foreach (var item in MainWindow.PlayerEventCountries)
+                {
+                    txt += item.countryName + ":" + "\nTransportschiff";
+                    txt += "\n";
+                }
+            }
+            else
+            {
+                txt = playerEvent;
+            }
             //to save data
             bool isListInDic = country.RoutePoints.TryGetValue(MainWindow.Round, out List<TwoPoints> routePoints);
 
@@ -251,7 +260,7 @@ namespace Seekarte.NET4._7
                 country.RoutePoints.Add(MainWindow.Round, routePoints = new List<TwoPoints>());
             }
 
-            routePoints.Add(new TwoPoints(startRightBtn, startRightBtn, "EnemyFleet"));
+            routePoints.Add(new TwoPoints(startRightBtn, startRightBtn, Colors.Transparent,  "EnemyFleet", txt)); ;
 
             //actual code
             List<ZoomBorder> list = new List<ZoomBorder>
@@ -350,7 +359,7 @@ namespace Seekarte.NET4._7
                     MainWindow.SelctedCountry.RoutePoints.Add(MainWindow.Round, routePoints = new List<TwoPoints>());
                 }
 
-                routePoints.Add(new TwoPoints(startRightBtn, endRightBtn, "Line"));
+                routePoints.Add(new TwoPoints(startRightBtn, endRightBtn, color, "Line", ""));
             }
 
             //actual code

@@ -356,6 +356,7 @@ namespace Seekarte.NET4._7
                     {
                         if (routePoints.type.Equals("Line"))
                         {
+                            MessageBox.Show("Line");
 
                             ZoomBorder tmp = new ZoomBorder();
                             tmp.startRightBtn = routePoints.startPoint;
@@ -369,7 +370,13 @@ namespace Seekarte.NET4._7
 
                         if (routePoints.type.Equals("EnemyFleet"))
                         {
-                            MessageBox.Show("Should be implemented da da da EnemyFleet SaveLines");
+                            MessageBox.Show("EnemyFleet");
+
+                            ZoomBorder tmp = new ZoomBorder();
+                            tmp.startRightBtn = routePoints.startPoint;
+                            tmp.playerEvent = routePoints.eventText;
+
+                            tmp.EnemyFleet(country);
                         }
 
                     }

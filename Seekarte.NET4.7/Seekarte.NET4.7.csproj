@@ -80,9 +80,6 @@
       <DependentUpon>ChooseGameMode.xaml</DependentUpon>
     </Compile>
     <Compile Include="Country.cs" />
-    <Compile Include="CountryShips.xaml.cs">
-      <DependentUpon>CountryShips.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dialogue.xaml.cs">
       <DependentUpon>Dialogue.xaml</DependentUpon>
     </Compile>
@@ -115,10 +112,6 @@
     <Page Include="ChooseGameMode.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="CountryShips.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogue.xaml">
       <Generator>MSBuild:Compile</Generator>
