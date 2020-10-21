@@ -1,13 +1,13 @@
 ﻿namespace Seekarte.NET4._7
 {
-    public abstract class Ship
+    public class Ship
     {
-        public abstract string ShipType { get; }
+        public virtual string ShipType { get; }
         public int HitPoints { get; set; }
         public string Name { get; set; }
         public int Troops { get; set; }
-        public abstract int MaxHitPoints { get; }
-        public abstract int MaxTroops { get; }
+        public virtual int MaxHitPoints { get; }
+        public virtual int MaxTroops { get; }
         public int Geschwader { get; set; }
 
         public Ship()
