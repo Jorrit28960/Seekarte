@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -179,7 +180,7 @@ namespace Seekarte.NET4._7
 
                     var dateString = DateTime.Now.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_");
 
-                    SaveData<List<Country>>("C:\\Users\\Jorrit_Surface\\source\\repos\\Seekarte\\Seekarte.NET4.7\\bin\\Debug\\test" + dateString + ".json", countries);
+                    SaveData<List<Country>>("test" + dateString + ".json", countries);
                     SaveLines(countries);
                 }
 
@@ -189,8 +190,11 @@ namespace Seekarte.NET4._7
 
                     countries = null;
 
-                    countries = ReadData<List<Country>>("C:\\Users\\Jorrit_Surface\\source\\repos\\Seekarte\\Seekarte.NET4.7\\bin\\Debug\\test.json");
-                    SaveLines(countries);
+                    countries = ReadData<List<Country>>();
+                    if (countries != null)
+                    {
+                        SaveLines(countries);
+                    }
                 }
 
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.Event))
@@ -290,9 +294,18 @@ namespace Seekarte.NET4._7
         /// <typeparam name="T">The type of object to read from the file.</typeparam>
         /// <param name="filePath">The file path to read the object instance from.</param>
         /// <returns>Returns a new instance of the object read from the Json file.</returns>
-        public static T ReadData<T>(string filePath) where T : new()
+        public static T ReadData<T>() where T : new()
         {
             TextReader reader = null;
+            string filePath = ChooseFile();
+
+            if (filePath == null)
+            {
+                return default(T);
+            }
+
+
+
             try
             {
                 reader = new StreamReader(filePath);
@@ -304,6 +317,25 @@ namespace Seekarte.NET4._7
                 if (reader != null)
                     reader.Close();
                 MessageBox.Show("Done");
+            }
+        }
+
+        private static string ChooseFile()
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = "";
+            openFileDialog1.Filter = "Database files (*.json)|*.json";
+            openFileDialog1.FilterIndex = 0;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == true)
+            {
+                return openFileDialog1.FileName;
+            }
+            else
+            {
+                return null;
             }
         }
 

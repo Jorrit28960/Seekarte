@@ -252,15 +252,9 @@ namespace Seekarte.NET4._7
             {
                 txt = playerEvent;
             }
-            //to save data
-            bool isListInDic = country.RoutePoints.TryGetValue(MainWindow.Round, out List<TwoPoints> routePoints);
 
-            if (!isListInDic)
-            {
-                country.RoutePoints.Add(MainWindow.Round, routePoints = new List<TwoPoints>());
-            }
 
-            routePoints.Add(new TwoPoints(startRightBtn, startRightBtn, Colors.Transparent,  "EnemyFleet", txt)); ;
+            SaveData(country, new TwoPoints(startRightBtn, startRightBtn, Colors.Transparent, "EnemyFleet", txt));
 
             //actual code
             List<ZoomBorder> list = new List<ZoomBorder>
@@ -269,7 +263,8 @@ namespace Seekarte.NET4._7
                 EnemyFleet(country.color, start2, end2, txt)
             };
 
-            isListInDic = country.Route.TryGetValue(MainWindow.Round, out List<ZoomBorder> enemyfleet);
+            // add data to List
+            bool isListInDic = country.Route.TryGetValue(MainWindow.Round, out List<ZoomBorder> enemyfleet);
 
             if (!isListInDic)
             {
@@ -280,6 +275,19 @@ namespace Seekarte.NET4._7
             {
                 enemyfleet.Add(item);
             }
+        }
+
+        private void SaveData(Country country, TwoPoints twoPoints)
+        {
+            //to save data
+            bool isListInDic = country.RoutePoints.TryGetValue(MainWindow.Round, out List<TwoPoints> routePoints);
+
+            if (!isListInDic)
+            {
+                country.RoutePoints.Add(MainWindow.Round, routePoints = new List<TwoPoints>());
+            }
+
+            routePoints.Add(twoPoints);
         }
 
         private ZoomBorder EnemyFleet(Color color, Point start, Point end, string txt)
@@ -352,14 +360,7 @@ namespace Seekarte.NET4._7
 
             if (MainWindow.IsCountrySelected)
             {
-                bool isListInDic = MainWindow.SelctedCountry.RoutePoints.TryGetValue(MainWindow.Round, out List<TwoPoints> routePoints);
-
-                if (!isListInDic)
-                {
-                    MainWindow.SelctedCountry.RoutePoints.Add(MainWindow.Round, routePoints = new List<TwoPoints>());
-                }
-
-                routePoints.Add(new TwoPoints(startRightBtn, endRightBtn, color, "Line", ""));
+                SaveData(MainWindow.SelctedCountry, new TwoPoints(startRightBtn, endRightBtn, color, "Line", ""));
             }
 
             //actual code
@@ -400,9 +401,12 @@ namespace Seekarte.NET4._7
             if (Double.IsNaN(end.X))
                 return new ZoomBorder();
 
+            //not working correct when saving executed
             //check for correct input (if mouse right boutton up is executed over line the end Point is false defined)
-            if (!ChooseGameMode.mainWindow.Map.Children[2].IsMouseOver)
-                return new ZoomBorder();
+            //if (!ChooseGameMode.mainWindow.Map.Children[2].IsMouseOver)
+            //    return new ZoomBorder();
+
+
 
             ZoomBorder zoomBorder = new ZoomBorder();
 
