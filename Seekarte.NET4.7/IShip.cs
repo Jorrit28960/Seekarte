@@ -12,6 +12,8 @@ namespace Seekarte.NET4._7
         {
             //var scrollViewer = scrollViewer;
 
+            MessageBox.Show("Penis ");
+
             scrollViewer.Children.Clear();
             ShowShipsInitFirstLine(scrollViewer);
 
@@ -79,6 +81,8 @@ namespace Seekarte.NET4._7
 
         private void ConfigShip(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Penis ");
+
             Ship ship;
             if (listButoons.TryGetValue((Button)sender, out ship))
             {
@@ -88,6 +92,8 @@ namespace Seekarte.NET4._7
 
         private void ShowShipsInitFirstLine(Grid scrollViewer)
         {
+            MessageBox.Show("Penis ");
+
             Label name = new Label();
             name.Content = "Schiffsname";
             Grid.SetColumn(name, 0);

@@ -98,14 +98,13 @@ namespace Seekarte.NET4._7
                     {
                         Content = "bearbeiten"
                     };
-                    Grid.SetColumn(buttonConfig, 6);
+                    Grid.SetColumn(buttonConfig, 7);
                     Grid.SetRow(buttonConfig, 1 + i);
                     this.scrollViewer.Children.Add(buttonConfig);
 
                     listButoons.Add(buttonConfig, SelectedCountry.Ships[i]);
 
                     buttonConfig.Click += ConfigShip;
-
 
                     this.scrollViewer.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(40) });
                 }
@@ -114,13 +113,20 @@ namespace Seekarte.NET4._7
 
         private void ConfigShip(object sender, RoutedEventArgs e)
         {
+
+
             if (listButoons.TryGetValue((Button)sender, out Ship ship))
             {
-                MessageBox.Show(ship.Name);
+                ShipEdit _shipEdit = new ShipEdit(SelectedCountry, ship, 1);
+                _shipEdit.Show();
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong :(");
             }
         }
 
-        private void ShowShipsInitFirstLine()
+        public void ShowShipsInitFirstLine()
         {
             Label name = new Label
             {
