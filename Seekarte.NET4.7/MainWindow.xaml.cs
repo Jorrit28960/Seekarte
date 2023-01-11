@@ -208,7 +208,7 @@ namespace Seekarte.NET4._7
 
         private void AdminWindow()
         {
-            var adminWindow = new Admin(countries)
+            var adminWindow = new AdminFleet(countries)
             {
                 Owner = this,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
@@ -541,14 +541,12 @@ namespace Seekarte.NET4._7
 
         private void Flotte()
         {
-            var test = new Dialogue("Hi")
+            var userWindow = new UserFleet(SelctedCountry)
             {
                 Owner = this,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
-            test.ShowDialog();
-
-            //throw new NotImplementedException();
+            userWindow.ShowDialog();
         }
 
         private List<Country> InitCountries()

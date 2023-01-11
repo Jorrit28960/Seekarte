@@ -64,7 +64,7 @@ namespace Seekarte.NET4._7
                 {
                     if (item.GetType().ToString().Equals(typeString))
                     {
-                        Admin.SelectedCountry.Ships.Add(item);
+                        AdminFleet.SelectedCountry.Ships.Add(item);
 
                         list.Clear();
                         InitializeShipList();

@@ -18,14 +18,14 @@ namespace Seekarte.NET4._7
     /// <summary>
     /// Interaktionslogik für Page1.xaml
     /// </summary>
-    public partial class ShipEdit : Window
+    public partial class UserShipEdit : Window
     {
         public static Country SelectedCountry { get; set; }
         private static Ship Ship { get; set; }
-        private static int AdminControl { get; set; }
+        private static bool AdminControl { get; set; }
         private readonly List<TextBox> textboxes = new List<TextBox>();
 
-        public ShipEdit(Country _SelectedCountry, Ship _Ship, int _AdminControl)
+        public UserShipEdit(Country _SelectedCountry, Ship _Ship, bool _AdminControl)
         {
             InitializeComponent();
 
@@ -217,6 +217,7 @@ namespace Seekarte.NET4._7
             Grid.SetRow(Type, 2);
             this.scrollViewer.Children.Add(Type);
             textboxes.Add(Type);
+            if(!AdminControl) Type.Visibility= Visibility.Collapsed;
 
             TextBox HitPoints = new TextBox
             {
@@ -226,6 +227,7 @@ namespace Seekarte.NET4._7
             Grid.SetRow(HitPoints, 2);
             this.scrollViewer.Children.Add(HitPoints);
             textboxes.Add(HitPoints);
+            if (!AdminControl) HitPoints.Visibility = Visibility.Collapsed;
 
             TextBox MaxHitPoints = new TextBox
             {
@@ -235,6 +237,7 @@ namespace Seekarte.NET4._7
             Grid.SetRow(MaxHitPoints, 2);
             this.scrollViewer.Children.Add(MaxHitPoints);
             textboxes.Add(MaxHitPoints);
+            if (!AdminControl) MaxHitPoints.Visibility = Visibility.Collapsed;
 
             TextBox Troops = new TextBox
             {
@@ -244,6 +247,7 @@ namespace Seekarte.NET4._7
             Grid.SetRow(Troops, 2);
             this.scrollViewer.Children.Add(Troops);
             textboxes.Add(Troops);
+            if (!AdminControl) Troops.Visibility = Visibility.Collapsed;
 
             TextBox MaxTroops = new TextBox
             {
@@ -253,6 +257,7 @@ namespace Seekarte.NET4._7
             Grid.SetRow(MaxTroops, 2);
             this.scrollViewer.Children.Add(MaxTroops);
             textboxes.Add(MaxTroops);
+            if (!AdminControl) MaxTroops.Visibility = Visibility.Collapsed;
 
             TextBox Geschwader = new TextBox
             {

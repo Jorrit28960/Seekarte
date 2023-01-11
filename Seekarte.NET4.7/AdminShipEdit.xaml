@@ -1,4 +1,4 @@
-﻿<Window x:Class="Seekarte.NET4._7.ShipEdit"
+﻿<Window x:Class="Seekarte.NET4._7.AdminShipEdit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

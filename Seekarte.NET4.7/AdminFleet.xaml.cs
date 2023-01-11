@@ -7,20 +7,20 @@ namespace Seekarte.NET4._7
     /// <summary>
     /// Interaction logic for Admin.xaml
     /// </summary>
-    public partial class Admin : Window
+    public partial class AdminFleet : Window
     {
         public static bool IsCountrySelected { get; set; }
         public static Country SelectedCountry { get; set; }
 
         private readonly List<Country> countries;
         private readonly Dictionary<Button, Ship> listButoons = new Dictionary<Button, Ship>();
-        public Admin(List<Country> countries)
+        public AdminFleet(List<Country> countries)
         {
             InitializeComponent();
 
             this.countries = countries;
 
-            ShowCountries();
+            //ShowCountries();
             this.LabelRoundAdmin.Content = MainWindow.Round;
             IsCountrySelected = false;
 
@@ -117,7 +117,7 @@ namespace Seekarte.NET4._7
 
             if (listButoons.TryGetValue((Button)sender, out Ship ship))
             {
-                ShipEdit _shipEdit = new ShipEdit(SelectedCountry, ship, 1);
+                AdminShipEdit _shipEdit = new AdminShipEdit(SelectedCountry, ship, true);
                 _shipEdit.Show();
             }
             else

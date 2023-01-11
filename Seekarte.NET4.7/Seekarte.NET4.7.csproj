@@ -73,8 +73,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Admin.xaml.cs">
-      <DependentUpon>Admin.xaml</DependentUpon>
+    <Compile Include="AdminFleet.xaml.cs">
+      <DependentUpon>AdminFleet.xaml</DependentUpon>
     </Compile>
     <Compile Include="ChooseGameMode.xaml.cs">
       <DependentUpon>ChooseGameMode.xaml</DependentUpon>
@@ -84,8 +84,8 @@
       <DependentUpon>Dialogue.xaml</DependentUpon>
     </Compile>
     <Compile Include="IShip.cs" />
-    <Compile Include="ShipEdit.xaml.cs">
-      <DependentUpon>ShipEdit.xaml</DependentUpon>
+    <Compile Include="AdminShipEdit.xaml.cs">
+      <DependentUpon>AdminShipEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="PasswordReset.xaml.cs">
       <DependentUpon>PasswordReset.xaml</DependentUpon>
@@ -99,6 +99,9 @@
     <Compile Include="PlayerEventWho.xaml.cs">
       <DependentUpon>PlayerEventWho.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserShipEdit.xaml.cs">
+      <DependentUpon>UserShipEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ships\Linienschiff_1.cs" />
     <Compile Include="Ships\Linienschiff_2.cs" />
     <Compile Include="Ships\Linienschiff_3.cs" />
@@ -107,8 +110,11 @@
       <DependentUpon>ShipSelect.xaml</DependentUpon>
     </Compile>
     <Compile Include="TwoPoints.cs" />
+    <Compile Include="UserFleet.xaml.cs">
+      <DependentUpon>UserFleet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ZoomBorder.cs" />
-    <Page Include="Admin.xaml">
+    <Page Include="AdminFleet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -132,7 +138,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ShipEdit.xaml">
+    <Page Include="AdminShipEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,7 +166,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UserShipEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ShipSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserFleet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

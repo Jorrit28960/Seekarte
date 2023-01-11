@@ -1,11 +1,11 @@
-﻿<Window x:Class="Seekarte.NET4._7.Admin"
+﻿<Window x:Class="Seekarte.NET4._7.UserShipEdit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Seekarte.NET4._7"
         mc:Ignorable="d"
-        Title="Admin" Height="450" Width="1000">
+        Title="ShipEdit" Height="450" Width="1000">
     <Window.Resources>
         <Style TargetType="Label">
             <!--<Setter Property="FontSize" Value="8"/>-->
@@ -46,7 +46,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2" Grid.RowSpan="6">
+        <ScrollViewer Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" Grid.RowSpan="6">
             <Grid Name="scrollViewer">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -59,24 +59,20 @@
                     <ColumnDefinition Width="90"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <!--<Label Content="Schiffsname" Grid.Row="0" Grid.Column="0"/>
-                <Label Content="Typ" Grid.Row="0" Grid.Column="1"/>
-                <Label Content="Trefferpunkte" Grid.Row="0" Grid.Column="2"/>
-                <Label Content="Maximale Trefferpunkte" Grid.Row="0" Grid.Column="3"/>
-                <Label Content="Truppen" Grid.Row="0" Grid.Column="4"/>
-                <Label Content="Maximale Truppen" Grid.Row="0" Grid.Column="5"/>
-                <Label Content="Geschwader" Grid.Row="0" Grid.Column="6"/>-->
-                <!--<Button Content="Bearbeiten" Grid.Column="7" Grid.Row="0"/>-->
-
-
             </Grid>
 
         </ScrollViewer>
-        <Button Content="Schiff hinzufügen" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"  Width="110" Click="AddShip_Click"/>
-        <!--<Button Content="Schiff löschen" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"  Width="110" Click="DeleteShip_Click"/>-->
-        <Button Content="Runde erhöhen" Grid.Column="2" Grid.Row="0" Width="110" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RoundAdd_Click"/>
-        <Button Content="Runde erniedrigen" Grid.Column="3" Grid.Row="0" Width="110" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RoundDelete_Click"/>
-        <Label Name="LabelRoundAdmin" Content="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Content="speichern" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.Column="3"  Width="110" Click="Save_Click"/>
+        <Button Content="abbrechen" Grid.Column="4" Grid.Row="4" Width="110" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
+        <!--<Label Name="LabelName" Content="Schiffsname" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+        <!--<TextBox Name="TextBoxName" Text="123" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Name="TextBlocKName" Text="1234" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
     </Grid>
 </Window>
