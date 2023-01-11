@@ -99,7 +99,6 @@
     <Compile Include="PlayerEventWho.xaml.cs">
       <DependentUpon>PlayerEventWho.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ShipListing.cs" />
     <Compile Include="Ships\Linienschiff_1.cs" />
     <Compile Include="Ships\Linienschiff_2.cs" />
     <Compile Include="Ships\Linienschiff_3.cs" />
