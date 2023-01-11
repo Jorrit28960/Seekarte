@@ -20,7 +20,7 @@ namespace Seekarte.NET4._7
 
             this.countries = countries;
 
-            //ShowCountries();
+            ShowCountries();
             this.LabelRoundAdmin.Content = MainWindow.Round;
             IsCountrySelected = false;
 
