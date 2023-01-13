@@ -159,4 +159,10 @@
   <data name="SaveData" xml:space="preserve">
     <value>Spielstand speichern</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Rückgängig</value>
+  </data>
+  <data name="Undo1" xml:space="preserve">
+    <value>Rückgängig 1</value>
+  </data>
 </root>

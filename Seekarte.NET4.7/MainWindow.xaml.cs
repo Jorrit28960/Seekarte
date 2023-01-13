@@ -168,7 +168,11 @@ namespace Seekarte.NET4._7
                 }
 
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.Country))
+                {
                     AdminWindow();
+                    SetVisibility(false, false);
+                    SetVisibility(true,true);
+                }
 
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.PasswordResetBtn))
                     PasswordResetWindwow();
@@ -196,6 +200,58 @@ namespace Seekarte.NET4._7
 
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.Event))
                     CreatePlayerEvent();
+
+                if (tmpButton.Content.ToString().Equals(Properties.Resources.Undo))
+                {
+                    if (IsCountrySelected)
+                    {
+                        List<ZoomBorder> tmpList;
+                        SelctedCountry.Route.TryGetValue(Round, out tmpList);
+
+                        if(tmpList != null)
+                        {
+                            foreach (var item in tmpList)
+                            {
+                                item.Visibility = Visibility.Hidden;
+                            }
+
+                            SelctedCountry.Route.Remove(Round);
+                            SelctedCountry.RoutePoints.Remove(Round);
+                        }
+                    }
+                    SetVisibility(true, false);
+                }
+
+                if (tmpButton.Content.ToString().Equals(Properties.Resources.Undo1))
+                {
+                    if (IsCountrySelected)
+                    {
+                        List<ZoomBorder> tmpListZoom;
+                        List<TwoPoints> tmpListTwoPoints;
+                        SelctedCountry.Route.TryGetValue(Round, out tmpListZoom);
+                        SelctedCountry.RoutePoints.TryGetValue(Round, out tmpListTwoPoints);
+
+                        foreach (var item in tmpListZoom)
+                        {
+                            item.Visibility = Visibility.Hidden;
+                        }
+
+                        int i = tmpListZoom.Count;
+                        if (i >= 3)
+                        {
+                            tmpListZoom.RemoveAt(i - 1);
+                            tmpListZoom.RemoveAt(i - 2);
+                            tmpListZoom.RemoveAt(i - 3);
+                        }
+
+                        int j = tmpListTwoPoints.Count;
+                        if (j >= 1)
+                        {
+                            tmpListTwoPoints.RemoveAt(j - 1);
+                        }
+                    }
+                    SetVisibility(true, false);
+                }
             }
 
 
@@ -438,20 +494,51 @@ namespace Seekarte.NET4._7
             buttonCountries[1].Content = Properties.Resources.Flotte;
             buttonCountries[2].Visibility = Visibility.Visible;
             buttonCountries[2].Content = Properties.Resources.PasswortÄndern;
+            buttonCountries[3].Visibility = Visibility.Visible;
+            buttonCountries[3].Content = Properties.Resources.Undo;
+            buttonCountries[4].Visibility = Visibility.Visible;
+            buttonCountries[4].Content = Properties.Resources.Undo1;
 
-            foreach (var item in SelctedCountry.Route)
+            SetVisibility(true, false);
+
+            normalModus = false;
+        }
+
+        private void SetVisibility(bool visible, bool admin)
+        {
+            foreach (var country in countries)
             {
-                foreach (var item2 in SelctedCountry.Route[item.Key])
+                foreach (var route in country.Route)
                 {
-                    //item2.solidColorBrush.Opacity = 1 / (double) (2 * (Round - item.Key));
-                    //item2.Line.Stroke.Opacity = 1 / (double)(2 * (Round - item.Key));
+                    foreach (var item in country.Route[route.Key])
+                    {
+                        if (visible)
+                        {
+                            if (!admin)
+                            {
+                                item.Visibility = Visibility.Hidden;
 
-                    item2.Opacity = 1 / (double)(4 * (Round - item.Key));
-                    item2.Visibility = Visibility.Visible;
+                                if(SelctedCountry == country && Round - route.Key < 3)
+                                {
+                                    item.Visibility = Visibility.Visible;
+                                    item.Opacity = 1 / (double)(6 * (Round - route.Key));
+                                }
+                            }
+                            else
+                            {
+                                item.Visibility = Visibility.Hidden;
+                                if (route.Key == Round)
+                                    item.Visibility = Visibility.Visible;
+                            }
+                        }
+                        else
+                        {
+                            item.Visibility = Visibility.Hidden;
+                        }
+                    }
                 }
             }
 
-            normalModus = false;
         }
 
         private void Admin()
@@ -479,17 +566,7 @@ namespace Seekarte.NET4._7
             buttonCountries[7].Content = Properties.Resources.Event;
 
 
-            foreach (var country in countries)
-            {
-                foreach (var route in country.Route)
-                {
-                    foreach (var item in country.Route[route.Key])
-                    {
-                        item.Opacity = 1 / (double)(4 * (Round - route.Key));
-                        item.Visibility = Visibility.Visible;
-                    }
-                }
-            }
+            SetVisibility(true, true);
 
             normalModus = false;
         }
@@ -536,16 +613,7 @@ namespace Seekarte.NET4._7
                 buttonCountries[i].Visibility = Visibility.Visible;
             }
 
-            foreach (var country in countries)
-            {
-                foreach (var route in country.Route)
-                {
-                    foreach (var item in country.Route[route.Key])
-                    {
-                        item.Visibility = Visibility.Hidden;
-                    }
-                }
-            }
+            SetVisibility(false, false);
         }
 
         private void Flotte()
