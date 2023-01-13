@@ -9,7 +9,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
-using static System.Net.WebRequestMethods;
 
 namespace Seekarte.NET4._7
 {
