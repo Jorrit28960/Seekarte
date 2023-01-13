@@ -170,7 +170,7 @@ namespace Seekarte.NET4._7
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.Country))
                 {
                     AdminWindow();
-                    SetVisibility(false, false);
+                    //SetVisibility(false, false);
                     SetVisibility(true,true);
                 }
 
