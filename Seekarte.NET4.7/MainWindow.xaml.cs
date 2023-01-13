@@ -396,8 +396,6 @@ namespace Seekarte.NET4._7
                     {
                         if (routePoints.type.Equals("Line"))
                         {
-                            MessageBox.Show("Line");
-
                             ZoomBorder tmp = new ZoomBorder();
                             tmp.startRightBtn = routePoints.startPoint;
                             tmp.endRightBtn = routePoints.endPoint;
@@ -410,8 +408,6 @@ namespace Seekarte.NET4._7
 
                         if (routePoints.type.Equals("EnemyFleet"))
                         {
-                            MessageBox.Show("EnemyFleet");
-
                             ZoomBorder tmp = new ZoomBorder();
                             tmp.startRightBtn = routePoints.startPoint;
                             tmp.playerEvent = routePoints.eventText;
@@ -422,6 +418,9 @@ namespace Seekarte.NET4._7
                     }
                 }
             }
+            ZoomBorder _tmp = new ZoomBorder();
+
+            _tmp.ResetZoom();
         }
 
         private void Country()

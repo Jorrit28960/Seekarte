@@ -74,19 +74,23 @@ namespace Seekarte.NET4._7
             }
         }
 
-        public void Reset()
+        public void ResetZoom()
         {
-            if (child != null)
+            foreach (var child in listZoomBorders)
             {
-                // reset zoom
-                var st = GetScaleTransform(child);
-                st.ScaleX = 1.0;
-                st.ScaleY = 1.0;
+                if (child != null)
+                {
+                    var st = GetScaleTransform(child);
+                    var tt = GetTranslateTransform(child);
 
-                // reset pan
-                var tt = GetTranslateTransform(child);
-                tt.X = 0.0;
-                tt.Y = 0.0;
+                    st.ScaleX = 1;
+                    st.ScaleY =  1;
+
+                    tt.X =  0;
+                    tt.Y =  0;
+
+                    SaveLatest(st, tt);
+                }
             }
         }
 
@@ -296,8 +300,6 @@ namespace Seekarte.NET4._7
             routePoints.Add(twoPoints);
         }
 
-        //private ZoomBorder EnemyFleet(Color color, Point start, Point end, string txt)
-
         public ZoomBorder EnemyFleet(Color color, Point start, Point end, string txt, double scaleX, double scaleY, double transformX, double transformY, bool load)
         {
             ZoomBorder zoomBorder = new ZoomBorder();
@@ -380,7 +382,6 @@ namespace Seekarte.NET4._7
         public List<ZoomBorder> CreateALine(Color color, double scaleX, double scaleY, double transformX, double transformY, bool load)
         {
             //to save data
-
             if (MainWindow.IsCountrySelected)
             {
                 SaveData(MainWindow.SelctedCountry, new TwoPoints(startRightBtn, endRightBtn, color, latestScale.ScaleX, latestScale.ScaleY, latestTransform.X, latestTransform.Y, "Line", ""));
