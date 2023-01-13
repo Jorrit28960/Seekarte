@@ -140,6 +140,7 @@ namespace Seekarte.NET4._7
             {
                 if (tmpButton.Content.ToString() == Properties.Resources.Abmelden)
                 {
+                    SaveData();
                     Abmelden();
                     normalModus = true;
                     IsCountrySelected = false;
@@ -177,13 +178,7 @@ namespace Seekarte.NET4._7
 
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.SaveData))
                 {
-                    //DeleteZoomBorders();
-                    DeleteLines(countries);
-
-                    var dateString = DateTime.Now.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_");
-
-                    SaveData<List<Country>>("test" + dateString + ".json", countries);
-                    SaveLines(countries);
+                    SaveData();
                 }
 
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.ReadData))
@@ -262,6 +257,15 @@ namespace Seekarte.NET4._7
             }
         }
 
+        private void SaveData()
+        {
+            DeleteZoomBorders();
+            DeleteLines(countries);
+            var dateString = DateTime.Now.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_");
+            SaveData<List<Country>>("test" + dateString + ".json", countries);
+            SaveLines(countries);
+        }
+
         /// <summary>
         /// Writes the given object instance to a Json file.
         /// <para>Object type must have a parameterless constructor.</para>
@@ -272,7 +276,7 @@ namespace Seekarte.NET4._7
         /// <param name="filePath">The file path to write the object instance to.</param>
         /// <param name="objectToWrite">The object instance to write to the file.</param>
         /// <param name="append">If false the file will be overwritten if it already exists. If true the contents will be appended to the file.</param>
-        public static void SaveData<T>(string filePath, T objectToWrite, bool append = false) where T : new()
+        private static void SaveData<T>(string filePath, T objectToWrite, bool append = false) where T : new()
         {
             TextWriter writer = null;
             try
@@ -285,7 +289,6 @@ namespace Seekarte.NET4._7
             {
                 if (writer != null)
                     writer.Close();
-                MessageBox.Show("Done");
             }
         }
 
@@ -414,7 +417,6 @@ namespace Seekarte.NET4._7
 
                             tmp.EnemyFleet(country, routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true);
                         }
-
                     }
                 }
             }

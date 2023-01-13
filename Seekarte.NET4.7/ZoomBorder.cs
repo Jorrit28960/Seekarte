@@ -382,7 +382,7 @@ namespace Seekarte.NET4._7
         public List<ZoomBorder> CreateALine(Color color, double scaleX, double scaleY, double transformX, double transformY, bool load)
         {
             //to save data
-            if (MainWindow.IsCountrySelected)
+            if (MainWindow.IsCountrySelected && !load )
             {
                 SaveData(MainWindow.SelctedCountry, new TwoPoints(startRightBtn, endRightBtn, color, latestScale.ScaleX, latestScale.ScaleY, latestTransform.X, latestTransform.Y, "Line", ""));
             }
