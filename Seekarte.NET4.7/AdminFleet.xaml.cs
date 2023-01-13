@@ -129,7 +129,6 @@ namespace Seekarte.NET4._7
             {
                 MessageBox.Show("Something went wrong :(");
             }
-
             ShowShipsInit();
         }
 

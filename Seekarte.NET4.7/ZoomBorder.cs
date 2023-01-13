@@ -219,7 +219,6 @@ namespace Seekarte.NET4._7
             EnemyFleet(country, 0, 0, 0, 0, false);
         }
 
-
         public void EnemyFleet(Country country, double scaleX, double scaleY, double transformX, double transformY, bool load)
         {
             Point end1 = new Point();

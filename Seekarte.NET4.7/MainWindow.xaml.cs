@@ -402,7 +402,6 @@ namespace Seekarte.NET4._7
                             tmp.startRightBtn = routePoints.startPoint;
                             tmp.endRightBtn = routePoints.endPoint;
 
-                            //foreach (var item in tmp.CreateALine(country.color))
                             foreach (var item in tmp.CreateALine(country.color, routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true))
                             {
                                 zoomBorders.Add(item);
