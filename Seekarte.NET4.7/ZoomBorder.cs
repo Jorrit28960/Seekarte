@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace Seekarte.NET4._7
@@ -215,6 +216,12 @@ namespace Seekarte.NET4._7
 
         public void EnemyFleet(Country country)
         {
+            EnemyFleet(country, 0, 0, 0, 0, false);
+        }
+
+
+        public void EnemyFleet(Country country, double scaleX, double scaleY, double transformX, double transformY, bool load)
+        {
             Point end1 = new Point();
             Point end2 = new Point();
             Point start1 = new Point();
@@ -254,13 +261,13 @@ namespace Seekarte.NET4._7
             }
 
 
-            SaveData(country, new TwoPoints(startRightBtn, startRightBtn, Colors.Transparent, "EnemyFleet", txt));
+            SaveData(country, new TwoPoints(startRightBtn, startRightBtn, Colors.Transparent,latestScale.ScaleX, latestScale.ScaleY, latestTransform.X, latestTransform.Y, "EnemyFleet", txt));
 
             //actual code
             List<ZoomBorder> list = new List<ZoomBorder>
             {
-                EnemyFleet(country.color, start1, end1, txt),
-                EnemyFleet(country.color, start2, end2, txt)
+                EnemyFleet(country.color, start1, end1, txt, scaleX, scaleY, transformX, transformY, load),
+                EnemyFleet(country.color, start2, end2, txt, scaleX, scaleY, transformX, transformY, load)
             };
 
             // add data to List
@@ -290,7 +297,9 @@ namespace Seekarte.NET4._7
             routePoints.Add(twoPoints);
         }
 
-        private ZoomBorder EnemyFleet(Color color, Point start, Point end, string txt)
+        //private ZoomBorder EnemyFleet(Color color, Point start, Point end, string txt)
+
+        public ZoomBorder EnemyFleet(Color color, Point start, Point end, string txt, double scaleX, double scaleY, double transformX, double transformY, bool load)
         {
             ZoomBorder zoomBorder = new ZoomBorder();
 
@@ -318,6 +327,16 @@ namespace Seekarte.NET4._7
             {
                 tt.X = latestTransform.X;
                 tt.Y = latestTransform.Y;
+            }
+
+            if (load)
+            {
+                st.ScaleX = scaleX;
+                st.ScaleY = scaleY;
+                tt.X = transformX;
+                tt.Y = transformY;
+
+                SaveLatest(st, tt);
             }
 
             line.X1 = ((start.X - latestTransform.X) / latestScale.ScaleX);
@@ -356,17 +375,22 @@ namespace Seekarte.NET4._7
 
         public List<ZoomBorder> CreateALine(Color color)
         {
+            return CreateALine(color, 0, 0, 0, 0, false);
+        }
+
+        public List<ZoomBorder> CreateALine(Color color, double scaleX, double scaleY, double transformX, double transformY, bool load)
+        {
             //to save data
 
             if (MainWindow.IsCountrySelected)
             {
-                SaveData(MainWindow.SelctedCountry, new TwoPoints(startRightBtn, endRightBtn, color, "Line", ""));
+                SaveData(MainWindow.SelctedCountry, new TwoPoints(startRightBtn, endRightBtn, color, latestScale.ScaleX, latestScale.ScaleY, latestTransform.X, latestTransform.Y, "Line", ""));
             }
 
             //actual code
             List<ZoomBorder> list = new List<ZoomBorder>
             {
-                CreateALine(color, startRightBtn, endRightBtn)
+                CreateALine(color, startRightBtn, endRightBtn, scaleX, scaleY, transformX, transformY, load)
             };
 
             int lineLength = 10;
@@ -374,8 +398,8 @@ namespace Seekarte.NET4._7
             Point left = Pfeil(lineLength, 170, startRightBtn, endRightBtn);
             Point right = Pfeil(lineLength, 190, startRightBtn, endRightBtn);
 
-            list.Add(CreateALine(color, endRightBtn, left));
-            list.Add(CreateALine(color, endRightBtn, right));
+            list.Add(CreateALine(color, endRightBtn, left, scaleX, scaleY, transformX, transformY, load));
+            list.Add(CreateALine(color, endRightBtn, right, scaleX, scaleY, transformX, transformY, load));
 
             return list;
         }
@@ -395,7 +419,7 @@ namespace Seekarte.NET4._7
 
         }
 
-        public ZoomBorder CreateALine(Color color, Point start, Point end)
+        public ZoomBorder CreateALine(Color color, Point start, Point end, double scaleX, double scaleY, double transformX, double transformY, bool load)
         {
             //check for correct input (if NaN program crashes)
             if (Double.IsNaN(end.X))
@@ -429,6 +453,16 @@ namespace Seekarte.NET4._7
             {
                 tt.X = latestTransform.X;
                 tt.Y = latestTransform.Y;
+            }
+
+            if (load)
+            {
+                st.ScaleX = scaleX;
+                st.ScaleY = scaleY;
+                tt.X = transformX;
+                tt.Y = transformY;
+
+                SaveLatest(st, tt);
             }
 
             line.X1 = ((start.X - latestTransform.X) / latestScale.ScaleX);

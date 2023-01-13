@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace Seekarte.NET4._7
@@ -175,7 +177,7 @@ namespace Seekarte.NET4._7
 
                 if (tmpButton.Content.ToString().Contains(Properties.Resources.SaveData))
                 {
-                    DeleteZoomBorders();
+                    //DeleteZoomBorders();
                     DeleteLines(countries);
 
                     var dateString = DateTime.Now.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_");
@@ -367,9 +369,15 @@ namespace Seekarte.NET4._7
 
         private void DeleteLines(List<Country> list)
         {
-            foreach (var country in list)
-                country.Route = null;
-
+            try
+            {
+                foreach (var country in list)
+                    country.Route = null;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void SaveLines(List<Country> list)
@@ -394,7 +402,8 @@ namespace Seekarte.NET4._7
                             tmp.startRightBtn = routePoints.startPoint;
                             tmp.endRightBtn = routePoints.endPoint;
 
-                            foreach (var item in tmp.CreateALine(country.color))
+                            //foreach (var item in tmp.CreateALine(country.color))
+                            foreach (var item in tmp.CreateALine(country.color, routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true))
                             {
                                 zoomBorders.Add(item);
                             }
@@ -408,7 +417,7 @@ namespace Seekarte.NET4._7
                             tmp.startRightBtn = routePoints.startPoint;
                             tmp.playerEvent = routePoints.eventText;
 
-                            tmp.EnemyFleet(country);
+                            tmp.EnemyFleet(country, routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true);
                         }
 
                     }

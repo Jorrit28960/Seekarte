@@ -117,13 +117,20 @@ namespace Seekarte.NET4._7
 
             if (listButoons.TryGetValue((Button)sender, out Ship ship))
             {
-                AdminShipEdit _shipEdit = new AdminShipEdit(SelectedCountry, ship, true);
-                _shipEdit.Show();
+
+                var userWindow = new AdminShipEdit(SelectedCountry, ship, true)
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                userWindow.ShowDialog();
             }
             else
             {
                 MessageBox.Show("Something went wrong :(");
             }
+
+            ShowShipsInit();
         }
 
         public void ShowShipsInitFirstLine()

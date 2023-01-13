@@ -8,6 +8,10 @@ namespace Seekarte.NET4._7
         public Point startPoint;
         public Point endPoint;
         public Color color;
+        public double scaleX;
+        public double scaleY;
+        public double transformX;
+        public double transformY;
         public string type;
         public string eventText;
 
@@ -34,13 +38,17 @@ namespace Seekarte.NET4._7
         //    this.type = type;
         //}
 
-        public TwoPoints(Point startPoint, Point endPoint, Color color, string type, string eventText)
+        public TwoPoints(Point startPoint, Point endPoint, Color color, double scaleX, double scaleY, double transformX, double transformY, string type, string eventText)
         {
             this.startPoint = startPoint;
             this.endPoint = endPoint;
             this.color = color;
             this.type = type;
             this.eventText = eventText;
+            this.scaleX = scaleX;
+            this.scaleY = scaleY;
+            this.transformX = transformX;
+            this.transformY = transformY;
         }
     }
 }
