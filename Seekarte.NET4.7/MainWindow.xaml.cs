@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using static System.Net.WebRequestMethods;
 
 namespace Seekarte.NET4._7
 {
@@ -22,25 +23,40 @@ namespace Seekarte.NET4._7
     {
         private readonly Dictionary<string, Color> risikoDic = new Dictionary<string, Color>
         {
+            //https://learn.microsoft.com/de-de/dotnet/api/system.windows.media.colors?view=windowsdesktop-7.0
             {"Admin", Colors.Transparent },
-            {"Preussen", Colors.Red },
-            {"Tartarenreich", Colors.Blue },
-            {"Spanien", Colors.Blue },
-            {"Polen1", Colors.Brown },
-            {"Polen2", Colors.Brown },
-            {"Polen3", Colors.Brown },
-            {"Polen4", Colors.Brown },
-            {"Polen5", Colors.Brown }
+            {"England", Colors.Tomato },
+            {"Mauren", Colors.DarkOliveGreen },
+            {"Spanien", Colors.Orange },
+            {"Schweden", Colors.Gold },
+            {"Italien", Colors.DarkRed },
+            {"Frankreich", Colors.Navy },
+            {"Preussen", Colors.Black },
+            {"Polen", Colors.HotPink },
+            {"Osmane", Colors.Maroon },
+            {"Österreich", Colors.Brown },
+            {"Russland", Colors.DarkGreen },
+            {"Tartarenreich", Colors.Peru },
+            {"Persien", Colors.MediumVioletRed },
+            {"Warlord 1", Colors.Lime },
+            {"Warlord 2", Colors.Ivory },
+            {"Warlord 3", Colors.Silver },
+            {"Warlord 4", Colors.DarkSalmon }
         };
 
         private readonly Dictionary<string, Color> GOTDic = new Dictionary<string, Color>
         {
             {"Admin", Colors.Transparent },
-            {"Stark", Colors.Red },
-            {"Lennister", Colors.Blue },
-            {"Tyrell", Colors.Brown },
-            {"Targaryen", Colors.Violet },
-            {"Nachtkönig", Colors.Yellow}
+            {"Stark", Colors.SlateGray },
+            {"Lennister", Colors.Gold },
+            {"Tyrell", Colors.LawnGreen },
+            {"Arryn", Colors.DodgerBlue},
+            {"Baratheon", Colors.Maroon},
+            {"Tully", Colors.MediumVioletRed},
+            {"Martell", Colors.Red},
+            {"Graufreud", Colors.LightSteelBlue},
+            {"Nachtwache", Colors.Black},
+            {"Wildlinge", Colors.Snow}
         };
 
         private ResourceDictionary gameDict;
