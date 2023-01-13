@@ -253,8 +253,6 @@ namespace Seekarte.NET4._7
                     SetVisibility(true, false);
                 }
             }
-
-
         }
 
         //Admin Buttons
@@ -538,7 +536,6 @@ namespace Seekarte.NET4._7
                     }
                 }
             }
-
         }
 
         private void Admin()
