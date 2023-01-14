@@ -25,7 +25,6 @@ namespace Seekarte.NET4._7
         public AffectedCountries()
         {
             InitializeComponent();
-            //SetLabels(MainWindow.countries);
             SetCheckBox(MainWindow.countries);
         }
 
@@ -37,28 +36,10 @@ namespace Seekarte.NET4._7
                 checkedCountries.Add(tmpCheckBox);
                 tmpCheckBox.Content = countries[i].countryName;
 
-                //tmpBtn.Click += CountryButtonClick;
-
                 Grid.SetRow(tmpCheckBox, i);
                 Grid.SetColumn(tmpCheckBox, 0);
                 this.CheckBoxGrid.Children.Add(tmpCheckBox);
                 this.CheckBoxGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(20) });
-            }
-        }
-        private void SetLabels(List<Country> countries)
-        {
-            for (int i = 0; i < countries.Count; i++)
-            {
-                var tmpLabel = new Label();
-                //buttonCountries.Add(tmpBtn);
-                tmpLabel.Content = countries[i].countryName;
-
-                //tmpBtn.Click += CountryButtonClick;
-
-                Grid.SetRow(tmpLabel, i);
-                Grid.SetColumn(tmpLabel, 1);
-                this.BtnGrid.Children.Add(tmpLabel);
-                this.BtnGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(50) });
             }
         }
 
