@@ -232,6 +232,9 @@ namespace Seekarte.NET4._7
 
             double versatz = 3 * latestScale.ScaleX;
 
+            if(load)
+                versatz = 3 * scaleX;
+
             start1.X = startRightBtn.X - versatz;
             start1.Y = startRightBtn.Y - versatz;
 
@@ -263,8 +266,12 @@ namespace Seekarte.NET4._7
                 txt = playerEvent;
             }
 
+            if (!load)
+            {
+                SaveData(country, new TwoPoints(startRightBtn, startRightBtn, country.ToSave(), latestScale.ScaleX, latestScale.ScaleY, latestTransform.X, latestTransform.Y, "EnemyFleet", txt));
+            }
 
-            SaveData(country, new TwoPoints(startRightBtn, startRightBtn, country.ToSave(), latestScale.ScaleX, latestScale.ScaleY, latestTransform.X, latestTransform.Y, "EnemyFleet", txt));
+
 
             //actual code
             List<ZoomBorder> list = new List<ZoomBorder>
@@ -350,7 +357,7 @@ namespace Seekarte.NET4._7
             // Create a red Brush  
             SolidColorBrush solidColorBrush = new SolidColorBrush
             {
-                Color = country.color
+                Color = Colors.Black
             };
 
             // Set Line's width and color  
