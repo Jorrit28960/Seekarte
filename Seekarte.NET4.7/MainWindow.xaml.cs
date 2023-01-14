@@ -59,7 +59,7 @@ namespace Seekarte.NET4._7
         };
 
         private ResourceDictionary gameDict;
-        public List<Country> countries;
+        public static List<Country> countries;
         private readonly List<Button> buttonCountries = new List<Button>();
         private bool normalModus = true;
         private readonly string game;
@@ -416,7 +416,7 @@ namespace Seekarte.NET4._7
         {
             var children = ChooseGameMode.mainWindow.Map.Children;
 
-            children.RemoveRange(3, children.Count - 3);
+            children.RemoveRange(4, children.Count - 4);
         }
 
         private void AddZoomBorders()
@@ -471,7 +471,8 @@ namespace Seekarte.NET4._7
                             tmp.startRightBtn = routePoints.startPoint;
                             tmp.endRightBtn = routePoints.endPoint;
 
-                            foreach (var item in tmp.CreateALine(country.color, routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true))
+                            //foreach (var item in tmp.CreateALine(country.ToSave(), routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true))
+                            foreach (var item in tmp.CreateALine(country, routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true))
                             {
                                 zoomBorders.Add(item);
                             }
@@ -484,6 +485,7 @@ namespace Seekarte.NET4._7
                             tmp.playerEvent = routePoints.eventText;
 
                             tmp.EnemyFleet(country, routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true);
+                            //tmp.EnemyFleet(country.ToSave(), routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true);
                         }
                     }
                 }
@@ -625,6 +627,7 @@ namespace Seekarte.NET4._7
             }
 
             SetVisibility(false, false);
+            txtCountryName.Text = "";
         }
 
         private void Flotte()

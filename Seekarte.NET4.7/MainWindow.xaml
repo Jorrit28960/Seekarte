@@ -46,6 +46,13 @@
                    FontSize="17" 
                    VerticalAlignment="Center"/>
 
+        <TextBlock 
+                   Grid.Column="1" Grid.Row="0" 
+                   Name="txtCountryName" 
+                   Text="Hi" 
+                   FontSize="17" 
+                   VerticalAlignment="Center"/>
+
         <Grid Name="BtnGrid" Grid.Row="1" Grid.Column="4" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <!--<RowDefinition Height="50"/>-->

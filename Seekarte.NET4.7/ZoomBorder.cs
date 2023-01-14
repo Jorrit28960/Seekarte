@@ -190,7 +190,7 @@ namespace Seekarte.NET4._7
                     MainWindow.SelctedCountry.Route.Add(MainWindow.Round, borders = new List<ZoomBorder>());
                 }
 
-                foreach (var item in CreateALine(MainWindow.SelctedCountry.color))
+                foreach (var item in CreateALine(MainWindow.SelctedCountry))
                 {
                     borders.Add(item);
                 }
@@ -264,13 +264,13 @@ namespace Seekarte.NET4._7
             }
 
 
-            SaveData(country, new TwoPoints(startRightBtn, startRightBtn, Colors.Transparent,latestScale.ScaleX, latestScale.ScaleY, latestTransform.X, latestTransform.Y, "EnemyFleet", txt));
+            SaveData(country, new TwoPoints(startRightBtn, startRightBtn, country.ToSave(), latestScale.ScaleX, latestScale.ScaleY, latestTransform.X, latestTransform.Y, "EnemyFleet", txt));
 
             //actual code
             List<ZoomBorder> list = new List<ZoomBorder>
             {
-                EnemyFleet(country.color, start1, end1, txt, scaleX, scaleY, transformX, transformY, load),
-                EnemyFleet(country.color, start2, end2, txt, scaleX, scaleY, transformX, transformY, load)
+                EnemyFleet(country, start1, end1, txt, scaleX, scaleY, transformX, transformY, load),
+                EnemyFleet(country, start2, end2, txt, scaleX, scaleY, transformX, transformY, load)
             };
 
             // add data to List
@@ -300,17 +300,18 @@ namespace Seekarte.NET4._7
             routePoints.Add(twoPoints);
         }
 
-        public ZoomBorder EnemyFleet(Color color, Point start, Point end, string txt, double scaleX, double scaleY, double transformX, double transformY, bool load)
+        public ZoomBorder EnemyFleet(Country country, Point start, Point end, string txt, double scaleX, double scaleY, double transformX, double transformY, bool load)
         {
             ZoomBorder zoomBorder = new ZoomBorder();
 
             //mouse over
-            zoomBorder.MouseDown += ZoomBorder_MouseDown; ;
+            zoomBorder.MouseDown += ZoomBorder_MouseDown;
             zoomBorder.playerEvent = txt;
 
 
             // Create a Line  
             Line line = new Line();
+            line.MouseEnter += Line_MouseEnter;
 
             zoomBorder.Child = line;
             ChooseGameMode.mainWindow.Map.Children.Add(zoomBorder);
@@ -349,7 +350,7 @@ namespace Seekarte.NET4._7
             // Create a red Brush  
             SolidColorBrush solidColorBrush = new SolidColorBrush
             {
-                Color = color
+                Color = country.color
             };
 
             // Set Line's width and color  
@@ -368,29 +369,40 @@ namespace Seekarte.NET4._7
             return zoomBorder;
         }
 
+        private void Line_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Line line = (Line)sender;
+
+            if (MainWindow.IsCountrySelected)
+                if (MainWindow.SelctedCountry.countryName.Equals("Admin"))
+                    foreach (var item in MainWindow.countries)
+                        if (line.Stroke.ToString().Equals(item.color.ToString()))
+                            ChooseGameMode.mainWindow.txtCountryName.Text = item.countryName;
+        }
+
         private void ZoomBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ZoomBorder tmp = (ZoomBorder)sender;
             MessageBox.Show(tmp.playerEvent);
         }
 
-        public List<ZoomBorder> CreateALine(Color color)
+        public List<ZoomBorder> CreateALine(Country country)
         {
-            return CreateALine(color, 0, 0, 0, 0, false);
+            return CreateALine(country, 0, 0, 0, 0, false);
         }
 
-        public List<ZoomBorder> CreateALine(Color color, double scaleX, double scaleY, double transformX, double transformY, bool load)
+        public List<ZoomBorder> CreateALine(Country country, double scaleX, double scaleY, double transformX, double transformY, bool load)
         {
             //to save data
             if (MainWindow.IsCountrySelected && !load )
             {
-                SaveData(MainWindow.SelctedCountry, new TwoPoints(startRightBtn, endRightBtn, color, latestScale.ScaleX, latestScale.ScaleY, latestTransform.X, latestTransform.Y, "Line", ""));
+                SaveData(MainWindow.SelctedCountry, new TwoPoints(startRightBtn, endRightBtn, country.ToSave(), latestScale.ScaleX, latestScale.ScaleY, latestTransform.X, latestTransform.Y, "Line", ""));
             }
 
             //actual code
             List<ZoomBorder> list = new List<ZoomBorder>
             {
-                CreateALine(color, startRightBtn, endRightBtn, scaleX, scaleY, transformX, transformY, load)
+                CreateALine(country, startRightBtn, endRightBtn, scaleX, scaleY, transformX, transformY, load)
             };
 
             int lineLength = 10;
@@ -398,8 +410,8 @@ namespace Seekarte.NET4._7
             Point left = Pfeil(lineLength, 170, startRightBtn, endRightBtn);
             Point right = Pfeil(lineLength, 190, startRightBtn, endRightBtn);
 
-            list.Add(CreateALine(color, endRightBtn, left, scaleX, scaleY, transformX, transformY, load));
-            list.Add(CreateALine(color, endRightBtn, right, scaleX, scaleY, transformX, transformY, load));
+            list.Add(CreateALine(country, endRightBtn, left, scaleX, scaleY, transformX, transformY, load));
+            list.Add(CreateALine(country, endRightBtn, right, scaleX, scaleY, transformX, transformY, load));
 
             return list;
         }
@@ -419,7 +431,7 @@ namespace Seekarte.NET4._7
 
         }
 
-        public ZoomBorder CreateALine(Color color, Point start, Point end, double scaleX, double scaleY, double transformX, double transformY, bool load)
+        public ZoomBorder CreateALine(Country country, Point start, Point end, double scaleX, double scaleY, double transformX, double transformY, bool load)
         {
             //check for correct input (if NaN program crashes)
             if (Double.IsNaN(end.X))
@@ -436,6 +448,7 @@ namespace Seekarte.NET4._7
 
             // Create a Line  
             Line line = new Line();
+            line.MouseEnter += Line_MouseEnter;
 
             zoomBorder.Child = line;
             ChooseGameMode.mainWindow.Map.Children.Add(zoomBorder);
@@ -474,7 +487,7 @@ namespace Seekarte.NET4._7
             // Create a red Brush  
             SolidColorBrush solidColorBrush = new SolidColorBrush
             {
-                Color = color
+                Color = country.color
             };
 
             // Set Line's width and color  

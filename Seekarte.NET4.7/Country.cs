@@ -18,5 +18,12 @@ namespace Seekarte.NET4._7
             this.countryName = contryName;
             this.color = color;
         }
+
+        public Country ToSave()
+        {
+            Country country = new Country(countryName, color);
+
+            return country;
+        }
     }
 }
