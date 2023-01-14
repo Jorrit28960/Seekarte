@@ -68,14 +68,14 @@ namespace Seekarte.NET4._7
                 MessageBox.Show("Falsche Eingabe: " + ex.ToString());
             }
 
-
-
-            MessageBox.Show("save");
+            this.DialogResult = true;
+            this.Close();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("cancel");
+            this.DialogResult = false;
+            this.Close();
         }
 
         public void ShowShipsInitFirstLine()

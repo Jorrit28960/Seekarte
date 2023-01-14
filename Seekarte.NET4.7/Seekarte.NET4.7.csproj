@@ -89,6 +89,9 @@
     <Compile Include="AdminFleet.xaml.cs">
       <DependentUpon>AdminFleet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AffectedCountries.xaml.cs">
+      <DependentUpon>AffectedCountries.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChooseGameMode.xaml.cs">
       <DependentUpon>ChooseGameMode.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,10 @@
     </Compile>
     <Compile Include="ZoomBorder.cs" />
     <Page Include="AdminFleet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AffectedCountries.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

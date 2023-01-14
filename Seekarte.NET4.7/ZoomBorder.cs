@@ -253,11 +253,11 @@ namespace Seekarte.NET4._7
             if (playerEvent == null)
             {
 
-                txt = "Die folgende Schife begegenen sich:\n";
+                txt = "Die folgende Flotten begegenen sich:\n";
 
                 foreach (var item in MainWindow.PlayerEventCountries)
                 {
-                    txt += item.countryName + ":" + "\nTransportschiff";
+                    txt += item.countryName + ":" + "\n";
                     txt += "\n";
                 }
             }

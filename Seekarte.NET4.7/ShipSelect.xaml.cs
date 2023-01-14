@@ -76,6 +76,9 @@ namespace Seekarte.NET4._7
             {
                 MessageBox.Show("Something is wrong with the buttons :0");
             }
+
+            this.DialogResult = true;
+            this.Close();
         }
 
         private void InitializeShipList()

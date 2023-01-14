@@ -20,6 +20,8 @@ namespace Seekarte.NET4._7
     public partial class PlayerEventOverview : Window
     {
         public int PlayerEventReturn { get; set; }
+        public List<Country> affectedCountries;
+        
         public PlayerEventOverview()
         {
             InitializeComponent();
@@ -28,7 +30,19 @@ namespace Seekarte.NET4._7
         private void EnemyFleet_Click(object sender, RoutedEventArgs e)
         {
             PlayerEventReturn = 2;
-            this.DialogResult = true;
+
+            var affectedCountriesWindow = new AffectedCountries()
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+
+            if (affectedCountriesWindow.ShowDialog() == true)
+            {
+                affectedCountries = affectedCountriesWindow.affectedCountries;
+                this.DialogResult = true;
+            }
+
             this.Close();
         }
     }

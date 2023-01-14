@@ -303,6 +303,7 @@ namespace Seekarte.NET4._7
         private void CreatePlayerEvent()
         {
             PlayerEventNumber = -1;
+            List<Country> affectedCountries = new List<Country>();
             var window = new PlayerEventOverview()
             {
                 Owner = this,
@@ -312,17 +313,11 @@ namespace Seekarte.NET4._7
             if (window.ShowDialog() == true)
             {
                 PlayerEventNumber = window.PlayerEventReturn;
+                affectedCountries = window.affectedCountries;
             }
 
-            List<string> players = new List<string>();
-            players.Add("Preussen");
-            players.Add("Spanien");
-
-            foreach (var country in players)
-            {
-                Country tmpCountry = countries.Find(x => x.countryName == country);
-                PlayerEventCountries.Add(tmpCountry);
-            }
+            foreach(var item in affectedCountries)
+                PlayerEventCountries.Add(item);
         }
 
         private void SaveData()
