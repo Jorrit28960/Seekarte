@@ -471,7 +471,6 @@ namespace Seekarte.NET4._7
                             tmp.startRightBtn = routePoints.startPoint;
                             tmp.endRightBtn = routePoints.endPoint;
 
-                            //foreach (var item in tmp.CreateALine(country.ToSave(), routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true))
                             foreach (var item in tmp.CreateALine(country, routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true))
                             {
                                 zoomBorders.Add(item);
@@ -485,7 +484,6 @@ namespace Seekarte.NET4._7
                             tmp.playerEvent = routePoints.eventText;
 
                             tmp.EnemyFleet(country, routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true);
-                            //tmp.EnemyFleet(country.ToSave(), routePoints.scaleX, routePoints.scaleY, routePoints.transformX, routePoints.transformY, true);
                         }
                     }
                 }
